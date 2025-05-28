@@ -1,0 +1,232 @@
+/*************************************************************************\
+* Copyright (c) 2015 Brookhaven Science Assoc. as operator of
+      Brookhaven National Laboratory.
+* EPICS BASE is distributed subject to a Software License Agreement found
+* in file LICENSE that is included with this distribution.
+\*************************************************************************/
+
+#include <math.h>
+
+#include <aSubRecord.h>
+#include <recGbl.h>
+#include <alarm.h>
+#include <registryFunction.h>
+#include <menuFtype.h>
+#include <errlog.h>
+#include <epicsExport.h>
+
+static int foo;
+
+#define MAGIC ((void*)&wf_stats)
+#define BADMAGIC ((void*)&foo)
+
+/* Waveform scaling
+ *
+ * Apply linear scaling to waveform
+ *
+ * record(aSub, "$(N)") {
+ *   field(SNAM, "WF Scale")
+ *   field(FTA , "LONG")
+ *   field(FTB , "DOUBLE")
+ *   field(FTC , "DOUBLE")
+ *   field(FTVA, "DOUBLE")
+ *   field(NOA , "128")
+ *   field(INPA, "Unscaled WF")
+ *   field(INPB, "Slope")
+ *   field(INPC, "Offset")
+ *   field(OUTA, "Scaled WF")
+ *   field(NOVA, "128")
+ * }
+ */
+static
+long wf_scale(aSubRecord *prec)
+{
+    const epicsInt32* inp = (const epicsInt32*)prec->a;
+    epicsUInt32 inp_cnt = prec->nea;
+    double scale = *(double*)prec->b;
+    double offset = *(double*)prec->c;
+    double *out = (double*)prec->vala;
+    epicsUInt32 cnt = prec->nova;
+    epicsUInt32 i;
+
+    if(cnt > inp_cnt)
+        cnt = inp_cnt;
+
+    for(i=0; i<cnt; i++) {
+        out[i] = scale*(double)inp[i] + offset;
+    }
+    prec->neva = cnt;
+    return 0;
+}
+
+/* Waveform statistics
+ *
+ * Computes mean and std of the (subset of)
+ * waveform Y.  The values of waveform X
+ * (aka time) are used to compute the windows
+ *
+ * record(aSub, "$(N)") {
+ *  field(SNAM, "Wf Stats")
+ *  field(FTA , "DOUBLE")
+ *  field(FTB , "DOUBLE")
+ *  field(FTC , "DOUBLE")
+ *  field(FTD , "DOUBLE")
+ *  field(FTVA ,"DOUBLE")
+ *  field(FTVB ,"DOUBLE")
+ *  field(FTVC ,"DOUBLE")
+ *  field(FTVD ,"DOUBLE")
+ *  field(FTVE ,"ULONG")
+ *  field(NOA , "128")
+ *  field(NOB , "128")
+ *  field(INPA, "Waveform Y")
+ *  field(INPB, "Waveform X")
+ *  field(INPC, "Start X") # window start
+ *  field(INPD, "Width X") # window width
+ *  field(OUTA, "Mean PP")
+ *  field(OUTB, "Std PP")
+ *  field(OUTC, "Min PP")
+ *  field(OUTD, "Max PP")
+ *  field(OUTE, "N PP")
+ */
+
+static
+long wf_stats(aSubRecord* prec)
+{
+    size_t i, N=0;
+    epicsEnum16 *ft = &prec->fta,
+                *ftv= &prec->ftva;
+    // actual length of inputs
+    epicsUInt32 len = prec->nea;
+
+    double *data = prec->a,
+           *time = prec->b,
+           sum   = 0.0, sum2 = 0.0,
+           vmin, vmax,
+           start = *(double*)prec->c,
+           width = *(double*)prec->d;
+
+    char usetime = prec->neb>1;
+    if(usetime && prec->neb<prec->nea)
+        len = prec->neb;
+
+    if(start<=0 && width<=0) {
+        /* default to entire range */
+        start = 0.0;
+        if(usetime)
+            width = time[prec->neb-1];
+        else
+            width = prec->neb;
+    }
+
+    if(prec->dpvt==BADMAGIC)
+        return 1;
+    if(prec->dpvt!=MAGIC) {
+        // Only do type checks in not already passed
+        for(i=0; i<4; i++) {
+            if(ft[i]!=menuFtypeDOUBLE) {
+                prec->dpvt=BADMAGIC;
+                errlogPrintf("%s: FT%c must be DOUBLE\n",
+                             prec->name, 'A'+(char)i);
+                return 1;
+
+            }
+        }
+        for(i=0; i<2; i++) {
+            if(ftv[i]!=menuFtypeDOUBLE) {
+                prec->dpvt=BADMAGIC;
+                errlogPrintf("%s: FTV%c must be DOUBLE\n",
+                             prec->name, 'A'+(char)i);
+                return 1;
+
+            }
+        }
+        prec->dpvt = MAGIC;
+    }
+
+    if(len==0) {
+        (void)recGblSetSevr(prec, READ_ALARM, INVALID_ALARM);
+        return 0;
+    }
+
+    for(i=0; i<len; i++) {
+        if(usetime) {
+            if(time[i]<start)
+                continue;
+            if(time[i]>=start+width)
+                break;
+        } else {
+            if(i<start)
+                continue;
+            if(i>=start+width)
+                break;
+        }
+
+        if(N==0) {
+            vmin = vmax = data[i];
+        } else {
+            if(data[i]<vmin)
+                vmin = data[i];
+            if(data[i]>vmax)
+                vmax = data[i];
+        }
+        sum  += data[i];
+        sum2 += data[i] * data[i];
+        N++;
+    }
+
+    if(N==0) {
+        (void)recGblSetSevr(prec, CALC_ALARM, INVALID_ALARM);
+        return 0;
+    }
+
+    sum  /= N; // <x>
+    sum2 /= N; // <x^2>
+
+    *(double*)prec->vala = sum;
+    prec->neva=1;
+    *(double*)prec->valb = sqrt(sum2 - sum*sum);
+    prec->nevb=1;
+    *(double*)prec->valc = vmin;
+    prec->nevc=1;
+    *(double*)prec->vald = vmax;
+    prec->nevd=1;
+
+    *(epicsUInt32*)prec->vale = N;
+    return 0;
+}
+
+/* Waveform timebase
+ *
+ * record(aSub, "$(N)") {
+ *  field(SNAM, "wf_timebase")
+ *  field(FTA , "ULONG")
+ *  field(FTB , "DOUBLE")
+ *  field(FTVA ,"DOUBLE")
+ *  field(NOVA , "128")
+ *  field(INPA, "Element count")
+ *  field(INPB, "Sample period")
+ *  field(OUTA, "Time array")
+ */
+static
+long wf_timebase(aSubRecord *prec)
+{
+    epicsUInt32 count = *(epicsUInt32*)prec->a;
+    double period = *(double*)prec->b;
+    double *out = (double*)prec->vala;
+    epicsUInt32 outLim = prec->nova;
+
+    if(count > outLim)
+        count = outLim;
+
+    double t = 0.0;
+    for(epicsUInt32 i=0; i<count; i++, t+=period)
+        out[i] = t;
+
+    prec->neva = count;
+
+    return 0;
+}
+
+epicsRegisterFunction(wf_scale);
+epicsRegisterFunction(wf_stats);
+epicsRegisterFunction(wf_timebase);
