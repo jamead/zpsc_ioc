@@ -1,0 +1,55 @@
+file "/epics/iocs/zpsc_ioc/db/lstats.db" {
+    pattern { P, NO }
+        { "lab", 5 }
+}
+
+file "/epics/iocs/zpsc_ioc/db/wfmstats.db" {
+    pattern { P, PSC }
+        { "lab", 5 }
+}
+
+file "/epics/iocs/zpsc_ioc/db/status10hz.db" {
+    pattern { P, NO, OFFSET }
+        { "lab", 5, 100 }
+}
+
+file "/epics/iocs/zpsc_ioc/db/control_glob.db" {
+    pattern { P, NO }
+        { "lab", 5 }
+}
+
+file "/epics/iocs/zpsc_ioc/db/control_chan.db" {
+    pattern { P, NO, CHAN }
+        { "lab", 5, 1 }
+        { "lab", 5, 2 }
+        { "lab", 5, 3 }
+        { "lab", 5, 4 }
+}
+
+file "/epics/iocs/zpsc_ioc/db/snapshots.db" {
+    pattern { P, NO, TYPE, CHAN, MSGID, BUFLEN }
+        { "lab", 5, USR, 1, 60, 100000 }
+        { "lab", 5, USR, 2, 61, 100000 }
+        { "lab", 5, USR, 3, 62, 100000 }
+        { "lab", 5, USR, 4, 63, 100000 }
+
+        { "lab", 5, FLT, 1, 70, 100000 }
+        { "lab", 5, FLT, 2, 71, 100000 }
+        { "lab", 5, FLT, 3, 72, 100000 }
+        { "lab", 5, FLT, 4, 73, 100000 }
+
+        { "lab", 5, ERR, 1, 80, 100000 }
+        { "lab", 5, ERR, 2, 81, 100000 }
+        { "lab", 5, ERR, 3, 82, 100000 }
+        { "lab", 5, ERR, 4, 83, 100000 }
+
+        { "lab", 5, INJ, 1, 90, 100000 }
+        { "lab", 5, INJ, 2, 91, 100000 }
+        { "lab", 5, INJ, 3, 92, 100000 }
+        { "lab", 5, INJ, 4, 93, 100000 }
+
+        { "lab", 5, EVR, 1, 100, 100000 }
+        { "lab", 5, EVR, 2, 101, 100000 }
+        { "lab", 5, EVR, 3, 102, 100000 }
+        { "lab", 5, EVR, 4, 103, 100000 }
+}
