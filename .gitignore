@@ -1,6 +1,7 @@
 # Install directories
 /bin/
 /cfg/
+/db/
 /dbd/
 /html/
 /include/
