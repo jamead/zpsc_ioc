@@ -1,0 +1,6 @@
+record(lsi, "$(user):tripp_pdu:version") {
+    field(DTYP, "tripp_pdu version")
+    field(DESC, "Version string")
+    field(SIZV, "$(SIZV=200)")
+    field(PINI, "YES")
+}

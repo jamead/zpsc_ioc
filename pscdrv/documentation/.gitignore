@@ -1,0 +1,5 @@
+/xml/
+/html/
+/_build
+*.tmp
+*.svg

@@ -1,0 +1,9 @@
+bin/
+dbd/
+db/
+include/
+lib/
+envPaths
+*.local
+O.*
+/iocBoot/*/as/

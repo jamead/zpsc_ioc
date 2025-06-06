@@ -1,0 +1,119 @@
+# Tripp PDU Load Control and Status Records for 8 Outlets
+
+record(bo, "$(P):OUT1:CTRL") {
+    field(DESC, "Control Outlet 1")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "Passive")
+}
+
+record(bi, "$(P):OUT1:STAT") {
+    field(DESC, "Status of Outlet 1")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "1 second")
+}
+
+record(bo, "$(P):OUT2:CTRL") {
+    field(DESC, "Control Outlet 2")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "Passive")
+}
+
+record(bi, "$(P):OUT2:STAT") {
+    field(DESC, "Status of Outlet 2")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "1 second")
+}
+
+record(bo, "$(P):OUT3:CTRL") {
+    field(DESC, "Control Outlet 3")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "Passive")
+}
+
+record(bi, "$(P):OUT3:STAT") {
+    field(DESC, "Status of Outlet 3")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "1 second")
+}
+
+record(bo, "$(P):OUT4:CTRL") {
+    field(DESC, "Control Outlet 4")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "Passive")
+}
+
+record(bi, "$(P):OUT4:STAT") {
+    field(DESC, "Status of Outlet 4")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "1 second")
+}
+
+record(bo, "$(P):OUT5:CTRL") {
+    field(DESC, "Control Outlet 5")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "Passive")
+}
+
+record(bi, "$(P):OUT5:STAT") {
+    field(DESC, "Status of Outlet 5")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "1 second")
+}
+
+record(bo, "$(P):OUT6:CTRL") {
+    field(DESC, "Control Outlet 6")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "Passive")
+}
+
+record(bi, "$(P):OUT6:STAT") {
+    field(DESC, "Status of Outlet 6")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "1 second")
+}
+
+record(bo, "$(P):OUT7:CTRL") {
+    field(DESC, "Control Outlet 7")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "Passive")
+}
+
+record(bi, "$(P):OUT7:STAT") {
+    field(DESC, "Status of Outlet 7")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "1 second")
+}
+
+record(bo, "$(P):OUT8:CTRL") {
+    field(DESC, "Control Outlet 8")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "Passive")
+}
+
+record(bi, "$(P):OUT8:STAT") {
+    field(DESC, "Status of Outlet 8")
+    field(ZNAM, "OFF")
+    field(ONAM, "ON")
+    field(SCAN, "1 second")
+}
+
+# Optional: overall status PV
+record(stringin, "$(P):STATUS") {
+    field(DESC, "Overall PDU Status")
+    field(SCAN, "10 second")
+}
