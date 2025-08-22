@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-07-21 16:01:18 by mead-->
+<!--Saved on 2025-08-21 16:34:16 by user-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1700</width>
@@ -3439,7 +3439,7 @@ $(actions)</tooltip>
         <action type="open_display">
           <file>Psc1_ramptable.opi</file>
           <macros>
-            <PriSys>lab</PriSys>
+            <PriSys>$(PriSys)</PriSys>
             <PSC>$(PSC)</PSC>
             <CHAN>$(CHAN)</CHAN>
           </macros>
@@ -3465,7 +3465,7 @@ $(actions)</tooltip>
         <action type="open_display">
           <file>Psc1_qspi.opi</file>
           <macros>
-            <PriSys>lab</PriSys>
+            <PriSys>$(PriSys)</PriSys>
             <PSC>$(PSC)</PSC>
             <CHAN>$(CHAN)</CHAN>
           </macros>
@@ -3491,7 +3491,7 @@ $(actions)</tooltip>
         <action type="open_display">
           <file>Psc1_snapshots.opi</file>
           <macros>
-            <PriSys>lab</PriSys>
+            <PriSys>$(PriSys)</PriSys>
             <PSC>$(PSC)</PSC>
             <CHAN>$(CHAN)</CHAN>
           </macros>
@@ -3815,8 +3815,9 @@ $(actions)</tooltip>
     <name>Action Button_32</name>
     <x>1350</x>
     <y>984</y>
-    <width>0</width>
-    <height>0</height>
+    <width>1</width>
+    <height>1</height>
+    <tooltip>$(actions)</tooltip>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_277</name>
