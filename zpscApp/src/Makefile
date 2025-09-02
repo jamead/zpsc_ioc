@@ -5,12 +5,18 @@ include $(TOP)/configure/CONFIG
 #  ADD MACRO DEFINITIONS AFTER THIS LINE
 #=============================
 
+# Enable Sequencer support
+USR_SEQ = YES
+SNCFLAGS += +r
+zpsc_SNC_SRCS += reset_digout.st
+
 #=============================
 # Build the IOC application
 
 PROD_IOC = zpsc
 # zpsc.dbd will be created and installed
 DBD += zpsc.dbd
+
 
 # zpsc.dbd will be made up from these files:
 zpsc_DBD += base.dbd
@@ -26,6 +32,7 @@ zpsc_DBD += sumTwoFloats.dbd
 
 # Add all the support libraries needed by this IOC
 zpsc_LIBS += pscCore
+zpsc_LIBS += seq pv
 
 # Add your custom C source here:
 zpsc_SRCS += scaleWaveform.c  
@@ -34,7 +41,6 @@ zpsc_SRCS += devRollingBuf.c
 zpsc_SRCS += devRollingBuf_varlen.c
 zpsc_SRCS += readRampTable.c
 zpsc_SRCS += sumTwoFloats.c
-
 
 # zpsc_registerRecordDeviceDriver.cpp derives from zpsc.dbd
 zpsc_SRCS += zpsc_registerRecordDeviceDriver.cpp

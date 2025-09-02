@@ -62,7 +62,7 @@ cd "${TOP}/iocBoot/${IOC}"
 iocInit
 
 ## Start any sequence programs
-#seq sncxxx,"user=mead"
+#seq reset_digout P=$(IOCNAME) NO=1 CHAN=1 &
 
 epicsThreadSleep(1.0)
 

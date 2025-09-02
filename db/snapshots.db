@@ -108,6 +108,19 @@ record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):Error-Wfm") {
 
 #}      
     
+record(longout, "$(P){$(NO)}Chan$(CHAN):SS:WFM-Xmin") {
+    field(DESC, "X Axis Minimum for waveform display")
+    field(VAL, "0")        # default value
+    field(PINI, "YES")     # initialize at startup
+}
+
+record(longout, "$(P){$(NO)}Chan$(CHAN):SS:WFM-Xmax") {
+    field(DESC, "X Axis Minimum for waveform display")
+    field(VAL, "10000")        # default value
+    field(PINI, "YES")     # initialize at startup
+}   
+   
+   
     
 
       

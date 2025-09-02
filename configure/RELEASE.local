@@ -1,3 +1,4 @@
-EPICS_BASE = /home/pstester/epics/base-7.0.9
-PSCDRV = /home/pstester/epics/pscdrv
+EPICS_BASE = /home/mead/epics/base-7.0.9
+PSCDRV = /home/mead/epics/pscdrv
+SEQ = /home/mead/epics/base-7.0.9/modules/sequencer
 

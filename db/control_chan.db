@@ -507,6 +507,8 @@ record(calcout, "$(P){$(NO)}Chan$(CHAN):FaultMask:All13") {
 record(longout, "$(P){$(NO)}Chan$(CHAN):DigOut_ON1-SP") {
     field(DESC, "Digital Output ON1")
     field(DTYP, "PSC Single I32")
+    field(PINI, "YES")
+    field(VAL, "0")     
     field(OUT , "@PSC$(NO) $(CHAN) 268")
     info(autosaveFields, "VAL")
     field(FLNK, "$(P){$(NO)}GoRegSingleWrite$(CHAN)")
