@@ -2247,7 +2247,7 @@ $(pv_value)</tooltip>
         <action type="open_display">
           <file>Psc1_chan_unified.opi</file>
           <macros>
-            <PriSys>lab</PriSys>
+            <PriSys>$(PriSys)</PriSys>
             <PSC>$(PSC)</PSC>
             <CHAN>Chan1</CHAN>
           </macros>
@@ -2271,7 +2271,7 @@ $(pv_value)</tooltip>
         <action type="open_display">
           <file>Psc1_chan_unified.opi</file>
           <macros>
-            <PriSys>lab</PriSys>
+            <PriSys>$(PriSys)</PriSys>
             <PSC>$(PSC)</PSC>
             <CHAN>Chan2</CHAN>
           </macros>
@@ -2295,7 +2295,7 @@ $(pv_value)</tooltip>
         <action type="open_display">
           <file>Psc1_chan_unified.opi</file>
           <macros>
-            <PriSys>lab</PriSys>
+            <PriSys>$(PriSys)</PriSys>
             <PSC>$(PSC)</PSC>
             <CHAN>Chan3</CHAN>
           </macros>
@@ -2319,7 +2319,7 @@ $(pv_value)</tooltip>
         <action type="open_display">
           <file>Psc1_chan_unified.opi</file>
           <macros>
-            <PriSys>lab</PriSys>
+            <PriSys>$(PriSys)</PriSys>
             <PSC>$(PSC)</PSC>
             <CHAN>Chan4</CHAN>
           </macros>
