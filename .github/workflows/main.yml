@@ -1,0 +1,30 @@
+---
+name: Building
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  Debian13:
+    runs-on: ubuntu-latest
+    container: jeonghanlee/debian13-epics
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build on Debian 13
+        run: |
+          echo "EPICS_BASE:=/usr/local/epics/R7.0.7/base"> configure/RELEASE.local
+          make
+  Rocky8:
+    runs-on: ubuntu-latest
+    container: jeonghanlee/rocky8-epics
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build on Rocky 8
+        run: |
+          echo "EPICS_BASE:=/usr/local/epics/R7.0.7/base" > configure/RELEASE.local
+          make

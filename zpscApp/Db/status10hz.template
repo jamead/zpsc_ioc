@@ -1,21 +1,15 @@
-
- 
-
- 
-
 ############# 10Hz Status PV's (MSG ID 30) #########################
-
 
 record(longin, "$(P){$(NO)}NumChannels-I") {
     field(DESC, "Number of Channels")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 0")
+    field( INP, "@$(NAME=PSC)$(NO) 31 0")
     field(FLNK, "$(P){$(NO)}NumChannels-Mode")
-    field(SCAN,"I/O Intr")
+    field(SCAN, "I/O Intr")
 }
 
 record(bi, "$(P){$(NO)}NumChannels-Mode") {
-    field(INP, "$(P){$(NO)}NumChannels-I")
+    field( INP, "$(P){$(NO)}NumChannels-I")
     field(ZNAM, "2 Channel")
     field(ONAM, "4 Channel")
     field(SCAN, "Passive")
@@ -24,42 +18,39 @@ record(bi, "$(P){$(NO)}NumChannels-Mode") {
 record(longin, "$(P){$(NO)}TS-NS-I") {
     field(DESC, "EVR Timestamp (ns)")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 4")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 4")
+    field(SCAN, "I/O Intr")
 }
 
 record(longin, "$(P){$(NO)}TS-S-I") {
     field(DESC, "EVR Timestamp (s)")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 8")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 8")
+    field(SCAN, "I/O Intr")
     field(FLNK, "$(P){$(NO)}Timestamp-I")     
 }
 
 record(aSub, "$(P){$(NO)}Timestamp-I") {
     field(DESC, "Convert epoch to string")
     field(INPA, "$(P){$(NO)}TS-S-I NPP NMS")    # Input: epoch time (int)
-    field(FTA, "LONG")                          # Input type
+    field( FTA, "LONG")                         # Input type
     field(FTVA, "UCHAR")                        # Output type (string)
     field(NOVA, "40")                           # Max string length
     field(SNAM, "epoch2string")                 # C function to call
 }
 
 
-
-
-
 record(longin, "$(P){$(NO)}Resolution-I") {
     field(DESC, "DCCT, DAC Resolution")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 12")
+    field( INP, "@$(NAME=PSC)$(NO) 31 12")
     field(FLNK, "$(P){$(NO)}Resolution-Mode")
-    field(SCAN,"I/O Intr")
+    field(SCAN, "I/O Intr")
 }
 
 
 record(bi, "$(P){$(NO)}Resolution-Mode") {
-    field(INP, "$(P){$(NO)}Resolution-I")
+    field( INP, "$(P){$(NO)}Resolution-I")
     field(ZNAM, "MS")
     field(ONAM, "HS")
     field(SCAN, "Passive")
@@ -69,42 +60,42 @@ record(bi, "$(P){$(NO)}Resolution-Mode") {
 record(longin, "$(P){$(NO)}GitHash-I") {
     field(DESC, "Git Hash")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 16")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 16")
+    field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P){$(NO)}DieTemp-I") {
     field(DESC, "Git Hash")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 20")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 20")
+    field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P){$(NO)}VCCInt-I") {
     field(DESC, "Git Hash")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 24")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 24")
+    field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P){$(NO)}VCCAux-I") {
     field(DESC, "Git Hash")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 28")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 28")
+    field(SCAN, "I/O Intr")
 }
 
 record(longin, "$(P){$(NO)}Bandwidth-I") {
     field(DESC, "Bandwidth of Unit ")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 32")
+    field( INP, "@$(NAME=PSC)$(NO) 31 32")
     field(FLNK, "$(P){$(NO)}Bandwidth-Mode")
-    field(SCAN,"I/O Intr")
+    field(SCAN, "I/O Intr")
 }
 
 
 record(bi, "$(P){$(NO)}Bandwidth-Mode") {
-    field(INP, "$(P){$(NO)}Bandwidth-I")
+    field( INP, "$(P){$(NO)}Bandwidth-I")
     field(ZNAM, "Fast")
     field(ONAM, "Slow")
     field(SCAN, "Passive")
@@ -113,14 +104,14 @@ record(bi, "$(P){$(NO)}Bandwidth-Mode") {
 record(longin, "$(P){$(NO)}Polarity-I") {
     field(DESC, "Polarity of Unit ")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 36")
+    field( INP, "@$(NAME=PSC)$(NO) 31 36")
     field(FLNK, "$(P){$(NO)}Polarity-Mode")
-    field(SCAN,"I/O Intr")
+    field(SCAN, "I/O Intr")
 }
 
 
 record(bi, "$(P){$(NO)}Polarity-Mode") {
-    field(INP, "$(P){$(NO)}Polarity-I")
+    field( INP, "$(P){$(NO)}Polarity-I")
     field(ZNAM, "Bipolar")
     field(ONAM, "Unipolar")
     field(SCAN, "Passive")
@@ -129,36 +120,36 @@ record(bi, "$(P){$(NO)}Polarity-Mode") {
 record(longin, "$(P){$(NO)}FOFB:PacketsRcvd-I") {
     field(DESC, "Number of FOFB packets received")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 40")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 40")
+    field(SCAN, "I/O Intr")
 }
 
 record(longin, "$(P){$(NO)}FOFB:Command-I") {
     field(DESC, "FOFB Command (See Fast Protocol)")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 44")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 44")
+    field(SCAN, "I/O Intr")
 }
 
 record(longin, "$(P){$(NO)}FOFB:Nonce-I") {
     field(DESC, "FOFB Nonce")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 48")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 48")
+    field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P){$(NO)}TenKHz-Freq-I") {
     field(DESC, "Frequency of 10KHz Trigger")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 52")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 52")
+    field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P){$(NO)}OneHz-Freq-I") {
     field(DESC, "Frequency of 1Hz HB Trigger")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 56")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 56")
+    field(SCAN, "I/O Intr")
 }
 
 
@@ -167,7 +158,7 @@ record(ai, "$(P){$(NO)}OneHz-Freq-I") {
 
 record(longout, "$(P){$(NO)}Chan1:TenHzBufLen-SP") {
     field(DESC, "Rolling buffer length")
-    field(VAL, "100")     # default length
+    field( VAL, "100")     # default length
     #field(PREC, "0")
     field(HOPR, "1000")
     field(LOPR, "1")
@@ -178,18 +169,18 @@ record(longout, "$(P){$(NO)}Chan1:TenHzBufLen-SP") {
 record(ai, "$(P){$(NO)}Chan1:DCCT1-I") {
     field(DESC, "DCCT 1 Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 100")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 100")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan1:DCCT1-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan1:DCCT1-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan1:DCCT1-I NPP ")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan1:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")   
+    field( FTB, "LONG")   
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -199,44 +190,42 @@ record(aSub, "$(P){$(NO)}Chan1:DCCT1-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan1:DCCT1-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan1:DCCT1-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan1:DCCT1-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
 
-
-
 record(ai, "$(P){$(NO)}Chan1:DCCT1-Offset-I") {
     field(DESC, "DCCT 1 Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 104")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 104")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:DCCT1-Gain-I") {
     field(DESC, "DCCT 1 Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 108")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 108")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:DCCT2-I") {
     field(DESC, "DCCT 2 Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 112")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 112")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan1:DCCT2-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan1:DCCT2-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan1:DCCT2-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan1:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")   
+    field( FTB, "LONG")   
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -246,7 +235,7 @@ record(aSub, "$(P){$(NO)}Chan1:DCCT2-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan1:DCCT2-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan1:DCCT2-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan1:DCCT2-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -256,34 +245,34 @@ record(waveform, "$(P){$(NO)}Chan1:DCCT2-Wfm") {
 record(ai, "$(P){$(NO)}Chan1:DCCT2-Offset-I") {
     field(DESC, "DCCT 2 Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 116")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 116")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:DCCT2-Gain-I") {
     field(DESC, "DCCT 2 Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 120")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 120")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:DAC-I") {
     field(DESC, "DAC Setpoint Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 124")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 124")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan1:DAC-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan1:DAC-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan1:DAC-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan1:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")       
+    field( FTB, "LONG")       
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -293,7 +282,7 @@ record(aSub, "$(P){$(NO)}Chan1:DAC-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan1:DAC-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan1:DAC-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan1:DAC-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -302,35 +291,35 @@ record(waveform, "$(P){$(NO)}Chan1:DAC-Wfm") {
 record(ai, "$(P){$(NO)}Chan1:DAC-Offset-I") {
     field(DESC, "DAC Setpoint Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 128")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 128")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:DAC-Gain-I") {
     field(DESC, "DAC Setpoint Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 132")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 132")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan1:Volt-I") {
     field(DESC, "Voltage Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 136")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 136")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan1:Volt-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan1:Volt-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan1:Volt-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan1:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")      
+    field( FTB, "LONG")      
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -340,7 +329,7 @@ record(aSub, "$(P){$(NO)}Chan1:Volt-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan1:Volt-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan1:Volt-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan1:Volt-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -348,35 +337,35 @@ record(waveform, "$(P){$(NO)}Chan1:Volt-Wfm") {
 record(ai, "$(P){$(NO)}Chan1:Volt-Offset-I") {
     field(DESC, "Voltage Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 140")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 140")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:Volt-Gain-I") {
     field(DESC, "Voltage Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 144")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 144")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan1:Gnd-I") {
     field(DESC, "Ground Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 148")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 148")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan1:Gnd-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan1:Gnd-aSub") {
     field(DESC, "Rolling Buffer of 1000 floats")
     field(INPA, "$(P){$(NO)}Chan1:Gnd-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan1:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")       
+    field( FTB, "LONG")       
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -386,7 +375,7 @@ record(aSub, "$(P){$(NO)}Chan1:Gnd-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan1:Gnd-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan1:Gnd-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan1:Gnd-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -397,34 +386,34 @@ record(waveform, "$(P){$(NO)}Chan1:Gnd-Wfm") {
 record(ai, "$(P){$(NO)}Chan1:Gnd-Offset-I") {
     field(DESC, "Ground Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 152")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 152")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:Gnd-Gain-I") {
     field(DESC, "Ground Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 156")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 156")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:Spare-I") {
     field(DESC, "Spare Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 160")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 160")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan1:Spare-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan1:Spare-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan1:Spare-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan1:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")      
+    field( FTB, "LONG")      
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -434,7 +423,7 @@ record(aSub, "$(P){$(NO)}Chan1:Spare-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan1:Spare-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan1:Spare-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan1:Spare-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -443,35 +432,35 @@ record(waveform, "$(P){$(NO)}Chan1:Spare-Wfm") {
 record(ai, "$(P){$(NO)}Chan1:Spare-Offset-I") {
     field(DESC, "Spare Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 164")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 164")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:Spare-Gain-I") {
     field(DESC, "Spare Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 168")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 168")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan1:Reg-I") {
     field(DESC, "Regulator Output Voltage Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 172")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 172")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan1:Reg-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan1:Reg-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan1:Reg-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan1:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")       
+    field( FTB, "LONG")       
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -481,7 +470,7 @@ record(aSub, "$(P){$(NO)}Chan1:Reg-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan1:Reg-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan1:Reg-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan1:Reg-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -490,34 +479,34 @@ record(waveform, "$(P){$(NO)}Chan1:Reg-Wfm") {
 record(ai, "$(P){$(NO)}Chan1:Reg-Offset-I") {
     field(DESC, "Regulator Output Voltage Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 176")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 176")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:Reg-Gain-I") {
     field(DESC, "Regulator Output Voltage Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 180")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 180")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:Error-I") {
     field(DESC, "Error Voltage Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 184")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 184")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan1:Error-aSub")     
 }
 
 record(aSub, "$(P){$(NO)}Chan1:Error-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan1:Error-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan1:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")      
+    field( FTB, "LONG")      
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -527,7 +516,7 @@ record(aSub, "$(P){$(NO)}Chan1:Error-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan1:Error-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan1:Error-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan1:Error-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -538,25 +527,25 @@ record(waveform, "$(P){$(NO)}Chan1:Error-Wfm") {
 record(ai, "$(P){$(NO)}Chan1:Error-Offset-I") {
     field(DESC, "Error Voltage Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 188")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 188")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:Error-Gain-I") {
     field(DESC, "Error Voltage Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 192")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 192")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:DACSetPt-I") {
     field(DESC, "DAC SetPoint Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 196")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 196")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan1:DACSetPt-aSub")     
 }
 
@@ -564,9 +553,9 @@ record(ai, "$(P){$(NO)}Chan1:DACSetPt-I") {
 record(aSub, "$(P){$(NO)}Chan1:DACSetPt-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan1:DACSetPt-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan1:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")       
+    field( FTB, "LONG")       
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -576,7 +565,7 @@ record(aSub, "$(P){$(NO)}Chan1:DACSetPt-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan1:DACSetPt-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan1:DACSetPt-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan1:DACSetPt-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -587,320 +576,320 @@ record(waveform, "$(P){$(NO)}Chan1:DACSetPt-Wfm") {
 record(ai, "$(P){$(NO)}Chan1:DACSetPt-Offset-I") {
     field(DESC, "DAC SetPoint Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 200")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 200")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:DACSetPt-Gain-I") {
     field(DESC, "DAC SetPoint Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 204")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 204")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(longin, "$(P){$(NO)}Chan1:DACRampActive-I") {
     field(DESC, "DAC SetPoint Readback")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 208")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 208")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan1:OVC1_Flt_Threshold-I") {
     field(DESC, "DCCT1 OVC Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 212")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 212")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:OVC2_Flt_Threshold-I") {
     field(DESC, "DCCT2 OVC Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 216")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 216")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:OVV_Flt_Threshold-I") {
     field(DESC, "OVV Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 220")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 220")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:ERR1_Flt_Threshold-I") {
     field(DESC, "ERR1 Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 224")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 224")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:ERR2_Flt_Threshold-I") {
     field(DESC, "ERR2 Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 228")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 228")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:IGND_Flt_Threshold-I") {
     field(DESC, "Ignd Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 232")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 232")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:OVC1_Flt_CntLim-I") {
     field(DESC, "DCCT1 OVC Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 236")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 236")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:OVC2_Flt_CntLim-I") {
     field(DESC, "DCCT2 OVC Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 240")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 240")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:OVV_Flt_CntLim-I") {
     field(DESC, "OVV Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 244")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 244")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:ERR1_Flt_CntLim-I") {
     field(DESC, "PID Error 1 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 248")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 248")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:ERR2_Flt_CntLim-I") {
     field(DESC, "PID Error 2  Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 252")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 252")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:IGND_Flt_CntLim-I") {
     field(DESC, "Ignd Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 256")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 256")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:DCCT_Flt_CntLim-I") {
     field(DESC, "DCCT Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 260")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 260")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:FLT1_Flt_CntLim-I") {
     field(DESC, "Fault 1 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 264")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 264")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:FLT2_Flt_CntLim-I") {
     field(DESC, "Fault 2 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 268")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 268")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:FLT3_Flt_CntLim-I") {
     field(DESC, "Fault 3 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 272")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 272")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:ON_Flt_CntLim-I") {
     field(DESC, "PowerSupply ON Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 276")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 276")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:HeartBeat_Flt_CntLim-I") {
     field(DESC, "HeartBeat Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 280")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 280")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan1:FaultClear-I") {
     field(DESC, "Fault Clear")
     field(DTYP, "PSC Reg")   
-    field(INP , "@PSC$(NO) 31 284")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 284")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan1:FaultMask-I") {
     field(DESC, "Fault 3 Fault Counter Limit")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 288")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 288")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan1:DigOut_ON1-I") {
     field(DESC, "Digital Output ON1")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 292")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 292")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan1:DigOut_ON2-I") {
     field(DESC, "Digital Output ON2")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 296")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 296")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(longin, "$(P){$(NO)}Chan1:DigOut_Reset-I") {
     field(DESC, "Digital Output Reset")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 300")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 300")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan1:DigOut_Spare-I") {
     field(DESC, "Digital Output Spare")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 304")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 304")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan1:DigOut_Park-I") {
     field(DESC, "Digital Output Park")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 308")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 308")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan1:DigIn-I") {
     field(DESC, "Digital Input Bits")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 312")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 312")
+    field(SCAN, "I/O Intr")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan1:FaultsLive-I") {
     field(DESC, "PS1 Live Faults")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 316")
+    field( INP, "@$(NAME=PSC)$(NO) 31 316")
     field(SCAN, "I/O Intr")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan1:FaultsLat-I") {
     field(DESC, "PS1 Latched Faults")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 320")
+    field( INP, "@$(NAME=PSC)$(NO) 31 320")
     field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P){$(NO)}Chan1:SF:AmpsperSec-I") {
     field(DESC, "ScaleFactor Amps/Sec Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 324")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 324")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:SF:DAC_DCCTs-I") {
     field(DESC, "ScaleFactor for DAC & DCCT's")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 328")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 328")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:SF:Vout-I") {
     field(DESC, "ScaleFactor for Vout ")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 332")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 332")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:SF:Ignd-I") {
     field(DESC, "ScaleFactor for Ignd")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 336")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 336")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:SF:Spare-I") {
     field(DESC, "ScaleFactor for Spare")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 340")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 340")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:SF:Regulator-I") {
     field(DESC, "ScaleFactor for Regulator")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 344")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 344")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan1:SF:Error-I") {
     field(DESC, "ScaleFactor for Error")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 348")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 348")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan1:DACSetPtRaw-I") {
     field(DESC, "DAC SetPoint Raw Readback")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 352")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 352")
+    field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P){$(NO)}Chan1:FOFB:DACSetPt-I") {
     field(DESC, "FOFB DAC Set Point")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 356")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 356")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
@@ -909,7 +898,7 @@ record(ai, "$(P){$(NO)}Chan1:FOFB:DACSetPt-I") {
 
 record(longout, "$(P){$(NO)}Chan2:TenHzBufLen-SP") {
     field(DESC, "Rolling buffer length")
-    field(VAL, "100")     # default length
+    field( VAL, "100")     # default length
     #field(PREC, "0")
     field(HOPR, "1000")
     field(LOPR, "1")
@@ -920,18 +909,18 @@ record(longout, "$(P){$(NO)}Chan2:TenHzBufLen-SP") {
 record(ai, "$(P){$(NO)}Chan2:DCCT1-I") {
     field(DESC, "DCCT 1 Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 400")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 400")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan2:DCCT1-aSub")       
 }
 
 record(aSub, "$(P){$(NO)}Chan2:DCCT1-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan2:DCCT1-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan2:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")      
+    field( FTB, "LONG")      
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -941,7 +930,7 @@ record(aSub, "$(P){$(NO)}Chan2:DCCT1-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan2:DCCT1-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan2:DCCT1-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan2:DCCT1-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -950,34 +939,34 @@ record(waveform, "$(P){$(NO)}Chan2:DCCT1-Wfm") {
 record(ai, "$(P){$(NO)}Chan2:DCCT1-Offset-I") {
     field(DESC, "DCCT 1 Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 404")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 404")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:DCCT1-Gain-I") {
     field(DESC, "DCCT 1 Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 408")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 408")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:DCCT2-I") {
     field(DESC, "DCCT 2 Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 412")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 412")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan2:DCCT2-aSub")       
 }
 
 record(aSub, "$(P){$(NO)}Chan2:DCCT2-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan2:DCCT2-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan2:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -987,7 +976,7 @@ record(aSub, "$(P){$(NO)}Chan2:DCCT2-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan2:DCCT2-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan2:DCCT2-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan2:DCCT2-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -996,34 +985,34 @@ record(waveform, "$(P){$(NO)}Chan2:DCCT2-Wfm") {
 record(ai, "$(P){$(NO)}Chan2:DCCT2-Offset-I") {
     field(DESC, "DCCT 2 Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 416")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 416")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:DCCT2-Gain-I") {
     field(DESC, "DCCT 2 Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 420")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 420")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:DAC-I") {
     field(DESC, "DAC Setpoint Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 424")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 424")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan2:DAC-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan2:DAC-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan2:DAC-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan2:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1033,7 +1022,7 @@ record(aSub, "$(P){$(NO)}Chan2:DAC-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan2:DAC-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan2:DAC-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan2:DAC-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1044,26 +1033,26 @@ record(waveform, "$(P){$(NO)}Chan2:DAC-Wfm") {
 record(ai, "$(P){$(NO)}Chan2:DAC-Offset-I") {
     field(DESC, "DAC Setpoint Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 428")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 428")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:DAC-Gain-I") {
     field(DESC, "DAC Setpoint Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 432")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 432")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan2:Volt-I") {
     field(DESC, "Voltage Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 436")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 436")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan2:Volt-aSub")      
 }
 
@@ -1071,9 +1060,9 @@ record(ai, "$(P){$(NO)}Chan2:Volt-I") {
 record(aSub, "$(P){$(NO)}Chan2:Volt-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan2:Volt-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan2:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")          
+    field( FTB, "LONG")          
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1083,7 +1072,7 @@ record(aSub, "$(P){$(NO)}Chan2:Volt-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan2:Volt-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan2:Volt-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan2:Volt-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1092,35 +1081,35 @@ record(waveform, "$(P){$(NO)}Chan2:Volt-Wfm") {
 record(ai, "$(P){$(NO)}Chan2:Volt-Offset-I") {
     field(DESC, "Voltage Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 440")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 440")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:Volt-Gain-I") {
     field(DESC, "Voltage Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 444")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 444")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan2:Gnd-I") {
     field(DESC, "Ground Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 448")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 448")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan2:Gnd-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan2:Gnd-aSub") {
     field(DESC, "Rolling Buffer of 1000 floats")
     field(INPA, "$(P){$(NO)}Chan2:Gnd-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan2:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")          
+    field( FTB, "LONG")          
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1130,7 +1119,7 @@ record(aSub, "$(P){$(NO)}Chan2:Gnd-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan2:Gnd-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan2:Gnd-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan2:Gnd-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }    
@@ -1139,34 +1128,34 @@ record(waveform, "$(P){$(NO)}Chan2:Gnd-Wfm") {
 record(ai, "$(P){$(NO)}Chan2:Gnd-Offset-I") {
     field(DESC, "Ground Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 452")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 452")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:Gnd-Gain-I") {
     field(DESC, "Ground Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 456")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 456")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:Spare-I") {
     field(DESC, "Spare Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 460")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 460")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan2:Spare-aSub") 
 }
 
 record(aSub, "$(P){$(NO)}Chan2:Spare-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan2:Spare-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan2:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")          
+    field( FTB, "LONG")          
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1176,7 +1165,7 @@ record(aSub, "$(P){$(NO)}Chan2:Spare-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan2:Spare-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan2:Spare-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan2:Spare-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1187,35 +1176,35 @@ record(waveform, "$(P){$(NO)}Chan2:Spare-Wfm") {
 record(ai, "$(P){$(NO)}Chan2:Spare-Offset-I") {
     field(DESC, "Spare Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 464")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 464")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:Spare-Gain-I") {
     field(DESC, "Spare Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 468")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 468")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan2:Reg-I") {
     field(DESC, "Regulator Output Voltage Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 472")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 472")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan2:Reg-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan2:Reg-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan2:Reg-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan2:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")          
+    field( FTB, "LONG")          
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1225,7 +1214,7 @@ record(aSub, "$(P){$(NO)}Chan2:Reg-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan2:Reg-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan2:Reg-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan2:Reg-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1235,34 +1224,34 @@ record(waveform, "$(P){$(NO)}Chan2:Reg-Wfm") {
 record(ai, "$(P){$(NO)}Chan2:Reg-Offset-I") {
     field(DESC, "Regulator Output Voltage Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 476")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 476")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:Reg-Gain-I") {
     field(DESC, "Regulator Output Voltage Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 480")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 480")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:Error-I") {
     field(DESC, "Error Voltage Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 484")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 484")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan2:Error-aSub")     
 }
 
 record(aSub, "$(P){$(NO)}Chan2:Error-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan2:Error-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan2:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")          
+    field( FTB, "LONG")          
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1272,7 +1261,7 @@ record(aSub, "$(P){$(NO)}Chan2:Error-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan2:Error-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan2:Error-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan2:Error-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1280,34 +1269,34 @@ record(waveform, "$(P){$(NO)}Chan2:Error-Wfm") {
 record(ai, "$(P){$(NO)}Chan2:Error-Offset-I") {
     field(DESC, "Error Voltage Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 488")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 488")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:Error-Gain-I") {
     field(DESC, "Error Voltage Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 492")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 492")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:DACSetPt-I") {
     field(DESC, "DAC SetPoint Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 496")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 496")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan2:DACSetPt-aSub")     
 }
 
 record(aSub, "$(P){$(NO)}Chan2:DACSetPt-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan2:DACSetPt-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan2:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")          
+    field( FTB, "LONG")          
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1317,7 +1306,7 @@ record(aSub, "$(P){$(NO)}Chan2:DACSetPt-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan2:DACSetPt-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan2:DACSetPt-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan2:DACSetPt-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1326,248 +1315,248 @@ record(waveform, "$(P){$(NO)}Chan2:DACSetPt-Wfm") {
 record(ai, "$(P){$(NO)}Chan2:DACSetPt-Offset-I") {
     field(DESC, "DAC SetPoint Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 500")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 500")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:DACSetPt-Gain-I") {
     field(DESC, "DAC SetPoint Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 504")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 504")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(longin, "$(P){$(NO)}Chan2:DACRampActive-I") {
     field(DESC, "DAC SetPoint Readback")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 508")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 508")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan2:OVC1_Flt_Threshold-I") {
     field(DESC, "DCCT1 OVC Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 512")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 512")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:OVC2_Flt_Threshold-I") {
     field(DESC, "DCCT2 OVC Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 516")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 516")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:OVV_Flt_Threshold-I") {
     field(DESC, "OVV Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 520")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 520")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:ERR1_Flt_Threshold-I") {
     field(DESC, "ERR1 Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 524")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 524")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:ERR2_Flt_Threshold-I") {
     field(DESC, "ERR2 Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 528")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 528")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:IGND_Flt_Threshold-I") {
     field(DESC, "Ignd Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 532")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 532")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:OVC1_Flt_CntLim-I") {
     field(DESC, "DCCT1 OVC Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 536")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 536")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:OVC2_Flt_CntLim-I") {
     field(DESC, "DCCT2 OVC Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 540")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 540")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:OVV_Flt_CntLim-I") {
     field(DESC, "OVV Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 544")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 544")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:ERR1_Flt_CntLim-I") {
     field(DESC, "PID Error 1 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 548")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 548")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:ERR2_Flt_CntLim-I") {
     field(DESC, "PID Error 2  Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 552")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 552")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:IGND_Flt_CntLim-I") {
     field(DESC, "Ignd Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 556")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 556")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:DCCT_Flt_CntLim-I") {
     field(DESC, "DCCT Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 560")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 560")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:FLT1_Flt_CntLim-I") {
     field(DESC, "Fault 1 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 564")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 564")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:FLT2_Flt_CntLim-I") {
     field(DESC, "Fault 2 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 568")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 568")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:FLT3_Flt_CntLim-I") {
     field(DESC, "Fault 3 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 572")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 572")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:ON_Flt_CntLim-I") {
     field(DESC, "PowerSupply ON Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 576")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 576")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:HeartBeat_Flt_CntLim-I") {
     field(DESC, "HeartBeat Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 580")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 580")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan2:FaultClear-I") {
     field(DESC, "Fault Clear")
     field(DTYP, "PSC Reg")   
-    field(INP , "@PSC$(NO) 31 584")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 584")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan2:FaultMask-I") {
     field(DESC, "Fault 3 Fault Counter Limit")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 588")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 588")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan2:DigOut_ON1-I") {
     field(DESC, "Digital Output ON1")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 592")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 592")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan2:DigOut_ON2-I") {
     field(DESC, "Digital Output ON2")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 596")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 596")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(longin, "$(P){$(NO)}Chan2:DigOut_Reset-I") {
     field(DESC, "Digital Output Reset")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 600")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 600")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan2:DigOut_Spare-I") {
     field(DESC, "Digital Output Spare")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 604")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 604")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan2:DigOut_Park-I") {
     field(DESC, "Digital Output Park")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 608")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 608")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan2:DigIn-I") {
     field(DESC, "Digital Input Bits")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 612")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 612")
+    field(SCAN, "I/O Intr")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan2:FaultsLive-I") {
     field(DESC, "PS1 Live Faults")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 616")
+    field( INP, "@$(NAME=PSC)$(NO) 31 616")
     field(SCAN, "I/O Intr")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan2:FaultsLat-I") {
     field(DESC, "PS1 Latched Faults")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 620")
+    field( INP, "@$(NAME=PSC)$(NO) 31 620")
     field(SCAN, "I/O Intr")
 }
 
@@ -1575,72 +1564,72 @@ record(mbbiDirect, "$(P){$(NO)}Chan2:FaultsLat-I") {
 record(ai, "$(P){$(NO)}Chan2:SF:AmpsperSec-I") {
     field(DESC, "ScaleFactor Amps/Sec Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 624")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 624")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:SF:DAC_DCCTs-I") {
     field(DESC, "ScaleFactor for DAC & DCCT's")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 628")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 628")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:SF:Vout-I") {
     field(DESC, "ScaleFactor for Vout ")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 632")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 632")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:SF:Ignd-I") {
     field(DESC, "ScaleFactor for Ignd")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 636")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 636")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:SF:Spare-I") {
     field(DESC, "ScaleFactor for Spare")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 640")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 640")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:SF:Regulator-I") {
     field(DESC, "ScaleFactor for Regulator")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 644")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 644")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan2:SF:Error-I") {
     field(DESC, "ScaleFactor for Error")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 648")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 648")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan2:DACSetPtRaw-I") {
     field(DESC, "DAC SetPoint Raw Readback")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 652")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 652")
+    field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P){$(NO)}Chan2:FOFB:DACSetPt-I") {
     field(DESC, "FOFB DAC Set Point")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 656")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 656")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
@@ -1649,7 +1638,7 @@ record(ai, "$(P){$(NO)}Chan2:FOFB:DACSetPt-I") {
 
 record(longout, "$(P){$(NO)}Chan3:TenHzBufLen-SP") {
     field(DESC, "Rolling buffer length")
-    field(VAL, "100")     # default length
+    field( VAL, "100")     # default length
     #field(PREC, "0")
     field(HOPR, "1000")
     field(LOPR, "1")
@@ -1660,18 +1649,18 @@ record(longout, "$(P){$(NO)}Chan3:TenHzBufLen-SP") {
 record(ai, "$(P){$(NO)}Chan3:DCCT1-I") {
     field(DESC, "DCCT 1 Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 700")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 700")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan3:DCCT1-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan3:DCCT1-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan3:DCCT1-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan3:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1681,7 +1670,7 @@ record(aSub, "$(P){$(NO)}Chan3:DCCT1-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan3:DCCT1-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan3:DCCT1-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan3:DCCT1-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1690,34 +1679,34 @@ record(waveform, "$(P){$(NO)}Chan3:DCCT1-Wfm") {
 record(ai, "$(P){$(NO)}Chan3:DCCT1-Offset-I") {
     field(DESC, "DCCT 1 Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 704")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 704")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:DCCT1-Gain-I") {
     field(DESC, "DCCT 1 Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 708")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 708")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:DCCT2-I") {
     field(DESC, "DCCT 2 Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 712")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 712")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan3:DCCT2-aSub")       
 }
 
 record(aSub, "$(P){$(NO)}Chan3:DCCT2-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan3:DCCT2-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan3:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1727,7 +1716,7 @@ record(aSub, "$(P){$(NO)}Chan3:DCCT2-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan3:DCCT2-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan3:DCCT2-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan3:DCCT2-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1737,34 +1726,34 @@ record(waveform, "$(P){$(NO)}Chan3:DCCT2-Wfm") {
 record(ai, "$(P){$(NO)}Chan3:DCCT2-Offset-I") {
     field(DESC, "DCCT 2 Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 716")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 716")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:DCCT2-Gain-I") {
     field(DESC, "DCCT 2 Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 720")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 720")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:DAC-I") {
     field(DESC, "DAC Setpoint Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 724")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 724")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan3:DAC-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan3:DAC-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan3:DAC-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan3:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1774,7 +1763,7 @@ record(aSub, "$(P){$(NO)}Chan3:DAC-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan3:DAC-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan3:DAC-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan3:DAC-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1784,35 +1773,35 @@ record(waveform, "$(P){$(NO)}Chan3:DAC-Wfm") {
 record(ai, "$(P){$(NO)}Chan3:DAC-Offset-I") {
     field(DESC, "DAC Setpoint Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 728")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 728")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:DAC-Gain-I") {
     field(DESC, "DAC Setpoint Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 732")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 732")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan3:Volt-I") {
     field(DESC, "Voltage Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 736")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 736")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan3:Volt-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan3:Volt-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan3:Volt-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan3:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1822,7 +1811,7 @@ record(aSub, "$(P){$(NO)}Chan3:Volt-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan3:Volt-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan3:Volt-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan3:Volt-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1830,35 +1819,35 @@ record(waveform, "$(P){$(NO)}Chan3:Volt-Wfm") {
 record(ai, "$(P){$(NO)}Chan3:Volt-Offset-I") {
     field(DESC, "Voltage Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 740")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 740")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:Volt-Gain-I") {
     field(DESC, "Voltage Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 744")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 744")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan3:Gnd-I") {
     field(DESC, "Ground Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 748")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 748")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan3:Gnd-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan3:Gnd-aSub") {
     field(DESC, "Rolling Buffer of 1000 floats")
     field(INPA, "$(P){$(NO)}Chan3:Gnd-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan3:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1868,7 +1857,7 @@ record(aSub, "$(P){$(NO)}Chan3:Gnd-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan3:Gnd-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan3:Gnd-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan3:Gnd-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1876,34 +1865,34 @@ record(waveform, "$(P){$(NO)}Chan3:Gnd-Wfm") {
 record(ai, "$(P){$(NO)}Chan3:Gnd-Offset-I") {
     field(DESC, "Ground Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 752")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 752")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:Gnd-Gain-I") {
     field(DESC, "Ground Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 756")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 756")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:Spare-I") {
     field(DESC, "Spare Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 760")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 760")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan3:Spare-aSub") 
 }
 
 record(aSub, "$(P){$(NO)}Chan3:Spare-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan3:Spare-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan3:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1913,7 +1902,7 @@ record(aSub, "$(P){$(NO)}Chan3:Spare-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan3:Spare-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan3:Spare-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan3:Spare-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1922,35 +1911,35 @@ record(waveform, "$(P){$(NO)}Chan3:Spare-Wfm") {
 record(ai, "$(P){$(NO)}Chan3:Spare-Offset-I") {
     field(DESC, "Spare Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 764")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 764")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:Spare-Gain-I") {
     field(DESC, "Spare Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 768")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 768")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan3:Reg-I") {
     field(DESC, "Regulator Output Voltage Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 772")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 772")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan3:Reg-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan3:Reg-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan3:Reg-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan3:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -1960,7 +1949,7 @@ record(aSub, "$(P){$(NO)}Chan3:Reg-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan3:Reg-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan3:Reg-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan3:Reg-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -1969,34 +1958,34 @@ record(waveform, "$(P){$(NO)}Chan3:Reg-Wfm") {
 record(ai, "$(P){$(NO)}Chan3:Reg-Offset-I") {
     field(DESC, "Regulator Output Voltage Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 776")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 776")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:Reg-Gain-I") {
     field(DESC, "Regulator Output Voltage Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 780")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 780")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:Error-I") {
     field(DESC, "Error Voltage Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 784")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 784")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan3:Error-aSub")     
 }
 
 record(aSub, "$(P){$(NO)}Chan3:Error-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan3:Error-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan3:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2006,7 +1995,7 @@ record(aSub, "$(P){$(NO)}Chan3:Error-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan3:Error-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan3:Error-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan3:Error-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2016,34 +2005,34 @@ record(waveform, "$(P){$(NO)}Chan3:Error-Wfm") {
 record(ai, "$(P){$(NO)}Chan3:Error-Offset-I") {
     field(DESC, "Error Voltage Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 788")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 788")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:Error-Gain-I") {
     field(DESC, "Error Voltage Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 792")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 792")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:DACSetPt-I") {
     field(DESC, "DAC SetPoint Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 796")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 796")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan3:DACSetPt-aSub")     
 }
 
 record(aSub, "$(P){$(NO)}Chan3:DACSetPt-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan3:DACSetPt-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan3:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2053,7 +2042,7 @@ record(aSub, "$(P){$(NO)}Chan3:DACSetPt-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan3:DACSetPt-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan3:DACSetPt-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan3:DACSetPt-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2063,320 +2052,320 @@ record(waveform, "$(P){$(NO)}Chan3:DACSetPt-Wfm") {
 record(ai, "$(P){$(NO)}Chan3:DACSetPt-Offset-I") {
     field(DESC, "DAC SetPoint Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 800")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 800")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:DACSetPt-Gain-I") {
     field(DESC, "DAC SetPoint Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 804")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 804")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(longin, "$(P){$(NO)}Chan3:DACRampActive-I") {
     field(DESC, "DAC SetPoint Readback")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 808")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 808")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan3:OVC1_Flt_Threshold-I") {
     field(DESC, "DCCT1 OVC Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 812")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 812")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:OVC2_Flt_Threshold-I") {
     field(DESC, "DCCT2 OVC Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 816")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 816")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:OVV_Flt_Threshold-I") {
     field(DESC, "OVV Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 820")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 820")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:ERR1_Flt_Threshold-I") {
     field(DESC, "ERR1 Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 824")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 824")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:ERR2_Flt_Threshold-I") {
     field(DESC, "ERR2 Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 828")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 828")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:IGND_Flt_Threshold-I") {
     field(DESC, "Ignd Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 832")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 832")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:OVC1_Flt_CntLim-I") {
     field(DESC, "DCCT1 OVC Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 836")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 836")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:OVC2_Flt_CntLim-I") {
     field(DESC, "DCCT2 OVC Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 840")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 840")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:OVV_Flt_CntLim-I") {
     field(DESC, "OVV Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 844")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 844")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:ERR1_Flt_CntLim-I") {
     field(DESC, "PID Error 1 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 848")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 848")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:ERR2_Flt_CntLim-I") {
     field(DESC, "PID Error 2  Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 852")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 852")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:IGND_Flt_CntLim-I") {
     field(DESC, "Ignd Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 856")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 856")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:DCCT_Flt_CntLim-I") {
     field(DESC, "DCCT Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 860")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 860")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:FLT1_Flt_CntLim-I") {
     field(DESC, "Fault 1 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 864")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 864")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:FLT2_Flt_CntLim-I") {
     field(DESC, "Fault 2 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 868")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 868")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:FLT3_Flt_CntLim-I") {
     field(DESC, "Fault 3 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 872")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 872")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:ON_Flt_CntLim-I") {
     field(DESC, "PowerSupply ON Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 876")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 876")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:HeartBeat_Flt_CntLim-I") {
     field(DESC, "HeartBeat Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 880")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 880")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan3:FaultClear-I") {
     field(DESC, "Fault Clear")
     field(DTYP, "PSC Reg")   
-    field(INP , "@PSC$(NO) 31 884")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 884")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan3:FaultMask-I") {
     field(DESC, "Fault 3 Fault Counter Limit")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 888")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 888")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan3:DigOut_ON1-I") {
     field(DESC, "Digital Output ON1")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 892")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 892")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan3:DigOut_ON2-I") {
     field(DESC, "Digital Output ON2")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 896")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 896")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(longin, "$(P){$(NO)}Chan3:DigOut_Reset-I") {
     field(DESC, "Digital Output Reset")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 900")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 900")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan3:DigOut_Spare-I") {
     field(DESC, "Digital Output Spare")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 904")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 904")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan3:DigOut_Park-I") {
     field(DESC, "Digital Output Park")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 908")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 908")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan3:DigIn-I") {
     field(DESC, "Digital Input Bits")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 912")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 912")
+    field(SCAN, "I/O Intr")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan3:FaultsLive-I") {
     field(DESC, "PS1 Live Faults")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 916")
+    field( INP, "@$(NAME=PSC)$(NO) 31 916")
     field(SCAN, "I/O Intr")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan3:FaultsLat-I") {
     field(DESC, "PS1 Latched Faults")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 920")
+    field( INP, "@$(NAME=PSC)$(NO) 31 920")
     field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P){$(NO)}Chan3:SF:AmpsperSec-I") {
     field(DESC, "ScaleFactor Amps/Sec Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 924")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 924")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:SF:DAC_DCCTs-I") {
     field(DESC, "ScaleFactor for DAC & DCCT's")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 928")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 928")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:SF:Vout-I") {
     field(DESC, "ScaleFactor for Vout ")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 932")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 932")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:SF:Ignd-I") {
     field(DESC, "ScaleFactor for Ignd")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 936")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 936")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:SF:Spare-I") {
     field(DESC, "ScaleFactor for Spare")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 940")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 940")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:SF:Regulator-I") {
     field(DESC, "ScaleFactor for Regulator")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 944")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 944")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan3:SF:Error-I") {
     field(DESC, "ScaleFactor for Error")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 948")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 948")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan3:DACSetPtRaw-I") {
     field(DESC, "DAC SetPoint Raw Readback")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 952")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 952")
+    field(SCAN, "I/O Intr")
 }
 
 record(ai, "$(P){$(NO)}Chan3:FOFB:DACSetPt-I") {
     field(DESC, "FOFB DAC Set Point")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 956")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 956")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
@@ -2385,7 +2374,7 @@ record(ai, "$(P){$(NO)}Chan3:FOFB:DACSetPt-I") {
 
 record(longout, "$(P){$(NO)}Chan4:TenHzBufLen-SP") {
     field(DESC, "Rolling buffer length")
-    field(VAL, "100")     # default length
+    field( VAL, "100")     # default length
     #field(PREC, "0")
     field(HOPR, "1000")
     field(LOPR, "1")
@@ -2396,18 +2385,18 @@ record(longout, "$(P){$(NO)}Chan4:TenHzBufLen-SP") {
 record(ai, "$(P){$(NO)}Chan4:DCCT1-I") {
     field(DESC, "DCCT 1 Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1000")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1000")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan4:DCCT1-aSub")       
 }
 
 record(aSub, "$(P){$(NO)}Chan4:DCCT1-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan4:DCCT1-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan4:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2417,7 +2406,7 @@ record(aSub, "$(P){$(NO)}Chan4:DCCT1-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan4:DCCT1-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan4:DCCT1-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan4:DCCT1-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2427,34 +2416,34 @@ record(waveform, "$(P){$(NO)}Chan4:DCCT1-Wfm") {
 record(ai, "$(P){$(NO)}Chan4:DCCT1-Offset-I") {
     field(DESC, "DCCT 1 Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1004")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1004")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:DCCT1-Gain-I") {
     field(DESC, "DCCT 1 Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1008")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1008")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:DCCT2-I") {
     field(DESC, "DCCT 2 Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1012")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1012")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan4:DCCT2-aSub")       
 }
 
 record(aSub, "$(P){$(NO)}Chan4:DCCT2-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan4:DCCT2-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan4:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2464,7 +2453,7 @@ record(aSub, "$(P){$(NO)}Chan4:DCCT2-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan4:DCCT2-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan4:DCCT2-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan4:DCCT2-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2474,34 +2463,34 @@ record(waveform, "$(P){$(NO)}Chan4:DCCT2-Wfm") {
 record(ai, "$(P){$(NO)}Chan4:DCCT2-Offset-I") {
     field(DESC, "DCCT 2 Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1016")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1016")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:DCCT2-Gain-I") {
     field(DESC, "DCCT 2 Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1020")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1020")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:DAC-I") {
     field(DESC, "DAC Setpoint Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1024")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1024")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan4:DAC-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan4:DAC-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan4:DAC-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan4:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2511,7 +2500,7 @@ record(aSub, "$(P){$(NO)}Chan4:DAC-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan4:DAC-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan4:DAC-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan4:DAC-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2522,35 +2511,35 @@ record(waveform, "$(P){$(NO)}Chan4:DAC-Wfm") {
 record(ai, "$(P){$(NO)}Chan4:DAC-Offset-I") {
     field(DESC, "DAC Setpoint Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1028")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1028")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:DAC-Gain-I") {
     field(DESC, "DAC Setpoint Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1032")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1032")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan4:Volt-I") {
     field(DESC, "Voltage Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1036")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1036")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan4:Volt-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan4:Volt-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan4:Volt-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan4:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2560,7 +2549,7 @@ record(aSub, "$(P){$(NO)}Chan4:Volt-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan4:Volt-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan4:Volt-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan4:Volt-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2568,35 +2557,35 @@ record(waveform, "$(P){$(NO)}Chan4:Volt-Wfm") {
 record(ai, "$(P){$(NO)}Chan4:Volt-Offset-I") {
     field(DESC, "Voltage Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1040")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1040")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:Volt-Gain-I") {
     field(DESC, "Voltage Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1044")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1044")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan4:Gnd-I") {
     field(DESC, "Ground Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1048")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1048")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan4:Gnd-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan4:Gnd-aSub") {
     field(DESC, "Rolling Buffer of 1000 floats")
     field(INPA, "$(P){$(NO)}Chan4:Gnd-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan4:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2606,7 +2595,7 @@ record(aSub, "$(P){$(NO)}Chan4:Gnd-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan4:Gnd-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan4:Gnd-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan4:Gnd-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2614,34 +2603,34 @@ record(waveform, "$(P){$(NO)}Chan4:Gnd-Wfm") {
 record(ai, "$(P){$(NO)}Chan4:Gnd-Offset-I") {
     field(DESC, "Ground Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1052")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1052")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:Gnd-Gain-I") {
     field(DESC, "Ground Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1056")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1056")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:Spare-I") {
     field(DESC, "Spare Monitor Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1060")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1060")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan4:Spare-aSub") 
 }
 
 record(aSub, "$(P){$(NO)}Chan4:Spare-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan4:Spare-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan4:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2651,7 +2640,7 @@ record(aSub, "$(P){$(NO)}Chan4:Spare-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan4:Spare-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan4:Spare-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan4:Spare-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2660,35 +2649,35 @@ record(waveform, "$(P){$(NO)}Chan4:Spare-Wfm") {
 record(ai, "$(P){$(NO)}Chan4:Spare-Offset-I") {
     field(DESC, "Spare Monitor Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1064")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1064")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:Spare-Gain-I") {
     field(DESC, "Spare Monitor Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1068")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1068")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan4:Reg-I") {
     field(DESC, "Regulator Output Voltage Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1072")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1072")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan4:Reg-aSub")      
 }
 
 record(aSub, "$(P){$(NO)}Chan4:Reg-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan1:Reg-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan4:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2698,7 +2687,7 @@ record(aSub, "$(P){$(NO)}Chan4:Reg-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan4:Reg-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan4:Reg-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan4:Reg-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2707,34 +2696,34 @@ record(waveform, "$(P){$(NO)}Chan4:Reg-Wfm") {
 record(ai, "$(P){$(NO)}Chan4:Reg-Offset-I") {
     field(DESC, "Regulator Output Voltage Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1076")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1076")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:Reg-Gain-I") {
     field(DESC, "Regulator Output Voltage Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1080")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1080")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:Error-I") {
     field(DESC, "Error Voltage Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1084")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1084")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan4:Error-aSub")     
 }
 
 record(aSub, "$(P){$(NO)}Chan4:Error-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan4:Error-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan4:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2744,7 +2733,7 @@ record(aSub, "$(P){$(NO)}Chan4:Error-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan4:Error-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan4:Error-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan4:Error-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2753,34 +2742,34 @@ record(waveform, "$(P){$(NO)}Chan4:Error-Wfm") {
 record(ai, "$(P){$(NO)}Chan4:Error-Offset-I") {
     field(DESC, "Error Voltage Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1088")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1088")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:Error-Gain-I") {
     field(DESC, "Error Voltage Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1092")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1092")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:DACSetPt-I") {
     field(DESC, "DAC SetPoint Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1096")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1096")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
     field(FLNK, "$(P){$(NO)}Chan4:DACSetPt-aSub")     
 }
 
 record(aSub, "$(P){$(NO)}Chan4:DACSetPt-aSub") {
     field(DESC, "Rolling Buffer of 100 floats")
     field(INPA, "$(P){$(NO)}Chan4:DACSetPt-I NPP NMS")  
-    field(FTA, "FLOAT")
+    field( FTA, "FLOAT")
     field(INPB, "$(P){$(NO)}Chan4:TenHzBufLen-SP NPP")   # desired length
-    field(FTB, "LONG")         
+    field( FTB, "LONG")         
     field(FTVA, "FLOAT")   
     field(NOVA, "$(BUFLEN)") #buffer size
     field(NEVA, "$(BUFLEN)") #output array length
@@ -2790,7 +2779,7 @@ record(aSub, "$(P){$(NO)}Chan4:DACSetPt-aSub") {
 
 record(waveform, "$(P){$(NO)}Chan4:DACSetPt-Wfm") {
     field(DESC, "Waveform of last 1000 points")
-    field(INP, "$(P){$(NO)}Chan4:DACSetPt-aSub.VALA CPP")
+    field( INP, "$(P){$(NO)}Chan4:DACSetPt-aSub.VALA CPP")
     field(FTVL, "FLOAT")
     field(NELM, "$(BUFLEN)")
 }
@@ -2800,248 +2789,248 @@ record(waveform, "$(P){$(NO)}Chan4:DACSetPt-Wfm") {
 record(ai, "$(P){$(NO)}Chan4:DACSetPt-Offset-I") {
     field(DESC, "DAC SetPoint Offset Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1100")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1100")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:DACSetPt-Gain-I") {
     field(DESC, "DAC SetPoint Gain Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1104")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1104")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(longin, "$(P){$(NO)}Chan4:DACRampActive-I") {
     field(DESC, "DAC SetPoint Readback")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1108")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1108")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(ai, "$(P){$(NO)}Chan4:OVC1_Flt_Threshold-I") {
     field(DESC, "DCCT1 OVC Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1112")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1112")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:OVC2_Flt_Threshold-I") {
     field(DESC, "DCCT2 OVC Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1116")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1116")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:OVV_Flt_Threshold-I") {
     field(DESC, "OVV Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1120")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1120")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:ERR1_Flt_Threshold-I") {
     field(DESC, "ERR1 Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1124")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1124")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:ERR2_Flt_Threshold-I") {
     field(DESC, "ERR2 Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1128")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1128")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:IGND_Flt_Threshold-I") {
     field(DESC, "Ignd Fault Threshold")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1132")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1132")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:OVC1_Flt_CntLim-I") {
     field(DESC, "DCCT1 OVC Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1136")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1136")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:OVC2_Flt_CntLim-I") {
     field(DESC, "DCCT2 OVC Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1140")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1140")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:OVV_Flt_CntLim-I") {
     field(DESC, "OVV Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1144")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1144")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:ERR1_Flt_CntLim-I") {
     field(DESC, "PID Error 1 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1148")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1148")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:ERR2_Flt_CntLim-I") {
     field(DESC, "PID Error 2  Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1152")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1152")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:IGND_Flt_CntLim-I") {
     field(DESC, "Ignd Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1156")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1156")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:DCCT_Flt_CntLim-I") {
     field(DESC, "DCCT Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1160")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1160")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:FLT1_Flt_CntLim-I") {
     field(DESC, "Fault 1 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1164")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1164")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:FLT2_Flt_CntLim-I") {
     field(DESC, "Fault 2 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1168")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1168")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:FLT3_Flt_CntLim-I") {
     field(DESC, "Fault 3 Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1172")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1172")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:ON_Flt_CntLim-I") {
     field(DESC, "PowerSupply ON Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1176")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1176")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:HeartBeat_Flt_CntLim-I") {
     field(DESC, "HeartBeat Fault Counter Limit")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1180")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1180")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan4:FaultClear-I") {
     field(DESC, "Fault Clear")
     field(DTYP, "PSC Reg")   
-    field(INP , "@PSC$(NO) 31 1184")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1184")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan4:FaultMask-I") {
     field(DESC, "Fault 3 Fault Counter Limit")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1188")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1188")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan4:DigOut_ON1-I") {
     field(DESC, "Digital Output ON1")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1192")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1192")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan4:DigOut_ON2-I") {
     field(DESC, "Digital Output ON2")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1196")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1196")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(longin, "$(P){$(NO)}Chan4:DigOut_Reset-I") {
     field(DESC, "Digital Output Reset")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1200")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1200")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan4:DigOut_Spare-I") {
     field(DESC, "Digital Output Spare")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1204")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1204")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(longin, "$(P){$(NO)}Chan4:DigOut_Park-I") {
     field(DESC, "Digital Output Park")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1208")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1208")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan4:DigIn-I") {
     field(DESC, "Digital Input Bits")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1212")
-    field(SCAN,"I/O Intr")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1212")
+    field(SCAN, "I/O Intr")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan4:FaultsLive-I") {
     field(DESC, "PS1 Live Faults")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1216")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1216")
     field(SCAN, "I/O Intr")
 }
 
 record(mbbiDirect, "$(P){$(NO)}Chan4:FaultsLat-I") {
     field(DESC, "PS1 Latched Faults")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1220")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1220")
     field(SCAN, "I/O Intr")
 }
 
@@ -3049,74 +3038,73 @@ record(mbbiDirect, "$(P){$(NO)}Chan4:FaultsLat-I") {
 record(ai, "$(P){$(NO)}Chan4:SF:AmpsperSec-I") {
     field(DESC, "ScaleFactor Amps/Sec Readback")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1224")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1224")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:SF:DAC_DCCTs-I") {
     field(DESC, "ScaleFactor for DAC & DCCT's")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1228")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1228")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:SF:Vout-I") {
     field(DESC, "ScaleFactor for Vout ")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1232")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1232")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:SF:Ignd-I") {
     field(DESC, "ScaleFactor for Ignd")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1236")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1236")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:SF:Spare-I") {
     field(DESC, "ScaleFactor for Spare")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1240")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1240")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:SF:Regulator-I") {
     field(DESC, "ScaleFactor for Regulator")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1244")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1244")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:SF:Error-I") {
     field(DESC, "ScaleFactor for Error")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1248")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1248")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 
 record(longin, "$(P){$(NO)}Chan4:DACSetPtRaw-I") {
     field(DESC, "DAC SetPoint Raw Readback")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(NO) 31 1252")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1252")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
 
 record(ai, "$(P){$(NO)}Chan4:FOFB:DACSetPt-I") {
     field(DESC, "FOFB DAC Set Point")
     field(DTYP, "PSC Reg F32")
-    field(INP , "@PSC$(NO) 31 1256")
-    field(SCAN,"I/O Intr")
-    field(EGU,  "")
+    field( INP, "@$(NAME=PSC)$(NO) 31 1256")
+    field(SCAN, "I/O Intr")
+    field( EGU,  "")
 }
-
-
+# End of DB

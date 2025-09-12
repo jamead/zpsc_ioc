@@ -1,0 +1,4 @@
+#!/bin/sh
+# cd "/vxboot/zpsc/boot/iocBoot/iocalsulab-zpsc"
+exec ./st.cmd
+

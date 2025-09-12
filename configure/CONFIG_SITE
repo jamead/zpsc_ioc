@@ -14,7 +14,7 @@
 # Set CHECK_RELEASE to NO to disable checking completely.
 # Set CHECK_RELEASE to WARN to perform consistency checking but
 #   continue building even if conflicts are found.
-CHECK_RELEASE = YES
+CHECK_RELEASE = NO
 
 # Set this when you only want to compile this application
 #   for a subset of the cross-compiled target architectures
@@ -34,6 +34,15 @@ CHECK_RELEASE = YES
 #   or CROSS_OPT settings from base/configure/CONFIG_SITE
 #HOST_OPT = NO
 #CROSS_OPT = NO
+
+# USR_CPPFLAGS += -fPIC
+# USR_CPPFLAGS += -DUSE_TYPED_RSET
+# 
+# USR_CFLAGS += `net-snmp-config --cflags`
+# USR_CFLAGS += -DNETSNMP_NO_INLINE
+# 
+# USR_LDFLAGS += `net-snmp-config --libs`
+
 
 # These allow developers to override the CONFIG_SITE variable
 # settings without having to modify the configure/CONFIG_SITE

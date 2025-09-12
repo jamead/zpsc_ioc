@@ -22,21 +22,85 @@
 # the CONFIG_SITE file.
 
 # Variables and paths to dependent modules:
-#MODULES = /path/to/modules
+MODULES = $(EPICS_BASE)/../modules
 #MYMODULE = $(MODULES)/my-module
 
-# If using the sequencer, point SNCSEQ at its top directory:
-#SNCSEQ = $(MODULES)/seq-ver
+#ALS_IOCSH = $(MODULES)/iocsh
+#SNMP = $(MODULES)/snmp
+#
+###--- ASYN Family
+#ASYN = $(MODULES)/asyn
+SNCSEQ = $(MODULES)/seq
+#MODBUS = $(MODULES)/modbus
+### MODBUS : Please enable ASYN
+#STD = $(MODULES)/std
+### STD : Please enable ASYN and SNCSEQ
+#CALC = $(MODULES)/calc
+### CALC : Please enable SSCAN and SNCSEQ
+#MEASCOMP = $(MODULES)/measComp
+### MEASCOMP : Please enable ASYN and SNCSEQ
+#SSCAN=$(MODULES)/sscan
+### SSCAN : Please enable SNCSEQ
+#BUSY=$(MODULES)/busy
+### BUSY : Please enable ASYN
+#SCALER=$(MODULES)/scaler
+### SCALER : Please enable ASYN
+#MCA=$(MODULES)/mca
+### MCA : Please enable ASYN
+###--- ALS-U use "StreamDevice" as a directory name
+#STREAM = $(MODULES)/StreamDevice
+### STREAM : Please enable ASYN and CALC
+#
+###--- AB PLC
+#ETHER_IP=$(MODULES)/ether_ip
+#
+###--- OPCUA
+#OPCUA=$(MODULES)/opcua
+#
+#
+###--- IOCSTATS : ALS specific iocStats
+#IOCSTATS = $(MODULES)/iocStatsALS
+#
+###--- ALS-U Site Specific Modules
+###---------------- VACUUM Modules
+#RGAMV2=$(MODULES)/rgamv2
+#UNIDRV=$(MODULES)/unidrv
+#QPC=$(MODULES)/qpc
+###---------------- Instrumentation
+#EVENTGENERATORSUP=$(MODULES)/eventGeneratorSup
+#BPMSUP=$(MODULES)/bpmSup
+###----------------- FEED for LLRF
+#FEED=$(MODULES)/feed
+###----------------- PSC Modules
+PSCDRV=$(MODULES)/pscdrv
+###----------------- MOTION Modules
+#MOTOR=$(MODULES)/motor
+### Please enable ASYN
+#PMAC=$(MODULES)/pmac
+#
+#
+### --- ALS-U Default Modules : All IOC should have them all
+AUTOSAVE = $(MODULES)/autosave
+RECCASTER = $(MODULES)/recsync
+RETOOLS = $(MODULES)/retools
+CAPUTLOG = $(MODULES)/caPutLog
+#### devIocStats : EPICS community iocStats
+devIocStats = $(MODULES)/iocStats
+PVXS=$(MODULES)/pvxs
 
 # EPICS_BASE should appear last so earlier modules can override stuff:
-#EPICS_BASE = /home/mead/epics/epics-base
+EPICS_BASE = /home/jeonglee/alsu-epics/1.1.2/debian-12/7.0.7/base
 
 # Set RULES here if you want to use build rules from somewhere
 # other than EPICS_BASE:
 #RULES = $(MODULES)/build-rules
 
-# These lines allow developers to override these RELEASE settings
-# without having to modify this file directly.
+#-- https://epics.anl.gov/tech-talk/2024/msg00460.php
+#-- When PVXS is included in RELEASE, then PVXS_MAJOR_VERSION will be defined
+#-- Here, we use the installed ALS-U EPICS Environment PVXS Version
+-include $(PVXS)/configure/CONFIG_PVXS_VERSION
+#-- These lines allow developers to override these RELEASE settings
+#-- without having to modify this file directly.
 -include $(TOP)/../RELEASE.local
 -include $(TOP)/../RELEASE.$(EPICS_HOST_ARCH).local
 -include $(TOP)/configure/RELEASE.local

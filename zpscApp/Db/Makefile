@@ -6,7 +6,45 @@ include $(TOP)/configure/CONFIG
 #----------------------------------------------------
 # Create and install (or just install) into <top>/db
 # databases, templates, substitutions like this
-#DB += xxx.db
+DB += PSC-CH4.db
+# Temp. solution to support old IOC
+
+ifneq ($(ASYN),)
+DB_INSTALLS += $(ASYN)/db/asynRecord.db
+endif
+
+ifneq ($(devIocStats),)
+DB_INSTALLS += $(devIocStats)/db/iocAdminSoft.db
+endif
+
+ifneq ($(IOCSTATS),)
+DB_INSTALLS += $(IOCSTATS)/db/ioc_stats.db
+endif
+
+ifneq ($(RECCASTER),)
+DB_INSTALLS += $(RECCASTER)/db/reccaster.db
+endif
+
+ifneq ($(AUTOSAVE),)
+DB_INSTALLS += $(AUTOSAVE)/db/save_restoreStatus.db
+endif
+
+ifneq ($(PMAC),)
+DB_INSTALLS += $(PMAC)/db/pmacController.template
+DB_INSTALLS += $(PMAC)/db/pmacStatusAxis.template
+DB_INSTALLS += $(PMAC)/db/powerPmacStatus.template
+endif
+
+DB += $(patsubst ../%, %, $(wildcard ../*.template))
+#DB += $(patsubst ../%, %, $(wildcard ../*.db))
+#DB += $(patsubst ../%, %, $(wildcard ../*.vdb))
+DB += $(patsubst ../%, %, $(wildcard ../*.substitutions))
+
+##
+DB += $(patsubst ../%, %, $(wildcard ../*.proto))
+DB += $(patsubst ../%, %, $(wildcard ../*.acf))
+
+REQ += $(patsubst ../%, %, $(wildcard ../*.req))
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

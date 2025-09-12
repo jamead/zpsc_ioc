@@ -1,0 +1,594 @@
+#### BEGIN: wfmstats.template
+## 50 0
+record(longin, "$(P){$(NO)}CurrBufAddr-I") {
+    field(DESC, "Current DDR Address of Snapshot Pointer")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 0")
+    field(SCAN, "I/O Intr")
+}
+
+## 50 4
+record(longin, "$(P){$(NO)}TotalTrigs-I") {
+    field(DESC, "Total Number of 10Khz DMA writes")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 4")
+    field(SCAN, "I/O Intr")
+}
+
+### User Trigger
+### 50 8 - 50 68
+record(longin, "$(P){$(NO)}Chan1:UsrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last user trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 8")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:UsrTrigActive-I") {
+    field(DESC, "User Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 12")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:UsrTrigTS-S-I") {
+    field(DESC, "User Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 16")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:UsrTrigTS-NS-I") {
+    field(DESC, "User Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 20")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:UsrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last user trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 24")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:UsrTrigActive-I") {
+    field(DESC, "User Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 28")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:UsrTrigTS-S-I") {
+    field(DESC, "User Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 32")
+    field(SCAN, "I/O Intr")
+}
+
+
+record(longin, "$(P){$(NO)}Chan2:UsrTrigTS-NS-I") {
+    field(DESC, "User Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 36")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:UsrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last user trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 40")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:UsrTrigActive-I") {
+    field(DESC, "User Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 44")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:UsrTrigTS-S-I") {
+    field(DESC, "User Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 48")
+    field(SCAN, "I/O Intr")
+}
+
+
+record(longin, "$(P){$(NO)}Chan3:UsrTrigTS-NS-I") {
+    field(DESC, "User Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 52")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:UsrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last user trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 56")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:UsrTrigActive-I") {
+    field(DESC, "User Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 60")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:UsrTrigTS-S-I") {
+    field(DESC, "User Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 64")
+    field(SCAN, "I/O Intr")
+}
+
+
+record(longin, "$(P){$(NO)}Chan4:UsrTrigTS-NS-I") {
+    field(DESC, "User Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 68")
+    field(SCAN, "I/O Intr")
+}
+
+### Fault Trigger
+### 50 72 - 50 132
+record(longin, "$(P){$(NO)}Chan1:FltTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last flt trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 72")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:FltTrigActive-I") {
+    field(DESC, "fault Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 76")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:FltTrigTS-S-I") {
+    field(DESC, "fault Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 80")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:FltTrigTS-NS-I") {
+    field(DESC, "fault Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 84")
+    field(SCAN, "I/O Intr")
+}
+
+
+record(longin, "$(P){$(NO)}Chan2:FltTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last flt trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 88")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:FltTrigActive-I") {
+    field(DESC, "fault Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 92")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:FltTrigTS-S-I") {
+    field(DESC, "fault Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 96")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:FltTrigTS-NS-I") {
+    field(DESC, "fault Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 100")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:FltTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last flt trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 104")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:FltTrigActive-I") {
+    field(DESC, "fault Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 108")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:FltTrigTS-S-I") {
+    field(DESC, "fault Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 112")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:FltTrigTS-NS-I") {
+    field(DESC, "fault Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 116")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:FltTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last flt trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 120")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:FltTrigActive-I") {
+    field(DESC, "fault Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 124")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:FltTrigTS-S-I") {
+    field(DESC, "fault Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 128")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:FltTrigTS-NS-I") {
+    field(DESC, "fault Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 132")
+    field(SCAN, "I/O Intr")
+}
+
+### Err Trigger
+### 50 136 - 50 196
+
+record(longin, "$(P){$(NO)}Chan1:ErrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last Err trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 136")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:ErrTrigActive-I") {
+    field(DESC, "fault Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 140")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:ErrTrigTS-S-I") {
+    field(DESC, "fault Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 144")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:ErrTrigTS-NS-I") {
+    field(DESC, "fault Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 148")
+    field(SCAN, "I/O Intr")
+}
+
+
+record(longin, "$(P){$(NO)}Chan2:ErrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last Err trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 152")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:ErrTrigActive-I") {
+    field(DESC, "fault Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 156")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:ErrTrigTS-S-I") {
+    field(DESC, "fault Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 160")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:ErrTrigTS-NS-I") {
+    field(DESC, "fault Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 164")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:ErrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last Err trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 168")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:ErrTrigActive-I") {
+    field(DESC, "fault Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 172")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:ErrTrigTS-S-I") {
+    field(DESC, "fault Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 176")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:ErrTrigTS-NS-I") {
+    field(DESC, "fault Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 180")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:ErrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last Err trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 184")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:ErrTrigActive-I") {
+    field(DESC, "fault Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 188")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:ErrTrigTS-S-I") {
+    field(DESC, "fault Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 192")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:ErrTrigTS-NS-I") {
+    field(DESC, "fault Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 196")
+    field(SCAN, "I/O Intr")
+}
+
+### Injection Trigger
+### 50 200 - 50 260
+record(longin, "$(P){$(NO)}Chan1:InjTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last inj trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 200")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:InjTrigActive-I") {
+    field(DESC, "injection Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 204")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:InjTrigTS-S-I") {
+    field(DESC, "injection Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 208")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:InjTrigTS-NS-I") {
+    field(DESC, "injection Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 212")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:InjTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last inj trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 216")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:InjTrigActive-I") {
+    field(DESC, "injection Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 220")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:InjTrigTS-S-I") {
+    field(DESC, "injection Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 224")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:InjTrigTS-NS-I") {
+    field(DESC, "injection Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 228")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:InjTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last inj trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 232")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:InjTrigActive-I") {
+    field(DESC, "injection Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 236")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:InjTrigTS-S-I") {
+    field(DESC, "injection Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 240")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:InjTrigTS-NS-I") {
+    field(DESC, "injection Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 244")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:InjTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last inj trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 248")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:InjTrigActive-I") {
+    field(DESC, "injection Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 252")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:InjTrigTS-S-I") {
+    field(DESC, "injection Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 256")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:InjTrigTS-NS-I") {
+    field(DESC, "injection Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 260")
+    field(SCAN, "I/O Intr")
+}
+
+### EVR Trigger 
+### 50 260 - 50 320
+record(longin, "$(P){$(NO)}Chan1:EvrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last EVR trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 264")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:EvrTrigActive-I") {
+    field(DESC, "EVR Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 268")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:EvrTrigTS-S-I") {
+    field(DESC, "EVR Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 272")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan1:EvrTrigTS-NS-I") {
+    field(DESC, "EVR Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 276")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:EvrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last EVR trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 280")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:EvrTrigActive-I") {
+    field(DESC, "EVR Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 284")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:EvrTrigTS-S-I") {
+    field(DESC, "EVR Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 288")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan2:EvrTrigTS-NS-I") {
+    field(DESC, "EVR Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 292")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:EvrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last EVR trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 296")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:EvrTrigActive-I") {
+    field(DESC, "EVR Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 300")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:EvrTrigTS-S-I") {
+    field(DESC, "EVR Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 304")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan3:EvrTrigTS-NS-I") {
+    field(DESC, "EVR Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 308")
+    field(SCAN, "I/O Intr")
+}
+record(longin, "$(P){$(NO)}Chan4:EvrTrigBufAddr-I") {
+    field(DESC, "Latched DDR Address on last EVR trigger")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 312")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:EvrTrigActive-I") {
+    field(DESC, "EVR Trigger Active")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 316")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P){$(NO)}Chan4:EvrTrigTS-S-I") {
+    field(DESC, "EVR Trigger Timestamp (s)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 320")
+    field(SCAN, "I/O Intr")
+}
+
+## 50 24 ? Why?
+record(longin, "$(P){$(NO)}Chan4:EvrTrigTS-NS-I") {
+    field(DESC, "EVR Trigger Timestamp (ns)")
+    field(DTYP, "PSC Reg")
+    field( INP, "@$(NAME=PSC)$(NO) 50 24")
+    field(SCAN, "I/O Intr")
+}
+#### END: wfmstats.template
+

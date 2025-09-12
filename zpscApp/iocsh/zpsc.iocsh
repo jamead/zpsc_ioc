@@ -1,0 +1,26 @@
+##########################################################################################
+############ START of zpsc.iocsh #########################################################
+#-- P             : PREFIX
+#-- NAME          : PSC NAME PREFIX
+#-- NO            : PSC NAME NUMBER
+#-- IPADDR        : PSC IP Address
+#-- PORT          : [Default] 3000, PSC PORT
+#-- TIMEOUT       : [Default] 0,    PSC timeout (unit?)
+#-- PSCDEBUG      : [Default] #
+#-- DBUGLVL       : [Default] 2 PSC debug level  #5 full debug
+#-- PSCBSIZE      : [Default] #
+#-- BID           : [Default] 1100,  PSC Block ID
+#-- BSIZE         : [Default] 512,   PSC Block Size
+#-- DATABASE_TOP  :
+#-- DATABASE_NANE : [Default] PSC-4CH.db
+#-- BUFLEN        : [Default] 100000, Snapshot DMA Length
+#--#######################################################################################
+
+$(PSCDEBUG=#--)var(PSCDebug, $(DBUGLVL=2))	
+createPSC("$(NAME=PSC)$(NO)", "$(IPADDR)", "$(PORT=3000)", "$(TIMEOUT=0)")
+$(PSCBSIZE=#--)setPSCSendBlockSize("$(NAME=PSC)$(NO)", "$(BID=1100)", "$(BSIZE=512)")
+
+dbLoadRecords("$(DATABASE_TOP)/$(DATABASE_NAME=PSC-CH4.db)", "PREFIX=$(P),PSCNAME=$(NAME=PSC),PSCNO=$(NO),PSCBUFLEN=$(BUFLEN=100000)")
+#dbLoadTemplate("$(DATABASE_TOP)/$(DATABASE_NAME=PSC-CH4.substitutions)", "PREFIX=$(P),PSCNAME=$(NAME=PSC),PSCNO=$(NO),PSCBUFLEN=$(BUFLEN=100000)")
+############ END of zpsc.iocsh ###########################################################
+##########################################################################################

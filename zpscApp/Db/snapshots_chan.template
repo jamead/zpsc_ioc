@@ -1,0 +1,111 @@
+#### BEGIN: snapshots_chan.template
+
+record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):Hdr-Wfm") {
+    field(DTYP, "PSC Block F32 In")
+    field( INP, "@$(NAME=PSC)$(NO) $(MSGID) 0 40")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(BUFLEN)")
+}
+
+record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):Cnt-Wfm") {
+    field(DTYP, "PSC Block F32 In")
+    field( INP, "@$(NAME=PSC)$(NO) $(MSGID) 4 40")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(BUFLEN)")
+}
+
+
+
+record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):DCCT1-Wfm") {
+    field(DTYP, "PSC Block F32 In")
+    field( INP, "@$(NAME=PSC)$(NO) $(MSGID) 8 40")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(BUFLEN)")
+}
+
+
+record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):DCCT2-Wfm") {
+    field(DTYP, "PSC Block F32 In")
+    field( INP, "@$(NAME=PSC)$(NO) $(MSGID) 12 40")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(BUFLEN)")
+}
+
+
+record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):DAC-Wfm") {
+    field(DTYP, "PSC Block F32 In")
+    field( INP, "@$(NAME=PSC)$(NO) $(MSGID) 16 40")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(BUFLEN)")
+}
+
+
+record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):Volt-Wfm") {
+    field(DTYP, "PSC Block F32 In")
+    field( INP, "@$(NAME=PSC)$(NO) $(MSGID) 20 40")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(BUFLEN)")
+} 
+
+record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):Gnd-Wfm") {
+    field(DTYP, "PSC Block F32 In")
+    field( INP, "@$(NAME=PSC)$(NO) $(MSGID) 24 40")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(BUFLEN)")
+}
+ 
+record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):Spare-Wfm") {
+    field(DTYP, "PSC Block F32 In")
+    field( INP, "@$(NAME=PSC)$(NO) $(MSGID) 28 40")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(BUFLEN)")
+}
+
+record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):Reg-Wfm") {
+    field(DTYP, "PSC Block F32 In")
+    field( INP, "@$(NAME=PSC)$(NO) $(MSGID) 32 40")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(BUFLEN)")
+}
+
+record(waveform,"$(P){$(NO)}Chan$(CHAN):$(TYPE):Error-Wfm") {
+    field(DTYP, "PSC Block F32 In")
+    field( INP, "@$(NAME=PSC)$(NO) $(MSGID) 36 40")
+    field(SCAN, "I/O Intr")
+    field(FTVL, "DOUBLE")
+    field(NELM, "$(BUFLEN)")   
+}
+ 
+#record(ai, "$(P){$(NO)}Chan$(CHAN):DACScaleFactor-I") {
+#    field(DTYP, "Soft Channel")
+#    field( VAL, "1.0")   
+#    field(PINI, "YES")
+#}   
+
+#record(ai, "$(P){$(NO)}Chan$(CHAN):DACRateScaleFactor-I") {
+#    field(DTYP, "Soft Channel")
+#    field( VAL, "1.0")   
+#    field(PINI, "YES")
+#}  
+
+record(longout, "$(P){$(NO)}Chan$(CHAN):SS:WFM-Xmin") {
+    field(DESC, "X Axis Minimum for waveform display")
+    field( VAL, "0")        # default value
+    field(PINI, "YES")     # initialize at startup
+}
+
+record(longout, "$(P){$(NO)}Chan$(CHAN):SS:WFM-Xmax") {
+    field(DESC, "X Axis Minimum for waveform display")
+    field( VAL, "10000")        # default value
+    field(PINI, "YES")     # initialize at startup
+}
+#### END: snapshots_chan.template

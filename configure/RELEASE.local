@@ -1,4 +1,0 @@
-EPICS_BASE = /home/mead/epics/base-7.0.9
-PSCDRV = /home/mead/epics/pscdrv
-SEQ = /home/mead/epics/base-7.0.9/modules/sequencer
-

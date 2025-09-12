@@ -1,31 +1,69 @@
-# Install directories
-/bin/
+# EPICS site : https://epics-controls.org/
+# References : epics-base / epics-modules / @ralphlange / @jeonghanlee
+# Directories built by EPICS building system
 /cfg/
+/bin/
+/lib/
 /dbd/
+/db/
 /html/
 /include/
-/lib/
 /templates/
-/python/data/
-# Local configuration files
-#/configure/*.local
-
-# iocBoot generated files
-/iocBoot/*ioc*/cdCommands
-/iocBoot/*ioc*/dllPath.bat
-/iocBoot/*ioc*/envPaths
-/iocBoot/*ioc*/relPaths.sh
-
-# iocsh
-.iocsh_history
-
-# Build directories
 O.*/
+/*Top/cfg/
+/*Top/bin/
+/*Top/lib/
+/*Top/db/
+/*Top/dbd/
+/*Top/html/
+/*Top/include/
+/*Top/templates/
 
-# Common files created by other tools
+# User-specific files for local modifications
+/configure/*.local
+/configure/RELEASE.*
+/configure/CONFIG_SITE.*
+/modules/RELEASE.*.local
+/modules/Makefile.local
+/*Top/configure/*.local
+
+# documents
+/documentation/html
+/documentation/*.tag
+
+# Others for UI, autosave, and so on
 /QtC-*
-/.vscode/
-*.orig
-*.log
-.*.swp
+envPaths
+cdCommands
+dllPath.bat
+*BAK.adl
+auto_settings.sav*
+auto_positions.sav*
+
+
+# ALS-U IOC
+/*App/Db/*#
+/*Boot/*/screenlog.*
+/*Boot/*/*.log
+/*Boot/*/*.states
+
+# General
+
+*~
+.\#*
+\#*
+.versions
+*-src
+*.service
+*.list
+*.swp
+*.log.0
+/iocsh
+#
+.project
+.cproject
+# tex
+*.aux
+*.out
+*.toc
 .DS_Store

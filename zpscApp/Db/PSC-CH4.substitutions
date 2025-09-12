@@ -1,0 +1,78 @@
+# Record set for a 4CH zpsc
+#
+# Macros:
+#  P      =
+#  NAME   = PSC Name (Default "PSC")
+#  NO     = PSC Identification Number 
+#  BUFLEN = 
+#  RPATH1, RNAME1
+#  RPATH2, RNAME2
+#  RPATH3, RNAME3
+#  RPATH4, RNAME4
+#
+
+global {P="$(PREFIX)", NAME="$(PSCNAME)", NO="$(PSCNO)", BUFLEN="$(PSCBUFLEN)"}
+
+
+# LEVEL0 : P, NAME, NO
+# Lstats (MSG ID 101)
+file "lstats.template"
+{{}}
+
+
+# LEVEL0 : P, NAME, NO
+# 10Hz Status PV's (MSG ID 30)
+file "status10hz.template"
+{{}}
+
+# record(stringin, "$(P){$(NO)}RampTableFile") {
+# LEVEL0 : P, NO
+file "control_glob.template"
+{{}}
+
+# LEVEL0 : P, NAME, NO
+# LEVEL1 : CHAN, RAMPPATH, RAMPNAME
+# record(stringin, "$(P){$(NO)}Chan$(CHAN):RampTable-FilePath") {
+# record(stringin, "$(P){$(NO)}Chan$(CHAN):RampTable-FileName") {
+file "control_chan.template" 
+{
+pattern
+{CHAN, RAMPPATH, RAMPNAME}
+{1, "/home", "data.txt"}
+{2, "/home", "data.txt"}
+{3, "/home", "data.txt"}
+{4, "/home", "data.txt"}
+}
+
+# LEVEL0 : P, NAME, NO, BUFLEN 
+# LEVEL1 : CHAN, TYPE, MSGID 
+file "snapshots_chan.template" 
+{
+pattern 
+{TYPE, CHAN, MSGID}
+{USR, 1, 60}
+{USR, 2, 61}
+{USR, 3, 62}
+{USR, 4, 63}
+{FLT, 1, 70}
+{FLT, 2, 71}
+{FLT, 3, 72}
+{FLT, 4, 73}
+{ERR, 1, 80}
+{ERR, 2, 81}
+{ERR, 3, 82}
+{ERR, 4, 83}
+{INJ, 1, 90}
+{INJ, 2, 91}
+{INJ, 3, 92}
+{INJ, 4, 93}
+{EVR, 1, 100}
+{EVR, 2, 101}
+{EVR, 3, 102}
+{EVR, 4, 103}
+}
+
+# LEVEL0 : P, NAME, NO
+file "wfmstats.template"
+{{}}
+
