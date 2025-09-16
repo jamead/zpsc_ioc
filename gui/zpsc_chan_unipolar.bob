@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-09-10 08:19:44 by mead-->
+<!--Saved on 2025-09-16 14:50:11 by mead-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1700</width>
@@ -43,8 +43,8 @@
       <pv_name></pv_name>
     </macros>
     <text>${CHAN}</text>
-    <x>355</x>
-    <y>12</y>
+    <x>482</x>
+    <y>11</y>
     <width>77</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -166,7 +166,7 @@ $(actions)</tooltip>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_17</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigOut_ON1-SP</pv_name>
-      <x>57</x>
+      <x>35</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -176,7 +176,7 @@ $(actions)</tooltip>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_18</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigOut_ON2-SP</pv_name>
-      <x>112</x>
+      <x>110</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -186,7 +186,7 @@ $(actions)</tooltip>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_19</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigOut_Reset-SP</pv_name>
-      <x>167</x>
+      <x>185</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -196,7 +196,7 @@ $(actions)</tooltip>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_20</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigOut_Park-SP</pv_name>
-      <x>299</x>
+      <x>334</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -206,7 +206,7 @@ $(actions)</tooltip>
     <widget type="led" version="2.0.0">
       <name>LED_103</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigIn-I.B0</pv_name>
-      <x>392</x>
+      <x>435</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -229,16 +229,16 @@ $(actions)</tooltip>
     <widget type="led" version="2.0.0">
       <name>LED_104</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigIn-I.B1</pv_name>
-      <x>452</x>
+      <x>510</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
       <off_color>
-        <color red="0" green="95" blue="0">
+        <color name="OK" red="0" green="255" blue="0">
         </color>
       </off_color>
       <on_color>
-        <color red="255" green="0" blue="0">
+        <color name="Off" red="60" green="100" blue="60">
         </color>
       </on_color>
       <foreground_color>
@@ -256,7 +256,7 @@ $(actions)</tooltip>
     <widget type="led" version="2.0.0">
       <name>LED_105</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigIn-I.B2</pv_name>
-      <x>512</x>
+      <x>585</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -264,6 +264,10 @@ $(actions)</tooltip>
         <color red="0" green="95" blue="0">
         </color>
       </off_color>
+      <on_color>
+        <color name="MAJOR" red="255" green="0" blue="0">
+        </color>
+      </on_color>
       <foreground_color>
         <color red="192" green="192" blue="192">
         </color>
@@ -278,10 +282,10 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_236</name>
-      <text>Pwr</text>
-      <x>57</x>
+      <text>TDK On</text>
+      <x>35</x>
       <y>11</y>
-      <width>43</width>
+      <width>62</width>
       <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
       <actions>
@@ -293,10 +297,10 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_237</name>
-      <text>Enb</text>
-      <x>111</x>
+      <text>PDU On</text>
+      <x>104</x>
       <y>11</y>
-      <width>46</width>
+      <width>72</width>
       <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
       <actions>
@@ -308,10 +312,10 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_238</name>
-      <text>Rst</text>
-      <x>169</x>
+      <text>TDK Rst</text>
+      <x>179</x>
       <y>11</y>
-      <width>41</width>
+      <width>63</width>
       <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
       <actions>
@@ -324,7 +328,7 @@ $(actions)</tooltip>
     <widget type="label" version="2.0.0">
       <name>Label_239</name>
       <text>Park</text>
-      <x>296</x>
+      <x>332</x>
       <y>11</y>
       <width>50</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -338,8 +342,8 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_240</name>
-      <text>On</text>
-      <x>388</x>
+      <text>AC On</text>
+      <x>428</x>
       <y>11</y>
       <width>55</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -353,8 +357,8 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_241</name>
-      <text>BPC Flt</text>
-      <x>450</x>
+      <text>Ch On</text>
+      <x>509</x>
       <y>11</y>
       <width>52</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -368,10 +372,10 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_242</name>
-      <text>HB</text>
-      <x>519</x>
+      <text>TDK Fault</text>
+      <x>571</x>
       <y>11</y>
-      <width>32</width>
+      <width>82</width>
       <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
       <actions>
@@ -384,7 +388,7 @@ $(actions)</tooltip>
     <widget type="led" version="2.0.0">
       <name>LED_110</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigIn-I.B3</pv_name>
-      <x>572</x>
+      <x>660</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -411,7 +415,7 @@ $(actions)</tooltip>
     <widget type="label" version="2.0.0">
       <name>Label_279</name>
       <text>Ext Flt</text>
-      <x>571</x>
+      <x>662</x>
       <y>11</y>
       <width>49</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -426,7 +430,7 @@ $(actions)</tooltip>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_25</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigOut_Spare-SP</pv_name>
-      <x>222</x>
+      <x>260</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -436,7 +440,7 @@ $(actions)</tooltip>
     <widget type="label" version="2.0.0">
       <name>Label_281</name>
       <text>Ext</text>
-      <x>224</x>
+      <x>264</x>
       <y>11</y>
       <width>41</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -2412,14 +2416,14 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_108</name>
-      <text>Fault 1: Bipolar Supply</text>
+      <text>Fault 1: TDK Channel</text>
       <x>157</x>
       <y>197</y>
       <width>191</width>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_109</name>
-      <text>Fault 2:  BPC Heartbeat</text>
+      <text>Fault 2:  TDK Fault</text>
       <x>157</x>
       <y>177</y>
       <width>191</width>
@@ -2460,30 +2464,6 @@ $(actions)</tooltip>
         </font>
       </font>
     </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Update_146</name>
-      <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultMask-SP</pv_name>
-      <y>368</y>
-      <width>53</width>
-      <font>
-        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <format>4</format>
-      <precision>0</precision>
-      <show_units>false</show_units>
-      <horizontal_alignment>1</horizontal_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
     <widget type="label" version="2.0.0">
       <name>Label_98</name>
       <text>Live</text>
@@ -2492,56 +2472,6 @@ $(actions)</tooltip>
       <width>43</width>
       <height>18</height>
       <horizontal_alignment>1</horizontal_alignment>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Update_148</name>
-      <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I</pv_name>
-      <x>53</x>
-      <y>368</y>
-      <width>53</width>
-      <font>
-        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <format>4</format>
-      <precision>0</precision>
-      <show_units>false</show_units>
-      <horizontal_alignment>1</horizontal_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Update_149</name>
-      <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I</pv_name>
-      <x>109</x>
-      <y>368</y>
-      <width>53</width>
-      <font>
-        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <format>4</format>
-      <precision>0</precision>
-      <show_units>false</show_units>
-      <horizontal_alignment>1</horizontal_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_99</name>
@@ -2642,8 +2572,8 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_111</name>
-      <text>    PS failed to turn on</text>
-      <x>145</x>
+      <text>    TDK failed to turn on</text>
+      <x>142</x>
       <y>137</y>
       <width>165</width>
     </widget>
@@ -3732,10 +3662,10 @@ $(actions)</tooltip>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_277</name>
-    <text>PSC Channel</text>
+    <text>zPSC Channel : Unipolar</text>
     <x>174</x>
     <y>4</y>
-    <width>182</width>
+    <width>273</width>
     <height>33</height>
     <font>
       <font name="Header 1" family="Liberation Sans" style="BOLD" size="22.0">

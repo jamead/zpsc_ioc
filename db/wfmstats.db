@@ -35,7 +35,18 @@ record(longin, "$(P){$(PSC)}Chan1:UsrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 16")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan1:UsrTrigTime-I")    
 }
+
+record(aSub, "$(P){$(PSC)}Chan1:UsrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan1:UsrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
+}
+
 
 
 record(longin, "$(P){$(PSC)}Chan1:UsrTrigTS-NS-I") {
@@ -62,8 +73,18 @@ record(longin, "$(P){$(PSC)}Chan2:UsrTrigActive-I") {
 record(longin, "$(P){$(PSC)}Chan2:UsrTrigTS-S-I") {
     field(DESC, "User Trigger Timestamp (s)")
     field(DTYP, "PSC Reg")
-    field(INP , "@PSC$(PSC) 50 32")
+    field(INP , "@PSC$(PSC) 50 32")     
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan2:UsrTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan2:UsrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan2:UsrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
 }
 
 
@@ -93,7 +114,18 @@ record(longin, "$(P){$(PSC)}Chan3:UsrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 48")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan3:UsrTrigTime-I")      
 }
+
+record(aSub, "$(P){$(PSC)}Chan3:UsrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan3:UsrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
+}
+
 
 
 record(longin, "$(P){$(PSC)}Chan3:UsrTrigTS-NS-I") {
@@ -122,7 +154,18 @@ record(longin, "$(P){$(PSC)}Chan4:UsrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 64")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan4:UsrTrigTime-I")      
 }
+
+record(aSub, "$(P){$(PSC)}Chan4:UsrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan4:UsrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
+}
+
 
 
 record(longin, "$(P){$(PSC)}Chan4:UsrTrigTS-NS-I") {
@@ -158,7 +201,19 @@ record(longin, "$(P){$(PSC)}Chan1:FltTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 80")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan1:FltTrigTime-I")      
 }
+
+record(aSub, "$(P){$(PSC)}Chan1:FltTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan1:FltTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
+}
+
+
 
 record(longin, "$(P){$(PSC)}Chan1:FltTrigTS-NS-I") {
     field(DESC, "fault Trigger Timestamp (ns)")
@@ -187,7 +242,21 @@ record(longin, "$(P){$(PSC)}Chan2:FltTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 96")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan2:FltTrigTime-I")      
 }
+
+record(aSub, "$(P){$(PSC)}Chan2:FltTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan2:FltTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
+}
+
+
+
+
 
 record(longin, "$(P){$(PSC)}Chan2:FltTrigTS-NS-I") {
     field(DESC, "fault Trigger Timestamp (ns)")
@@ -215,6 +284,16 @@ record(longin, "$(P){$(PSC)}Chan3:FltTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 112")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan3:FltTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan3:FltTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan3:FltTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
 }
 
 record(longin, "$(P){$(PSC)}Chan3:FltTrigTS-NS-I") {
@@ -243,6 +322,16 @@ record(longin, "$(P){$(PSC)}Chan4:FltTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 128")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan4:FltTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan4:FltTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan4:FltTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
 }
 
 record(longin, "$(P){$(PSC)}Chan4:FltTrigTS-NS-I") {
@@ -274,7 +363,19 @@ record(longin, "$(P){$(PSC)}Chan1:ErrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 144")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan1:ErrTrigTime-I")      
 }
+
+record(aSub, "$(P){$(PSC)}Chan1:ErrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan1:ErrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
+}
+
+
 
 record(longin, "$(P){$(PSC)}Chan1:ErrTrigTS-NS-I") {
     field(DESC, "fault Trigger Timestamp (ns)")
@@ -303,7 +404,18 @@ record(longin, "$(P){$(PSC)}Chan2:ErrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 160")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan2:ErrTrigTime-I")      
 }
+
+record(aSub, "$(P){$(PSC)}Chan2:ErrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan2:ErrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
+}
+
 
 record(longin, "$(P){$(PSC)}Chan2:ErrTrigTS-NS-I") {
     field(DESC, "fault Trigger Timestamp (ns)")
@@ -331,6 +443,16 @@ record(longin, "$(P){$(PSC)}Chan3:ErrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 176")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan3:ErrTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan3:ErrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan3:ErrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
 }
 
 record(longin, "$(P){$(PSC)}Chan3:ErrTrigTS-NS-I") {
@@ -359,6 +481,16 @@ record(longin, "$(P){$(PSC)}Chan4:ErrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 192")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan4:ErrTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan4:ErrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan4:ErrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
 }
 
 record(longin, "$(P){$(PSC)}Chan4:ErrTrigTS-NS-I") {
@@ -392,6 +524,16 @@ record(longin, "$(P){$(PSC)}Chan1:InjTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 208")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan1:InjTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan1:InjTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan1:InjTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
 }
 
 record(longin, "$(P){$(PSC)}Chan1:InjTrigTS-NS-I") {
@@ -420,6 +562,16 @@ record(longin, "$(P){$(PSC)}Chan2:InjTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 224")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan2:InjTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan2:InjTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan2:InjTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
 }
 
 record(longin, "$(P){$(PSC)}Chan2:InjTrigTS-NS-I") {
@@ -448,6 +600,16 @@ record(longin, "$(P){$(PSC)}Chan3:InjTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 240")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan3:InjTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan3:InjTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan3:InjTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
 }
 
 record(longin, "$(P){$(PSC)}Chan3:InjTrigTS-NS-I") {
@@ -476,6 +638,16 @@ record(longin, "$(P){$(PSC)}Chan4:InjTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 256")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan4:InjTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan4:InjTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan4:InjTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
 }
 
 record(longin, "$(P){$(PSC)}Chan4:InjTrigTS-NS-I") {
@@ -509,6 +681,16 @@ record(longin, "$(P){$(PSC)}Chan1:EvrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 272")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan1:EvrTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan1:EvrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan1:EvrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string")                
 }
 
 record(longin, "$(P){$(PSC)}Chan1:EvrTrigTS-NS-I") {
@@ -537,6 +719,16 @@ record(longin, "$(P){$(PSC)}Chan2:EvrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 288")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan2:EvrTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan2:EvrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan2:EvrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string") 
 }
 
 record(longin, "$(P){$(PSC)}Chan2:EvrTrigTS-NS-I") {
@@ -565,7 +757,17 @@ record(longin, "$(P){$(PSC)}Chan3:EvrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 304")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan3:EvrTrigTime-I")      
 }
+
+record(aSub, "$(P){$(PSC)}Chan3:EvrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan3:EvrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string") 
+}    
 
 record(longin, "$(P){$(PSC)}Chan3:EvrTrigTS-NS-I") {
     field(DESC, "EVR Trigger Timestamp (ns)")
@@ -593,6 +795,16 @@ record(longin, "$(P){$(PSC)}Chan4:EvrTrigTS-S-I") {
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(PSC) 50 320")
     field(SCAN,"I/O Intr")
+    field(FLNK, "$(P){$(PSC)}Chan4:EvrTrigTime-I")      
+}
+
+record(aSub, "$(P){$(PSC)}Chan4:EvrTrigTime-I") {
+    field(DESC, "Convert epoch to string")
+    field(INPA, "$(P){$(PSC)}Chan4:EvrTrigTS-S-I NPP NMS")   
+    field(FTA, "LONG")                         
+    field(FTVA, "UCHAR")                        
+    field(NOVA, "40")                           
+    field(SNAM, "epoch2string") 
 }
 
 record(longin, "$(P){$(PSC)}Chan4:EvrTrigTS-NS-I") {

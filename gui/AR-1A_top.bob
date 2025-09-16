@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-09-16 13:45:48 by mead-->
+<!--Saved on 2025-09-16 14:54:29 by mead-->
 <display version="2.0.0">
   <name>PSC Top</name>
   <width>850</width>
@@ -14,7 +14,7 @@
   <grid_step_y>6</grid_step_y>
   <widget type="label" version="2.0.0">
     <name>Label_7</name>
-    <text>AR-1 Rack Power Supply Controllers</text>
+    <text>AR-1A Rack Power Supply Controllers</text>
     <x>202</x>
     <y>11</y>
     <width>444</width>
@@ -38,7 +38,7 @@
     </border_color>
   </widget>
   <widget type="action_button" version="3.0.0">
-    <name>Action Button_39</name>
+    <name>Action Button_40</name>
     <actions>
       <action type="open_display">
         <file>zpsc_global_4chan_bipolar.opi</file>
@@ -50,34 +50,9 @@
         <description>Open Display</description>
       </action>
     </actions>
-    <text> AR-1 {1} </text>
+    <text>AR-1A {1} </text>
     <x>66</x>
-    <y>101</y>
-    <width>116</width>
-    <height>25</height>
-    <font>
-      <font name="Header1" family="Sans" style="BOLD" size="9.900990099009901">
-      </font>
-    </font>
-    <tooltip>$(actions)</tooltip>
-    <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="action_button" version="3.0.0">
-    <name>Action Button_40</name>
-    <actions>
-      <action type="open_display">
-        <file>zpsc_global_4chan_bipolar.opi</file>
-        <macros>
-          <PriSys>lab</PriSys>
-          <PSC>2</PSC>
-        </macros>
-        <target>window</target>
-        <description>Open Display</description>
-      </action>
-    </actions>
-    <text>AR-1 {2} </text>
-    <x>66</x>
-    <y>135</y>
+    <y>109</y>
     <width>116</width>
     <height>25</height>
     <font>
@@ -94,15 +69,15 @@
         <file>zpsc_global_4chan_bipolar.opi</file>
         <macros>
           <PriSys>lab</PriSys>
-          <PSC>3</PSC>
+          <PSC>2</PSC>
         </macros>
         <target>window</target>
         <description>Open Display</description>
       </action>
     </actions>
-    <text>AR-1 {3}</text>
+    <text>AR-1A {2}</text>
     <x>66</x>
-    <y>168</y>
+    <y>143</y>
     <width>116</width>
     <height>25</height>
     <font>
@@ -119,15 +94,15 @@
         <file>zpsc_global_4chan_bipolar.opi</file>
         <macros>
           <PriSys>lab</PriSys>
-          <PSC>4</PSC>
+          <PSC>3</PSC>
         </macros>
         <target>window</target>
         <description>Open Display</description>
       </action>
     </actions>
-    <text>AR-1 {4} </text>
+    <text>AR-1A {3} </text>
     <x>66</x>
-    <y>202</y>
+    <y>177</y>
     <width>116</width>
     <height>25</height>
     <font>
@@ -144,15 +119,15 @@
         <file>zpsc_global_2chan_unipolar.opi</file>
         <macros>
           <PriSys>lab</PriSys>
-          <PSC>5</PSC>
+          <PSC>4</PSC>
         </macros>
         <target>window</target>
         <description>Open Display</description>
       </action>
     </actions>
-    <text>AR-1 {5} </text>
+    <text>AR-1A {4} </text>
     <x>66</x>
-    <y>235</y>
+    <y>210</y>
     <width>116</width>
     <height>25</height>
     <font>
@@ -161,29 +136,6 @@
     </font>
     <tooltip>$(actions)</tooltip>
     <border_alarm_sensitive>false</border_alarm_sensitive>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Update_113</name>
-    <pv_name>lab{1}Rtos-Uptime-I</pv_name>
-    <x>600</x>
-    <y>104</y>
-    <width>90</width>
-    <font>
-      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </background_color>
-    <precision>0</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <actions>
-    </actions>
-    <border_color>
-      <color red="0" green="128" blue="255">
-      </color>
-    </border_color>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_161</name>
@@ -204,7 +156,7 @@
     <name>Text Update_114</name>
     <pv_name>lab{2}Rtos-Uptime-I</pv_name>
     <x>600</x>
-    <y>139</y>
+    <y>145</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -215,29 +167,6 @@
       </color>
     </background_color>
     <precision>0</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <actions>
-    </actions>
-    <border_color>
-      <color red="0" green="128" blue="255">
-      </color>
-    </border_color>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Update_115</name>
-    <pv_name>lab{1}Sys-Temp-I</pv_name>
-    <x>700</x>
-    <y>104</y>
-    <width>90</width>
-    <font>
-      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </background_color>
-    <precision>3</precision>
     <horizontal_alignment>1</horizontal_alignment>
     <actions>
     </actions>
@@ -265,7 +194,7 @@
     <name>Text Update_116</name>
     <pv_name>lab{2}Sys-Temp-I</pv_name>
     <x>700</x>
-    <y>139</y>
+    <y>145</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -288,7 +217,7 @@
     <name>Text Update_117</name>
     <pv_name>lab{3}Rtos-Uptime-I</pv_name>
     <x>600</x>
-    <y>172</y>
+    <y>178</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -311,7 +240,7 @@
     <name>Text Update_118</name>
     <pv_name>lab{4}Rtos-Uptime-I</pv_name>
     <x>600</x>
-    <y>206</y>
+    <y>212</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -334,7 +263,7 @@
     <name>Text Update_119</name>
     <pv_name>lab{3}Sys-Temp-I</pv_name>
     <x>700</x>
-    <y>172</y>
+    <y>178</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -357,7 +286,7 @@
     <name>Text Update_120</name>
     <pv_name>lab{4}Sys-Temp-I</pv_name>
     <x>700</x>
-    <y>206</y>
+    <y>212</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -380,7 +309,7 @@
     <name>Text Update_121</name>
     <pv_name>lab{5}Rtos-Uptime-I</pv_name>
     <x>600</x>
-    <y>239</y>
+    <y>245</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -403,30 +332,7 @@
     <name>Text Update_122</name>
     <pv_name>lab{5}Sys-Temp-I</pv_name>
     <x>700</x>
-    <y>239</y>
-    <width>90</width>
-    <font>
-      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </background_color>
-    <precision>3</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <actions>
-    </actions>
-    <border_color>
-      <color red="0" green="128" blue="255">
-      </color>
-    </border_color>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Update_123</name>
-    <pv_name>lab{1}NumChannels-Mode</pv_name>
-    <x>200</x>
-    <y>104</y>
+    <y>245</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -460,29 +366,6 @@
       </color>
     </border_color>
   </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Update_124</name>
-    <pv_name>lab{1}Resolution-Mode</pv_name>
-    <x>300</x>
-    <y>104</y>
-    <width>90</width>
-    <font>
-      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </background_color>
-    <precision>3</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <actions>
-    </actions>
-    <border_color>
-      <color red="0" green="128" blue="255">
-      </color>
-    </border_color>
-  </widget>
   <widget type="label" version="2.0.0">
     <name>Label_165</name>
     <text>Resolution</text>
@@ -491,29 +374,6 @@
     <width>72</width>
     <horizontal_alignment>2</horizontal_alignment>
     <vertical_alignment>1</vertical_alignment>
-    <actions>
-    </actions>
-    <border_color>
-      <color red="0" green="128" blue="255">
-      </color>
-    </border_color>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Update_125</name>
-    <pv_name>lab{1}Bandwidth-Mode</pv_name>
-    <x>400</x>
-    <y>104</y>
-    <width>90</width>
-    <font>
-      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </background_color>
-    <precision>3</precision>
-    <horizontal_alignment>1</horizontal_alignment>
     <actions>
     </actions>
     <border_color>
@@ -540,7 +400,7 @@
     <name>Text Update_126</name>
     <pv_name>lab{2}NumChannels-Mode</pv_name>
     <x>200</x>
-    <y>139</y>
+    <y>145</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -563,7 +423,7 @@
     <name>Text Update_127</name>
     <pv_name>lab{2}Resolution-Mode</pv_name>
     <x>300</x>
-    <y>139</y>
+    <y>145</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -586,7 +446,7 @@
     <name>Text Update_128</name>
     <pv_name>lab{2}Bandwidth-Mode</pv_name>
     <x>400</x>
-    <y>139</y>
+    <y>145</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -609,7 +469,7 @@
     <name>Text Update_129</name>
     <pv_name>lab{3}NumChannels-Mode</pv_name>
     <x>200</x>
-    <y>172</y>
+    <y>178</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -632,7 +492,7 @@
     <name>Text Update_130</name>
     <pv_name>lab{3}Resolution-Mode</pv_name>
     <x>300</x>
-    <y>172</y>
+    <y>178</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -655,7 +515,7 @@
     <name>Text Update_131</name>
     <pv_name>lab{3}Bandwidth-Mode</pv_name>
     <x>400</x>
-    <y>172</y>
+    <y>178</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -678,7 +538,7 @@
     <name>Text Update_132</name>
     <pv_name>lab{4}NumChannels-Mode</pv_name>
     <x>200</x>
-    <y>206</y>
+    <y>212</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -701,7 +561,7 @@
     <name>Text Update_133</name>
     <pv_name>lab{4}Resolution-Mode</pv_name>
     <x>300</x>
-    <y>206</y>
+    <y>212</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -724,7 +584,7 @@
     <name>Text Update_134</name>
     <pv_name>lab{4}Bandwidth-Mode</pv_name>
     <x>400</x>
-    <y>206</y>
+    <y>212</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -747,7 +607,7 @@
     <name>Text Update_135</name>
     <pv_name>lab{5}NumChannels-Mode</pv_name>
     <x>200</x>
-    <y>239</y>
+    <y>245</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -770,7 +630,7 @@
     <name>Text Update_136</name>
     <pv_name>lab{5}Resolution-Mode</pv_name>
     <x>300</x>
-    <y>239</y>
+    <y>245</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -793,7 +653,7 @@
     <name>Text Update_137</name>
     <pv_name>lab{5}Bandwidth-Mode</pv_name>
     <x>400</x>
-    <y>239</y>
+    <y>245</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -819,15 +679,15 @@
         <file>zpsc_global_2chan_unipolar.opi</file>
         <macros>
           <PriSys>lab</PriSys>
-          <PSC>6</PSC>
+          <PSC>5</PSC>
         </macros>
         <target>window</target>
         <description>Open Display</description>
       </action>
     </actions>
-    <text>AR-1 {6}</text>
+    <text>AR-1A {5}</text>
     <x>66</x>
-    <y>270</y>
+    <y>245</y>
     <width>116</width>
     <height>25</height>
     <font>
@@ -839,9 +699,9 @@
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>Text Update_138</name>
-    <pv_name>lab{6}Rtos-Uptime-I</pv_name>
+    <pv_name>lab{1}Rtos-Uptime-I</pv_name>
     <x>600</x>
-    <y>274</y>
+    <y>109</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -862,9 +722,9 @@
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>Text Update_139</name>
-    <pv_name>lab{6}Sys-Temp-I</pv_name>
+    <pv_name>lab{1}Sys-Temp-I</pv_name>
     <x>700</x>
-    <y>274</y>
+    <y>109</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -885,9 +745,9 @@
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>Text Update_140</name>
-    <pv_name>lab{6}NumChannels-Mode</pv_name>
+    <pv_name>lab{1}NumChannels-Mode</pv_name>
     <x>200</x>
-    <y>274</y>
+    <y>109</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -908,9 +768,9 @@
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>Text Update_141</name>
-    <pv_name>lab{6}Resolution-Mode</pv_name>
+    <pv_name>lab{1}Resolution-Mode</pv_name>
     <x>300</x>
-    <y>274</y>
+    <y>109</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -931,32 +791,9 @@
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>Text Update_142</name>
-    <pv_name>lab{6}Bandwidth-Mode</pv_name>
+    <pv_name>lab{1}Bandwidth-Mode</pv_name>
     <x>400</x>
-    <y>274</y>
-    <width>90</width>
-    <font>
-      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </background_color>
-    <precision>3</precision>
-    <horizontal_alignment>1</horizontal_alignment>
-    <actions>
-    </actions>
-    <border_color>
-      <color red="0" green="128" blue="255">
-      </color>
-    </border_color>
-  </widget>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Update_143</name>
-    <pv_name>lab{1}Polarity-Mode</pv_name>
-    <x>500</x>
-    <y>104</y>
+    <y>109</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -994,7 +831,7 @@
     <name>Text Update_144</name>
     <pv_name>lab{2}Polarity-Mode</pv_name>
     <x>500</x>
-    <y>139</y>
+    <y>145</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -1017,7 +854,7 @@
     <name>Text Update_145</name>
     <pv_name>lab{3}Polarity-Mode</pv_name>
     <x>500</x>
-    <y>172</y>
+    <y>178</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -1040,7 +877,7 @@
     <name>Text Update_146</name>
     <pv_name>lab{4}Polarity-Mode</pv_name>
     <x>500</x>
-    <y>206</y>
+    <y>212</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -1063,7 +900,7 @@
     <name>Text Update_147</name>
     <pv_name>lab{5}Polarity-Mode</pv_name>
     <x>500</x>
-    <y>239</y>
+    <y>245</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -1084,9 +921,9 @@
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>Text Update_148</name>
-    <pv_name>lab{6}Polarity-Mode</pv_name>
+    <pv_name>lab{1}Polarity-Mode</pv_name>
     <x>500</x>
-    <y>274</y>
+    <y>109</y>
     <width>90</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
