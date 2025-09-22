@@ -14,12 +14,17 @@ record(longin, "$(P){$(NO)}NumChannels-I") {
     field(SCAN,"I/O Intr")
 }
 
-record(bi, "$(P){$(NO)}NumChannels-Mode") {
+record(mbbi, "$(P){$(NO)}NumChannels-Mode") {
     field(INP, "$(P){$(NO)}NumChannels-I")
-    field(ZNAM, "2 Channel")
-    field(ONAM, "4 Channel")
+    field(ZRVL, "0")    
+    field(ZRST, "2 Channel")
+    field(ONVL, "1")    
+    field(ONST, "4 Channel")
+    field(TWVL, "2")
+    field(TWST, "Check EEPROM")    
     field(SCAN, "Passive")
 }
+
 
 record(longin, "$(P){$(NO)}TS-NS-I") {
     field(DESC, "EVR Timestamp (ns)")
@@ -57,13 +62,18 @@ record(longin, "$(P){$(NO)}Resolution-I") {
     field(SCAN,"I/O Intr")
 }
 
-
-record(bi, "$(P){$(NO)}Resolution-Mode") {
-    field(INP, "$(P){$(NO)}Resolution-I")
-    field(ZNAM, "MS")
-    field(ONAM, "HS")
+record(mbbi, "$(P){$(NO)}Resolution-Mode") {
+    field(INP,  "$(P){$(NO)}Resolution-I")
+    field(ZRVL, "0")
+    field(ZRST, "MS (18bit)")     
+    field(ONVL, "1")
+    field(ONST, "HS (20bit)") 
+    field(TWVL, "2")
+    field(TWST, "Check EEPROM")
     field(SCAN, "Passive")
 }
+
+
 
 
 record(longin, "$(P){$(NO)}GitHash-I") {
@@ -103,12 +113,20 @@ record(longin, "$(P){$(NO)}Bandwidth-I") {
 }
 
 
-record(bi, "$(P){$(NO)}Bandwidth-Mode") {
+record(mbbi, "$(P){$(NO)}Bandwidth-Mode") {
     field(INP, "$(P){$(NO)}Bandwidth-I")
-    field(ZNAM, "Fast")
-    field(ONAM, "Slow")
+    field(ZRVL, "0")     
+    field(ZRST, "Fast")
+    field(ONVL, "1")      
+    field(ONST, "Slow")
+    field(TWVL, "2")
+    field(TWST, "Check EEPROM")    
     field(SCAN, "Passive")
 }
+
+
+
+
 
 record(longin, "$(P){$(NO)}Polarity-I") {
     field(DESC, "Polarity of Unit ")
@@ -119,12 +137,18 @@ record(longin, "$(P){$(NO)}Polarity-I") {
 }
 
 
-record(bi, "$(P){$(NO)}Polarity-Mode") {
+record(mbbi, "$(P){$(NO)}Polarity-Mode") {
     field(INP, "$(P){$(NO)}Polarity-I")
-    field(ZNAM, "Bipolar")
-    field(ONAM, "Unipolar")
+    field(ZRVL, "0")      
+    field(ZRST, "Bipolar")
+    field(ONVL, "1")    
+    field(ONST, "Unipolar")
+    field(TWVL, "2")  
+    field(TWST, "Check EEPROM")       
     field(SCAN, "Passive")
 }
+
+
 
 record(longin, "$(P){$(NO)}FOFB:PacketsRcvd-I") {
     field(DESC, "Number of FOFB packets received")

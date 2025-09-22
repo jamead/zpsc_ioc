@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-09-16 12:06:36 by mead-->
+<!--Saved on 2025-09-19 11:43:47 by mead-->
 <display version="2.0.0">
   <name>$(PriSys):$(PSC)</name>
   <width>960</width>
@@ -27,55 +27,6 @@
       </color>
     </line_color>
     <transparent>true</transparent>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Update_84</name>
-      <pv_name>$(PriSys){$(PSC)}NumChannels-Mode</pv_name>
-      <x>108</x>
-      <y>5</y>
-      <width>90</width>
-      <font>
-        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <precision>0</precision>
-      <horizontal_alignment>1</horizontal_alignment>
-      <actions>
-      </actions>
-      <rules>
-        <rule name="New Rule" prop_id="name" out_exp="false">
-          <exp bool_exp="0">
-            <value>MS</value>
-          </exp>
-          <exp bool_exp="1">
-            <value>HS</value>
-          </exp>
-          <pv_name>$(pv_name)</pv_name>
-        </rule>
-      </rules>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_56</name>
-      <text>Num Channels</text>
-      <x>3</x>
-      <y>5</y>
-      <width>102</width>
-      <horizontal_alignment>2</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Update_47</name>
       <pv_name>$(PriSys){$(PSC)}CurrBufAddr-I</pv_name>
@@ -147,44 +98,6 @@
       <x>244</x>
       <y>26</y>
       <width>90</width>
-      <horizontal_alignment>2</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Update_103</name>
-      <pv_name>$(PriSys){$(PSC)}Resolution-Mode</pv_name>
-      <x>108</x>
-      <y>24</y>
-      <width>90</width>
-      <font>
-        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <precision>0</precision>
-      <horizontal_alignment>1</horizontal_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_61</name>
-      <text>Resolution</text>
-      <x>25</x>
-      <y>24</y>
-      <width>79</width>
       <horizontal_alignment>2</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
       <actions>
@@ -538,93 +451,6 @@
       </border_color>
     </widget>
     <widget type="textentry" version="3.0.0">
-      <name>Text Update_123</name>
-      <pv_name>$(PriSys){$(PSC)}Bandwidth-Mode</pv_name>
-      <x>108</x>
-      <y>44</y>
-      <width>90</width>
-      <font>
-        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <precision>0</precision>
-      <horizontal_alignment>1</horizontal_alignment>
-      <actions>
-      </actions>
-      <rules>
-        <rule name="New Rule" prop_id="name" out_exp="false">
-          <exp bool_exp="0">
-            <value>MS</value>
-          </exp>
-          <exp bool_exp="1">
-            <value>HS</value>
-          </exp>
-          <pv_name>$(pv_name)</pv_name>
-        </rule>
-      </rules>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_76</name>
-      <text>Bandwidth</text>
-      <x>3</x>
-      <y>44</y>
-      <width>102</width>
-      <horizontal_alignment>2</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Update_124</name>
-      <pv_name>$(PriSys){$(PSC)}Polarity-Mode</pv_name>
-      <x>108</x>
-      <y>63</y>
-      <width>90</width>
-      <font>
-        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <precision>0</precision>
-      <horizontal_alignment>1</horizontal_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_77</name>
-      <text>Polarity</text>
-      <x>25</x>
-      <y>63</y>
-      <width>79</width>
-      <horizontal_alignment>2</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
       <name>Text Update_113</name>
       <pv_name>$(PriSys){$(PSC)}Rtos-Uptime-I</pv_name>
       <x>338</x>
@@ -731,6 +557,158 @@
       <x>244</x>
       <y>46</y>
       <width>90</width>
+      <horizontal_alignment>2</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>Text Update_84</name>
+      <pv_name>$(PriSys){$(PSC)}NumChannels-Mode</pv_name>
+      <x>106</x>
+      <y>6</y>
+      <width>107</width>
+      <font>
+        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <precision>0</precision>
+      <horizontal_alignment>1</horizontal_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_56</name>
+      <text>Num Channels</text>
+      <x>3</x>
+      <y>6</y>
+      <width>102</width>
+      <horizontal_alignment>2</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>Text Update_103</name>
+      <pv_name>$(PriSys){$(PSC)}Resolution-Mode</pv_name>
+      <x>106</x>
+      <y>25</y>
+      <width>107</width>
+      <font>
+        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <precision>0</precision>
+      <horizontal_alignment>1</horizontal_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_61</name>
+      <text>Resolution</text>
+      <x>23</x>
+      <y>25</y>
+      <width>79</width>
+      <horizontal_alignment>2</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>Text Update_123</name>
+      <pv_name>$(PriSys){$(PSC)}Bandwidth-Mode</pv_name>
+      <x>106</x>
+      <y>45</y>
+      <width>107</width>
+      <font>
+        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <precision>0</precision>
+      <horizontal_alignment>1</horizontal_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_76</name>
+      <text>Bandwidth</text>
+      <x>3</x>
+      <y>45</y>
+      <width>102</width>
+      <horizontal_alignment>2</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>Text Update_124</name>
+      <pv_name>$(PriSys){$(PSC)}Polarity-Mode</pv_name>
+      <x>106</x>
+      <y>64</y>
+      <width>107</width>
+      <font>
+        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <precision>0</precision>
+      <horizontal_alignment>1</horizontal_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_77</name>
+      <text>Polarity</text>
+      <x>23</x>
+      <y>64</y>
+      <width>79</width>
       <horizontal_alignment>2</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
       <actions>
