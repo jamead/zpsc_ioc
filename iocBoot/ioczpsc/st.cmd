@@ -22,6 +22,8 @@ cd "${TOP}"
 
 ## Register all support components
 dbLoadDatabase "dbd/zpsc.dbd"
+dbLoadDatabase("dbd/seq.dbd")
+
 zpsc_registerRecordDeviceDriver pdbbase
 
 ## Load record instances for PSC1
@@ -297,3 +299,4 @@ dbpf lab{1}Chan4:DAC_OpMode-SP 0
 #dbpf lab{1}Chan1:Error-Offset-SP 0.0
 #dbpf lab{1}Chan1:Error-Gain-SP 1.0
 
+seq ch1_fsm
