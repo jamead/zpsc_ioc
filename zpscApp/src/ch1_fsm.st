@@ -2,173 +2,154 @@
 
 #define PRINTF seqLog
 
-program ch1_fsm ("M0=lab{3}Chan1")
-
-/* options */
-option  +r;
-option  -c; 
+program ch1_fsm ("M0=lab{3}, M1=Chan1")
 
 
+/* ============================================================
+   Options
+   ------------------------------------------------------------
+   +r : Reentrant (allows multiple instances)
+   -c : Do not wait for all assigned PVs to connect at startup
+   ============================================================ */
+option +r;
+option -c;
 
-/*Write Only PV's*/
-//short Park; assign Park to "{M0}:DigOut_Park-SP"; monitor Park;
-short Park; assign Park to "{M0}:DigOut_Park-SP"; monitor Park;
-short on_cmd; assign on_cmd to "{M0}:DigOut_ON1-SP"; monitor on_cmd;
-short ch1_dac_setpoint; assign ch1_dac_setpoint to "{M1}I-sp"; monitor ch1_dac_setpoint;  
-short on1_cmd; assign on1_cmd to "{M0}:On1-Cmd"; monitor on1_cmd;
-short ch1_clr_flts; assign ch1_clr_flts to "{M2}FltClearChan1-bo"; monitor ch1_clr_flts; 
-short ch1_mode; assign ch1_mode to "{M1}Mode-cmd"; monitor ch1_mode; 
-short ch1_ps_on_off_sts; assign ch1_ps_on_off_sts to "{M0}:PsOnOff-Sts"; monitor ch1_ps_on_off_sts; 
+/* ============================================================
+   Write-only Process Variables
+   ------------------------------------------------------------
+   'Park' is a binary output (bo) record such as:
+   record(bo, "lab3Chan1:DigOut_Park-SP") { ... }
+   ============================================================ */
+short Park;
+assign Park to "{M0}{M1}:DigOut_Park-SP";
+monitor Park;
 
-/*Read Only PV's*/
-short ch1_dac_rdbck; assign ch1_dac_rdbck to "{M0}-DAC-SP"; monitor ch1_dac_rdbck; 
-short ch1_ps_sts; assign ch1_ps_sts to "{M0}:Status0"; monitor ch1_ps_sts; 
+short NumChans; 
+assign NumChans to "{M0}NumChannels-Mode"; 
+monitor NumChans; 
+
+short flt_mask; 
+assign flt_mask to "{M0}{M1}:FaultMask:B12-SP"; 
+monitor flt_mask; 
+
+short flt_clr; 
+assign flt_clr to "{M0}{M1}:FaultClear-SP"; 
+monitor flt_clr; 
 
 /* stringout to display status or progress. */
 string Chan1_seq_messages;  assign Chan1_seq_messages to "Chan1_seq_messages";
 
+/* ============================================================
+   State Set Definition
+   ============================================================ */
 ss OFF_ON_FSM {
-	state INIT {
-		when(){
-		   Park =1; 
-		   pvPut(Park);
-		   on1_cmd = 0; 
-		   pvPut(on1_cmd); 
-		   ch1_mode = 0; 
-		   pvPut(ch1_mode); 
-		   sprintf(Chan1_seq_messages, "PS OFF");
-        	   pvPut(Chan1_seq_messages);
-        	   ch1_ps_on_off_sts = 1; 
-		   pvPut(ch1_ps_on_off_sts); 
-		  } state IDLE
-	} 
-	state IDLE {
-		when (on_cmd==1) {
-			Park = 0; 
-			pvPut(Park);
-			ch1_ps_on_off_sts = 0; 
-			pvPut(ch1_ps_on_off_sts); 
-			sprintf(Chan1_seq_messages, "Zero DAC");
-        	   	pvPut(Chan1_seq_messages);
-        	   	ch1_dac_setpoint =0.0; 
-        	   	pvPut(ch1_dac_setpoint); 
-		} state WAIT_FOR_DAC_CHANGE_ON
-			
-	}
-	state WAIT_FOR_DAC_CHANGE_ON {
-		when (delay(3)) {
-		} state SET_DAC_TO_ZERO_ON
-	}
-	state SET_DAC_TO_ZERO_ON {
-		when ((ch1_dac_rdbck < 0.01) && (ch1_dac_rdbck > -0.01)) {
-			sprintf(Chan1_seq_messages, "Zero DAC");
-			pvPut(Chan1_seq_messages);  
-			ch1_dac_setpoint =0.000; 
-        	   	pvPut(ch1_dac_setpoint); 						
-		} state POWER_ON
-	}
-	state POWER_ON {
-		when (delay(4)) {
-			Park = 1; 
-			pvPut(Park); 
-		        ch1_mode = 0; 
-        	   	pvPut(ch1_mode); 
-			sprintf(Chan1_seq_messages, "Pwr ON");
-			pvPut(Chan1_seq_messages); 
-			on1_cmd = 1; 
-			pvPut(on1_cmd); 						
-		} state CLEAR_FAULTS
-	}
-	state CLEAR_FAULTS {
-		when (delay(2)) {
-			sprintf(Chan1_seq_messages, "Clr Faults");
-			pvPut(Chan1_seq_messages); 
-			ch1_clr_flts = 1; 
-			pvPut(ch1_clr_flts); 						
-		} state WAIT_TO_CLEAR
-	}
-	state WAIT_TO_CLEAR {
-		when (delay(5)) {
-			sprintf(Chan1_seq_messages, "Clearing");
-			pvPut(Chan1_seq_messages); 
-			ch1_clr_flts = 0; 
-			pvPut(ch1_clr_flts); 						
-		} state PARK_OFF
-	}			
-	state PARK_OFF {
-		when (delay(5)) {
-			sprintf(Chan1_seq_messages, "Park OFF");
-			pvPut(Chan1_seq_messages); 
-			Park = 0; 
-			pvPut(Park); 						
-		} state DONE_CHECK
-	}
-	state DONE_CHECK{
-		when (ch1_ps_sts == 0) {
-			sprintf(Chan1_seq_messages, "FAULTED");
-			pvPut(Chan1_seq_messages); 	
-			ch1_ps_on_off_sts = 1;	
-			pvPut(ch1_ps_on_off_sts); 				
-		} state RETRY_ON
-		when (ch1_ps_sts == 1) {				
-		} state DONE
-	}
-	state RETRY_ON {
-		when (on_cmd==0) {
-			Park = 1; 
-			ch1_ps_on_off_sts = 1; 
-			pvPut(ch1_ps_on_off_sts); 
-			sprintf(Chan1_seq_messages, "Try Again");
-        	   	pvPut(Chan1_seq_messages);
-		} state IDLE
-	}
-	state DONE {
-		when (delay(1)) {
-			sprintf(Chan1_seq_messages, "PS Ready");
-			pvPut(Chan1_seq_messages); 	
-			ch1_ps_on_off_sts = 1;	
-			pvPut(ch1_ps_on_off_sts); 				
-		} state READY
-	}
-	state READY {
-		when (on_cmd==0) {
-			Park = 1; 
-			sprintf(Chan1_seq_messages, "Zero DAC");
-        	   	pvPut(Chan1_seq_messages);
-        	   	ch1_dac_setpoint =0.00; 
-        	   	pvPut(ch1_dac_setpoint); 
-        	   	ch1_ps_on_off_sts = 0;
-        	   	pvPut(ch1_ps_on_off_sts); 
-		} state SET_DAC_TO_ZERO_OFF
-		when(on_cmd==1) {
-			sprintf(Chan1_seq_messages, " PS Ready");
-        	   	pvPut(Chan1_seq_messages);
-		} state READY
-			
-	}
-	state SET_DAC_TO_ZERO_OFF {
-		when ((ch1_dac_rdbck < 0.01) && (ch1_dac_rdbck > -0.05)) {
-			sprintf(Chan1_seq_messages, "Pls Wait");
-			pvPut(Chan1_seq_messages);  						
-		} state POWER_OFF
-	}
-	state POWER_OFF {
-		when (delay(5)) {
-			sprintf(Chan1_seq_messages, "Pwr OFF");
-			pvPut(Chan1_seq_messages); 
-			on1_cmd = 0; 
-			pvPut(on1_cmd); 	
-			Park = 0; 
-			pvPut(Park); 					
-		} state COMPLETE
-	}
-	state COMPLETE {
-		when (delay(1)) {
-			sprintf(Chan1_seq_messages, "Pwr OFF");
-			pvPut(Chan1_seq_messages); 
-			ch1_ps_on_off_sts = 1;
-			pvPut(ch1_ps_on_off_sts); 
-					
-		} state INIT
-	}
+
+    state INIT_1 {
+    	when(){
+    	  flt_mask = 1; 
+    	  pvPut(flt_mask); 
+    	  printf("Initializing OFF_ON_FSM...\n");
+          sprintf(Chan1_seq_messages, "INIT 1");
+          pvPut(Chan1_seq_messages);
+    	} state INIT_2
+    }
+    state INIT_2 {
+    	when(delay(2)) {
+          flt_mask = 0; 
+    	  pvPut(flt_mask); 
+    	  printf("Initializing OFF_ON_FSM...\n");
+          sprintf(Chan1_seq_messages, "INIT 2");
+          pvPut(Chan1_seq_messages);
+    	} state INIT_3
+    }
+    state INIT_3 {
+    	when(delay(2)) {
+          flt_mask = 1; 
+    	  pvPut(flt_mask); 
+    	  printf("Initializing OFF_ON_FSM...\n");
+          sprintf(Chan1_seq_messages, "INIT 3");
+       	  pvPut(Chan1_seq_messages);
+    	} state INIT_4
+    }
+    state INIT_4 {
+    	when(delay(2)) {
+          flt_clr = 1; 
+    	  pvPut(flt_clr); 
+    	  printf("Initializing OFF_ON_FSM...\n");
+          sprintf(Chan1_seq_messages, "Clearing Faults");
+       	  pvPut(Chan1_seq_messages);
+    	} state INIT_5
+    }
+    state INIT_5 {
+    	when(delay(5)) {
+          flt_clr = 0; 
+    	  pvPut(flt_clr); 
+    	  printf("Initializing OFF_ON_FSM...\n");
+          sprintf(Chan1_seq_messages, "Clear Done");
+       	  pvPut(Chan1_seq_messages);
+    	} state INIT_5
+    }
+    state CHECK_CHANS {
+        when(NumChans == 1) {
+            printf("Initializing OFF_ON_FSM...\n");
+            sprintf(Chan1_seq_messages, "INIT 4CH");
+       	    pvPut(Chan1_seq_messages);
+
+            /* Set PV to 0 initially */
+            Park = 1;
+            pvPut(Park);
+            printf("Set %s to 0\n", pvName(Park));
+        } state IDLE_4CH
+        when(NumChans == 0) {
+            printf("Initializing OFF_ON_FSM...\n");
+            sprintf(Chan1_seq_messages, "INIT 2CH");
+       	    pvPut(Chan1_seq_messages);
+
+            /* Set PV to 0 initially */
+            Park = 0;
+            pvPut(Park);
+            printf("Set %s to 0\n", pvName(Park));
+        } state IDLE_2CH
+    }
+    
+    /*******************************/
+   /* Sequencer for 4 Channel PSC */
+  /*******************************/
+    state IDLE_4CH {
+        when (delay(1.0)) {
+            /* Only write if value actually changes */
+            if (Park != 1) {
+                Park = 1;
+                pvPut(Park);
+                printf("Set %s to 1\n", pvName(Park));
+                sprintf(Chan1_seq_messages, "IDLE 4CH");
+       	    	pvPut(Chan1_seq_messages);
+            } else {
+                printf("%s is already 1\n", pvName(Park));
+                sprintf(Chan1_seq_messages, "IDLE 4CH");
+       	    	pvPut(Chan1_seq_messages);
+            }
+        } state IDLE_4CH
+    }
+    
+    /*******************************/
+   /* Sequencer for 2 Channel PSC */
+  /*******************************/
+    state IDLE_2CH {
+        when (delay(1.0)) {
+            /* Only write if value actually changes */
+            if (Park != 1) {
+                Park = 1;
+                pvPut(Park);
+                printf("Set %s to 1\n", pvName(Park));
+                sprintf(Chan1_seq_messages, "IDLE 2CH");
+       	    	pvPut(Chan1_seq_messages);
+            } else {
+                printf("%s is already 1\n", pvName(Park));
+                sprintf(Chan1_seq_messages, "IDLE 2CH");
+       	    	pvPut(Chan1_seq_messages);
+            }
+        } state IDLE_2CH
+    }
 }
+

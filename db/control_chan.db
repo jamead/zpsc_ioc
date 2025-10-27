@@ -719,8 +719,58 @@ record(waveform, "$(P){$(NO)}Chan$(CHAN):RampTable-Wfm") {
     field(FLNK, "$(P){$(NO)}send")
 }
 
+#-------------------------------------------
+#------------FSM Readbacks------------------
+#-------------------------------------------
+
+record(stringout, "Chan1_seq_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "Chan2_seq_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "Chan3_seq_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "Chan4_seq_messages") {
+    field(DESC, "Message box from seq")
+}
 
 
+#-----------------------------------------------
+#------------FSM ON/OFF Button------------------
+#-----------------------------------------------
+
+record(mbbo,"$(PriSys){$(PSC)}Chan1:PsOnOff-SP")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Pls wait...") 
+	field(DESC, "PS Operation Mode Change")
+}
+
+record(mbbo,"$(PriSys){$(PSC)}Chan2:PsOnOff-SP")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Pls wait...") 
+	field(DESC, "PS Operation Mode Change")
+}
+
+record(mbbo,"$(PriSys){$(PSC)}Chan3:PsOnOff-SP")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Pls wait...") 
+	field(DESC, "PS Operation Mode Change")
+}
+
+record(mbbo,"$(PriSys){$(PSC)}Chan4:PsOnOff-SP")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Pls wait...") 
+	field(DESC, "PS Operation Mode Change")
+}
 
 
 
