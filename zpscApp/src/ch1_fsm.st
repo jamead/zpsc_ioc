@@ -11,15 +11,11 @@ program ch1_fsm ("M0=lab{3}, M1=Chan1")
    +r : Reentrant (allows multiple instances)
    -c : Do not wait for all assigned PVs to connect at startup
    ============================================================ */
+   
 option +r;
 option -c;
 
-/* ============================================================
-   Write-only Process Variables
-   ------------------------------------------------------------
-   'Park' is a binary output (bo) record such as:
-   record(bo, "lab3Chan1:DigOut_Park-SP") { ... }
-   ============================================================ */
+
 short DAC; 
 assign DAC to "{M0}{M1}:DAC_SetPt-SP"; 
 monitor DAC; 
