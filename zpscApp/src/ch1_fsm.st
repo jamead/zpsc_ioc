@@ -60,7 +60,7 @@ ss OFF_ON_FSM {
     	  DAC = 0; 
     	  pvPut(DAC); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan1_seq_messages, "WAIT 1");
+          sprintf(Chan1_seq_messages, "WAIT..");
           pvPut(Chan1_seq_messages);
     	} state INIT_2
     }
@@ -69,7 +69,7 @@ ss OFF_ON_FSM {
           flt_mask = 0; 
     	  pvPut(flt_mask); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan1_seq_messages, "WAIT 2");
+          sprintf(Chan1_seq_messages, "WAIT...");
           pvPut(Chan1_seq_messages);
     	} state INIT_3
     }
@@ -78,7 +78,7 @@ ss OFF_ON_FSM {
           flt_mask = 1; 
     	  pvPut(flt_mask); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan1_seq_messages, "WAIT 3");
+          sprintf(Chan1_seq_messages, "WAIT......");
        	  pvPut(Chan1_seq_messages);
     	} state INIT_4
     }
@@ -105,8 +105,6 @@ ss OFF_ON_FSM {
             printf("Initializing OFF_ON_FSM...\n");
             sprintf(Chan1_seq_messages, "BIPOLAR");
        	    pvPut(Chan1_seq_messages);
-
-            /* Set PV to 0 initially */
             Park = 1;
             pvPut(Park);
             printf("Set %s to 0\n", pvName(Park));
@@ -115,8 +113,6 @@ ss OFF_ON_FSM {
             printf("Initializing OFF_ON_FSM...\n");
             sprintf(Chan1_seq_messages, "UNIPOLAR");
        	    pvPut(Chan1_seq_messages);
-
-            /* Set PV to 0 initially */
             Park = 1;
             pvPut(Park);
             printf("Set %s to 0\n", pvName(Park));
@@ -124,7 +120,7 @@ ss OFF_ON_FSM {
     }
     
     /*******************************/
-   /* Sequencer for 4 Channel PSC */
+   /* Sequencer for Bipolar PSC   */
   /*******************************/
     state BIPOLAR {
         when(ps_on_off == 1) {
@@ -158,7 +154,7 @@ ss OFF_ON_FSM {
     }
     
     /*******************************/
-   /* Sequencer for 2 Channel PSC */
+   /* Sequencer for Unipolar PSC  */
   /*******************************/
     state UNIPOLAR {
         when(delay(1.0)) {
