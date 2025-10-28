@@ -144,17 +144,17 @@ ss OFF_ON_FSM {
   /*******************************/
     state BIPOLAR_IDLE {
         when(ps_on_off == 1) {
-			Park = 1; 
-			pvPut(Park); 
-			DAC = 0.0; 
-			pvPut(DAC); 
-		    ps_on_off_sts = 0;
-            pvPut(ps_on_off_sts); 
-            sprintf(Chan1_seq_messages, "Zero DAC");
-       	    pvPut(Chan1_seq_messages);
+		Park = 1; 
+		pvPut(Park); 
+		DAC = 0.0; 
+		pvPut(DAC); 
+		ps_on_off_sts = 0;
+            	pvPut(ps_on_off_sts); 
+            	sprintf(Chan1_seq_messages, "Zero DAC");
+       	    	pvPut(Chan1_seq_messages);
        	    } state SET_DAC_TO_ZERO_ON
        	when(ps_on_off == 0) {
-		    ps_on_off_sts = 1;
+		ps_on_off_sts = 1;
         	pvPut(ps_on_off_sts); 
 	        sprintf(Chan1_seq_messages, "PS OFF");
        	    pvPut(Chan1_seq_messages);
@@ -232,7 +232,7 @@ ss OFF_ON_FSM {
         	   	pvPut(Chan1_seq_messages);
         	   	DAC =0.00; 
         	   	pvPut(DAC); 
-        	   	ps_on_off_sts = 1;
+        	   	ps_on_off_sts = 0;
         	   	pvPut(ps_on_off_sts); 
 		} state SET_DAC_TO_ZERO_OFF
 		when(ps_on_off==0) {
