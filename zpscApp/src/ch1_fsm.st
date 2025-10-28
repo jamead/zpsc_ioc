@@ -202,8 +202,8 @@ ss OFF_ON_FSM {
 	}
 	state DONE_CHECK{
 		when (ps_on_sts == 0) {
-			sprintf(Chan1_seq_messages, "FAULTED");
-			pvPut(Chan1_seq_messages); 	
+			//sprintf(Chan1_seq_messages, "CHECKING");
+			//pvPut(Chan1_seq_messages); 	
 			ps_on_off_sts = 0;	
 			pvPut(ps_on_off_sts); 				
 		} state RETRY_ON
@@ -212,11 +212,17 @@ ss OFF_ON_FSM {
 	}
 	state RETRY_ON {
 		when (ps_on_off==0) {
-			ps_on_off_sts = 0; 
+			ps_on_off_sts = 1; 
 			pvPut(ps_on_off_sts); 
-			sprintf(Chan1_seq_messages, "Try Again");
-        	pvPut(Chan1_seq_messages);
-		} state BIPOLAR_IDLE
+			sprintf(Chan1_seq_messages, "Faulted..Try Again");
+        		pvPut(Chan1_seq_messages);
+        	    } state RETRY_ON
+        	when (ps_on_off==1) {
+        		ps_on_off_sts = 0; 
+			pvPut(ps_on_off_sts);
+        		sprintf(Chan1_seq_messages, "Faulted..Try Again");
+        		pvPut(Chan1_seq_messages);
+        	    } state BIPOLAR_IDLE
 	}
 	state DONE {
 		when (delay(1)) {
