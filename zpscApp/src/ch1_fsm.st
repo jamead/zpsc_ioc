@@ -250,7 +250,7 @@ ss OFF_ON_FSM {
 	}
 	state POWER_OFF {
 		when (delay(5)) {
-			sprintf(Chan1_seq_messages, "Power OFF");
+			sprintf(Chan1_seq_messages, "Please Wait");
 			pvPut(Chan1_seq_messages); 
 			on1_cmd = 0; 
 			pvPut(on1_cmd); 	
