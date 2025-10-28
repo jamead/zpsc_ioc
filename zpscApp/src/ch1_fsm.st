@@ -144,8 +144,8 @@ ss OFF_ON_FSM {
        	    pvPut(Chan1_seq_messages);
        	    } state SET_DAC_TO_ZERO_ON
        	when(ps_on_off == 0) {
-            //Park = 1; 
-	        //pvPut(Park); 
+		    ps_on_off_sts = 1;
+        	pvPut(ps_on_off_sts); 
 	        sprintf(Chan1_seq_messages, "IDLE");
        	    pvPut(Chan1_seq_messages);
         } state BIPOLAR_IDLE
@@ -220,11 +220,13 @@ ss OFF_ON_FSM {
         	   	pvPut(Chan1_seq_messages);
         	   	DAC =0.00; 
         	   	pvPut(DAC); 
-        	   	ps_on_off_sts = 0;
+        	   	ps_on_off_sts = 1;
         	   	pvPut(ps_on_off_sts); 
 		} state SET_DAC_TO_ZERO_OFF
 		when(ps_on_off==0) {
-			sprintf(Chan1_seq_messages, " PS Ready");
+        	   	ps_on_off_sts = 1;
+        	   	pvPut(ps_on_off_sts); 
+			    sprintf(Chan1_seq_messages, " PS Ready");
         	   	pvPut(Chan1_seq_messages);
 		} state READY
 	}

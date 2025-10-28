@@ -28,7 +28,7 @@ zpsc_registerRecordDeviceDriver pdbbase
 
 ## Load record instances for PSC1
 dbLoadRecords("db/lstats.db", "P=$(IOCNAME), NO=1")
-dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=1, OFFSET=100")
+dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=1, OFFSET=100, BUFLEN=$(BLEN)")
 dbLoadRecords("db/control_glob.db", "P=$(IOCNAME), NO=1")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=1, CHAN=1")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=1, CHAN=2")
@@ -59,7 +59,7 @@ dbLoadRecords("db/wfmstats.db", "P=$(IOCNAME), PSC=1")
 
 ## Load record instances for PSC2
 dbLoadRecords("db/lstats.db", "P=$(IOCNAME), NO=2")
-dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=2, OFFSET=100")
+dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=2, OFFSET=100, BUFLEN=$(BLEN)")
 dbLoadRecords("db/control_glob.db", "P=$(IOCNAME), NO=2")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=2, CHAN=1")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=2, CHAN=2")
@@ -90,7 +90,7 @@ dbLoadRecords("db/wfmstats.db", "P=$(IOCNAME), PSC=2")
 
 ## Load record instances for PSC3
 dbLoadRecords("db/lstats.db", "P=$(IOCNAME), NO=3")
-dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=3, OFFSET=100")
+dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=3, OFFSET=100, BUFLEN=$(BLEN)")
 dbLoadRecords("db/control_glob.db", "P=$(IOCNAME), NO=3")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=3, CHAN=1")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=3, CHAN=2")
@@ -121,7 +121,7 @@ dbLoadRecords("db/wfmstats.db", "P=$(IOCNAME), PSC=3")
 
 ## Load record instances for PSC4
 dbLoadRecords("db/lstats.db", "P=$(IOCNAME), NO=4")
-dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=4, OFFSET=100")
+dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=4, OFFSET=100, BUFLEN=$(BLEN)")
 dbLoadRecords("db/control_glob.db", "P=$(IOCNAME), NO=4")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=4, CHAN=1")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=4, CHAN=2")
@@ -152,7 +152,7 @@ dbLoadRecords("db/wfmstats.db", "P=$(IOCNAME), PSC=4")
 
 ## Load record instances for PSC5
 dbLoadRecords("db/lstats.db", "P=$(IOCNAME), NO=5")
-dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=5, OFFSET=100")
+dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=5, OFFSET=100, BUFLEN=$(BLEN)")
 dbLoadRecords("db/control_glob.db", "P=$(IOCNAME), NO=5")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=5, CHAN=1")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=5, CHAN=2")
@@ -183,7 +183,7 @@ dbLoadRecords("db/wfmstats.db", "P=$(IOCNAME), PSC=5")
 
 ## Load record instances for PSC6
 dbLoadRecords("db/lstats.db", "P=$(IOCNAME), NO=6")
-dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=6, OFFSET=100")
+dbLoadRecords("db/status10hz.db", "P=$(IOCNAME), NO=6, OFFSET=100, BUFLEN=$(BLEN)")
 dbLoadRecords("db/control_glob.db", "P=$(IOCNAME), NO=6")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=6, CHAN=1")
 dbLoadRecords("db/control_chan.db", "P=$(IOCNAME), NO=6, CHAN=2")
