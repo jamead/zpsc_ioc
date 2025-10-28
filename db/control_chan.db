@@ -768,5 +768,36 @@ record(bo, "$(P){$(NO)}Chan$(CHAN):PsOnOff-SP") {
     field(HIGH,".01")    #500 ms after low
 }
 
+#-----------------------------------------------
+#----------------FSM Status---------------------
+#-----------------------------------------------
+
+record(mbbo,"$(PriSys){$(PSC)}Chan1:PsOnOff-Sts")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Pls wait...") 
+	field(DESC, "PS Operation Mode Change")
+}
+
+record(mbbo,"$(PriSys){$(PSC)}Chan2:PsOnOff-Sts")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Pls wait...") 
+	field(DESC, "PS Operation Mode Change")
+}
+
+record(mbbo,"$(PriSys){$(PSC)}Chan3:PsOnOff-Sts")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Pls wait...") 
+	field(DESC, "PS Operation Mode Change")
+}
+
+record(mbbo,"$(PriSys){$(PSC)}Chan4:PsOnOff-Sts")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Pls wait...") 
+	field(DESC, "PS Operation Mode Change")
+}
 
 

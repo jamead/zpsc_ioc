@@ -24,7 +24,7 @@ short DAC_rdbck;
 assign DAC_rdbck to "{M0}{M1}:DAC-I"; 
 monitor DAC_rdbck; 
 
-short Park;
+short Park; 
 assign Park to "{M0}{M1}:DigOut_Park-SP";
 monitor Park;
 
@@ -45,6 +45,18 @@ short ps_on_off;
 assign ps_on_off to "{M0}{M1}:PSOnOff-SP"; 
 monitor ps_on_off; 
 
+short ps_on_off_sts; 
+assign ps_on_off_sts to "{M0}{M1}:PsOnOff-STS"; 
+monitor ps_on_off_sts; 
+
+short ps_on_sts; 
+assign ps_on_sts to "{M0}{M1}:DigIn-I.B0"; 
+monitor ps_on_sts; 
+
+short on1_cmd; 
+assign on1_cmd to "{M0}{M1}:DigOut_ON1-SP"; 
+monitor on1_cmd; 
+
 /* stringout to display status or progress. */
 string Chan1_seq_messages;  assign Chan1_seq_messages to "Chan1_seq_messages";
 
@@ -60,7 +72,7 @@ ss OFF_ON_FSM {
     	  DAC = 0; 
     	  pvPut(DAC); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan1_seq_messages, "WAIT..");
+          sprintf(Chan1_seq_messages, "WAIT.1");
           pvPut(Chan1_seq_messages);
     	} state INIT_2
     }
@@ -69,7 +81,7 @@ ss OFF_ON_FSM {
           flt_mask = 0; 
     	  pvPut(flt_mask); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan1_seq_messages, "WAIT...");
+          sprintf(Chan1_seq_messages, "WAIT..2");
           pvPut(Chan1_seq_messages);
     	} state INIT_3
     }
@@ -78,7 +90,7 @@ ss OFF_ON_FSM {
           flt_mask = 1; 
     	  pvPut(flt_mask); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan1_seq_messages, "WAIT......");
+          sprintf(Chan1_seq_messages, "WAIT...3");
        	  pvPut(Chan1_seq_messages);
     	} state INIT_4
     }
@@ -108,7 +120,7 @@ ss OFF_ON_FSM {
             Park = 1;
             pvPut(Park);
             printf("Set %s to 0\n", pvName(Park));
-        } state BIPOLAR
+        } state BIPOLAR_IDLE
         when(Polarity == 1) {
             printf("Initializing OFF_ON_FSM...\n");
             sprintf(Chan1_seq_messages, "UNIPOLAR");
@@ -116,13 +128,13 @@ ss OFF_ON_FSM {
             Park = 1;
             pvPut(Park);
             printf("Set %s to 0\n", pvName(Park));
-        } state UNIPOLAR
+        } state UNIPOLAR_IDLE
     }
     
     /*******************************/
    /* Sequencer for Bipolar PSC   */
   /*******************************/
-    state BIPOLAR {
+    state BIPOLAR_IDLE {
         when(ps_on_off == 1) {
 	    Park = 1; 
 	    pvPut(Park); 
@@ -133,10 +145,10 @@ ss OFF_ON_FSM {
        	    } state SET_DAC_TO_ZERO_ON
        	when(ps_on_off == 0) {
             //Park = 1; 
-	    //pvPut(Park); 
-	    sprintf(Chan1_seq_messages, "IDLE");
+	        //pvPut(Park); 
+	        sprintf(Chan1_seq_messages, "IDLE");
        	    pvPut(Chan1_seq_messages);
-        } state BIPOLAR
+        } state BIPOLAR_IDLE
     }
     state SET_DAC_TO_ZERO_ON {
 	when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.01)) {
@@ -144,24 +156,112 @@ ss OFF_ON_FSM {
 	    pvPut(Chan1_seq_messages);  
 	    DAC =0.000; 
             pvPut(DAC); 						
-	} state POWER_ON
+		} state POWER_ON
     }    
     state POWER_ON {
     	when(){
 	   sprintf(Chan1_seq_messages, "Powering ON");
 	   pvPut(Chan1_seq_messages); 
-    	} state POWER_ON
+    	} state CLEAR_FAULTS
     }
-    
+ 	state CLEAR_FAULTS {
+		when (delay(2)) {
+			sprintf(Chan1_seq_messages, "Clr Faults");
+			pvPut(Chan1_seq_messages); 
+			flt_clr = 1; 
+			pvPut(flt_clr); 						
+		} state WAIT_TO_CLEAR
+	}
+	state WAIT_TO_CLEAR {
+		when (delay(5)) {
+			sprintf(Chan1_seq_messages, "Clearing");
+			pvPut(Chan1_seq_messages); 
+			flt_clr = 0; 
+			pvPut(flt_clr); 						
+		} state PARK_OFF
+	}			
+	state PARK_OFF {
+		when (delay(5)) {
+			sprintf(Chan1_seq_messages, "Park OFF");
+			pvPut(Chan1_seq_messages); 
+			Park = 0; 
+			pvPut(Park); 						
+		} state DONE_CHECK
+	}
+	state DONE_CHECK{
+		when (ps_on_sts == 0) {
+			sprintf(Chan1_seq_messages, "FAULTED");
+			pvPut(Chan1_seq_messages); 	
+			ps_on_off_sts = 1;	
+			pvPut(ps_on_off_sts); 				
+		} state RETRY_ON
+		when (ps_on_sts == 1) {				
+		} state DONE
+	}
+	state RETRY_ON {
+		when (ps_on_off==0) {
+			ps_on_off_sts = 1; 
+			pvPut(ps_on_off_sts); 
+			sprintf(Chan1_seq_messages, "Try Again");
+        	pvPut(Chan1_seq_messages);
+		} state BIPOLAR_IDLE
+	}
+	state DONE {
+		when (delay(1)) {
+			sprintf(Chan1_seq_messages, "PS Ready");
+			pvPut(Chan1_seq_messages); 	
+			ps_on_off_sts = 1;	
+			pvPut(ps_on_off_sts); 				
+		} state READY
+	}
+	state READY {
+		when (ps_on_off==1) {
+			sprintf(Chan1_seq_messages, "Zero DAC");
+        	   	pvPut(Chan1_seq_messages);
+        	   	DAC =0.00; 
+        	   	pvPut(DAC); 
+        	   	ps_on_off_sts = 0;
+        	   	pvPut(ps_on_off_sts); 
+		} state SET_DAC_TO_ZERO_OFF
+		when(ps_on_off==0) {
+			sprintf(Chan1_seq_messages, " PS Ready");
+        	   	pvPut(Chan1_seq_messages);
+		} state READY
+	}
+	state SET_DAC_TO_ZERO_OFF {
+		when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.05)) {
+			sprintf(Chan1_seq_messages, "Pls Wait");
+			pvPut(Chan1_seq_messages);  						
+		} state POWER_OFF
+	}
+	state POWER_OFF {
+		when (delay(5)) {
+			sprintf(Chan1_seq_messages, "Pwr OFF");
+			pvPut(Chan1_seq_messages); 
+			on1_cmd = 0; 
+			pvPut(on1_cmd); 	
+			Park = 0; 
+			pvPut(Park); 					
+		} state COMPLETE
+	}
+	state COMPLETE {
+		when (delay(1)) {
+			sprintf(Chan1_seq_messages, "Pwr OFF");
+			pvPut(Chan1_seq_messages); 
+			ps_on_off_sts = 1;
+			pvPut(ps_on_off_sts); 				
+		} state BIPOLAR_IDLE
+	}
+  
     /*******************************/
    /* Sequencer for Unipolar PSC  */
   /*******************************/
-    state UNIPOLAR {
+    state UNIPOLAR_IDLE {
         when(delay(1.0)) {
             printf("Set %s to 1\n", pvName(Park));
             sprintf(Chan1_seq_messages, "IDLE 2CH");
        	    pvPut(Chan1_seq_messages);
-        } state UNIPOLAR
+        } state UNIPOLAR_IDLE
     }
 }
 
