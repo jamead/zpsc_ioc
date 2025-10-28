@@ -1,4 +1,4 @@
-/* Sequencer to control the on-demond record process: ramping table download, power supply mode change, and watch funciton upload */
+/* Sequencer to control the PSC IOC startup.*/
 
 #define PRINTF seqLog
 
@@ -46,7 +46,7 @@ assign ps_on_off to "{M0}{M1}:PSOnOff-SP";
 monitor ps_on_off; 
 
 short ps_on_off_sts; 
-assign ps_on_off_sts to "{M0}{M1}:PsOnOff-STS"; 
+assign ps_on_off_sts to "{M0}{M1}:PSOnOff-STS"; 
 monitor ps_on_off_sts; 
 
 short ps_on_sts; 
@@ -58,7 +58,8 @@ assign on1_cmd to "{M0}{M1}:DigOut_ON1-SP";
 monitor on1_cmd; 
 
 /* stringout to display status or progress. */
-string Chan1_seq_messages;  assign Chan1_seq_messages to "Chan1_seq_messages";
+string Chan1_seq_messages;  
+assign Chan1_seq_messages to "Chan1_seq_messages";
 
     /*******************************/
    /*    Initialization Phase     */
@@ -71,6 +72,8 @@ ss OFF_ON_FSM {
     	  pvPut(flt_mask); 
     	  DAC = 0; 
     	  pvPut(DAC); 
+		  ps_on_off_sts = 0;
+          pvPut(ps_on_off_sts); 
     	  printf("Initializing OFF_ON_FSM...\n");
           sprintf(Chan1_seq_messages, "WAIT.1");
           pvPut(Chan1_seq_messages);
@@ -136,10 +139,12 @@ ss OFF_ON_FSM {
   /*******************************/
     state BIPOLAR_IDLE {
         when(ps_on_off == 1) {
-	    Park = 1; 
-	    pvPut(Park); 
-	    DAC = 0.0; 
-	    pvPut(DAC); 
+			Park = 1; 
+			pvPut(Park); 
+			DAC = 0.0; 
+			pvPut(DAC); 
+		    ps_on_off_sts = 0;
+            pvPut(ps_on_off_sts); 
             sprintf(Chan1_seq_messages, "Zero DAC");
        	    pvPut(Chan1_seq_messages);
        	    } state SET_DAC_TO_ZERO_ON
@@ -151,10 +156,10 @@ ss OFF_ON_FSM {
         } state BIPOLAR_IDLE
     }
     state SET_DAC_TO_ZERO_ON {
-	when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.01)) {
-	    sprintf(Chan1_seq_messages, "Zeroing DAC");
-	    pvPut(Chan1_seq_messages);  
-	    DAC =0.000; 
+		when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.01)) {
+	        sprintf(Chan1_seq_messages, "Zeroing DAC");
+	        pvPut(Chan1_seq_messages);  
+	        DAC =0.000; 
             pvPut(DAC); 						
 		} state POWER_ON
     }    
@@ -166,7 +171,7 @@ ss OFF_ON_FSM {
     }
  	state CLEAR_FAULTS {
 		when (delay(2)) {
-			sprintf(Chan1_seq_messages, "Clr Faults");
+			sprintf(Chan1_seq_messages, "Clear Faults");
 			pvPut(Chan1_seq_messages); 
 			flt_clr = 1; 
 			pvPut(flt_clr); 						
@@ -192,7 +197,7 @@ ss OFF_ON_FSM {
 		when (ps_on_sts == 0) {
 			sprintf(Chan1_seq_messages, "FAULTED");
 			pvPut(Chan1_seq_messages); 	
-			ps_on_off_sts = 1;	
+			ps_on_off_sts = 0;	
 			pvPut(ps_on_off_sts); 				
 		} state RETRY_ON
 		when (ps_on_sts == 1) {				
@@ -200,7 +205,7 @@ ss OFF_ON_FSM {
 	}
 	state RETRY_ON {
 		when (ps_on_off==0) {
-			ps_on_off_sts = 1; 
+			ps_on_off_sts = 0; 
 			pvPut(ps_on_off_sts); 
 			sprintf(Chan1_seq_messages, "Try Again");
         	pvPut(Chan1_seq_messages);
@@ -226,19 +231,19 @@ ss OFF_ON_FSM {
 		when(ps_on_off==0) {
         	   	ps_on_off_sts = 1;
         	   	pvPut(ps_on_off_sts); 
-			    sprintf(Chan1_seq_messages, " PS Ready");
+			sprintf(Chan1_seq_messages, " PS Ready");
         	   	pvPut(Chan1_seq_messages);
 		} state READY
 	}
 	state SET_DAC_TO_ZERO_OFF {
 		when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.05)) {
-			sprintf(Chan1_seq_messages, "Pls Wait");
+			sprintf(Chan1_seq_messages, "Please Wait");
 			pvPut(Chan1_seq_messages);  						
 		} state POWER_OFF
 	}
 	state POWER_OFF {
 		when (delay(5)) {
-			sprintf(Chan1_seq_messages, "Pwr OFF");
+			sprintf(Chan1_seq_messages, "Power OFF");
 			pvPut(Chan1_seq_messages); 
 			on1_cmd = 0; 
 			pvPut(on1_cmd); 	
@@ -248,7 +253,7 @@ ss OFF_ON_FSM {
 	}
 	state COMPLETE {
 		when (delay(1)) {
-			sprintf(Chan1_seq_messages, "Pwr OFF");
+			sprintf(Chan1_seq_messages, "Power OFF");
 			pvPut(Chan1_seq_messages); 
 			ps_on_off_sts = 1;
 			pvPut(ps_on_off_sts); 				
