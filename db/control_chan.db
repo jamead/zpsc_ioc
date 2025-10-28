@@ -775,7 +775,7 @@ record(bo, "$(P){$(NO)}Chan$(CHAN):PsOnOff-SP") {
 record(mbbo,"$(P){$(NO)}Chan$(CHAN):PSOnOff-STS")
 {
 	field(ONST, "DONE")
-	field(ZRST, "Pls wait...") 
+	field(ZRST, "Please wait...") 
 	field(DESC, "PS Operation Mode Change")
 }
 

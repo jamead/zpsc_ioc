@@ -55,7 +55,10 @@ monitor ps_on_sts;
 
 short on1_cmd; 
 assign on1_cmd to "{M0}{M1}:DigOut_ON1-SP"; 
-monitor on1_cmd; 
+
+short en_cmd; 
+assign en_cmd to "{M0}{M1}:DigOut_ON2-SP";
+monitor en_cmd; 
 
 /* stringout to display status or progress. */
 string Chan1_seq_messages;  
@@ -72,10 +75,12 @@ ss OFF_ON_FSM {
     	  pvPut(flt_mask); 
     	  DAC = 0; 
     	  pvPut(DAC); 
-		  ps_on_off_sts = 0;
-          pvPut(ps_on_off_sts); 
+          ps_on_off_sts = 0;
+          pvPut(ps_on_off_sts);
+          en_cmd = 1; 
+          pvPut(en_cmd);  
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan1_seq_messages, "WAIT.1");
+          sprintf(Chan1_seq_messages, "WAIT...1");
           pvPut(Chan1_seq_messages);
     	} state INIT_2
     }
@@ -84,7 +89,7 @@ ss OFF_ON_FSM {
           flt_mask = 0; 
     	  pvPut(flt_mask); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan1_seq_messages, "WAIT..2");
+          sprintf(Chan1_seq_messages, "WAIT....2");
           pvPut(Chan1_seq_messages);
     	} state INIT_3
     }
@@ -93,7 +98,7 @@ ss OFF_ON_FSM {
           flt_mask = 1; 
     	  pvPut(flt_mask); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan1_seq_messages, "WAIT...3");
+          sprintf(Chan1_seq_messages, "WAIT.....3");
        	  pvPut(Chan1_seq_messages);
     	} state INIT_4
     }
@@ -151,24 +156,18 @@ ss OFF_ON_FSM {
        	when(ps_on_off == 0) {
 		    ps_on_off_sts = 1;
         	pvPut(ps_on_off_sts); 
-	        sprintf(Chan1_seq_messages, "IDLE");
+	        sprintf(Chan1_seq_messages, "PS OFF");
        	    pvPut(Chan1_seq_messages);
         } state BIPOLAR_IDLE
     }
     state SET_DAC_TO_ZERO_ON {
 		when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.01)) {
-	        sprintf(Chan1_seq_messages, "Zeroing DAC");
+	        sprintf(Chan1_seq_messages, "Zero-ing DAC");
 	        pvPut(Chan1_seq_messages);  
 	        DAC =0.000; 
             pvPut(DAC); 						
-		} state POWER_ON
+		} state CLEAR_FAULTS
     }    
-    state POWER_ON {
-    	when(){
-	   sprintf(Chan1_seq_messages, "Powering ON");
-	   pvPut(Chan1_seq_messages); 
-    	} state CLEAR_FAULTS
-    }
  	state CLEAR_FAULTS {
 		when (delay(2)) {
 			sprintf(Chan1_seq_messages, "Clear Faults");
@@ -183,10 +182,18 @@ ss OFF_ON_FSM {
 			pvPut(Chan1_seq_messages); 
 			flt_clr = 0; 
 			pvPut(flt_clr); 						
-		} state PARK_OFF
-	}			
+		} state POWER_ON
+	}	
+    	state POWER_ON {
+    		when(delay(2)){
+    	   		on1_cmd = 1; 
+	   		pvPut(on1_cmd); 
+	   		sprintf(Chan1_seq_messages, "Powering ON");
+	   		pvPut(Chan1_seq_messages); 
+    		} state PARK_OFF
+    	}		
 	state PARK_OFF {
-		when (delay(5)) {
+		when (delay(8)) {
 			sprintf(Chan1_seq_messages, "Park OFF");
 			pvPut(Chan1_seq_messages); 
 			Park = 0; 
@@ -213,7 +220,7 @@ ss OFF_ON_FSM {
 	}
 	state DONE {
 		when (delay(1)) {
-			sprintf(Chan1_seq_messages, "PS Ready");
+			sprintf(Chan1_seq_messages, "PS Ready!");
 			pvPut(Chan1_seq_messages); 	
 			ps_on_off_sts = 1;	
 			pvPut(ps_on_off_sts); 				
@@ -231,7 +238,7 @@ ss OFF_ON_FSM {
 		when(ps_on_off==0) {
         	   	ps_on_off_sts = 1;
         	   	pvPut(ps_on_off_sts); 
-			sprintf(Chan1_seq_messages, " PS Ready");
+			sprintf(Chan1_seq_messages, " PS Ready!");
         	   	pvPut(Chan1_seq_messages);
 		} state READY
 	}
