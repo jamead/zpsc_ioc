@@ -250,13 +250,13 @@ ss OFF_ON_FSM {
 	}
 	state SET_DAC_TO_ZERO_OFF {
 		when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.05)) {
-			sprintf(Chan1_seq_messages, "Please Wait");
+			sprintf(Chan1_seq_messages, "Turning OFF");
 			pvPut(Chan1_seq_messages);  						
 		} state POWER_OFF
 	}
 	state POWER_OFF {
 		when (delay(5)) {
-			sprintf(Chan1_seq_messages, "Please Wait");
+			sprintf(Chan1_seq_messages, "Turning OFF");
 			pvPut(Chan1_seq_messages); 
 			on1_cmd = 0; 
 			pvPut(on1_cmd); 	

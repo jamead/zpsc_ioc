@@ -780,5 +780,13 @@ record(mbbo,"$(P){$(NO)}Chan$(CHAN):PSOnOff-STS")
 }
 
 
+#record(calcout, "$(P){$(NO)}Chan$(CHAN):DigOut_Spare-test")
+#{
+#        field(DESC, "On1 Status drives SPARE")    
+#        field(INPA, "$(P){$(NO)}Chan$(CHAN):DigIn-I.B0")
+#        field(CALC, "A")          
+#  	field(SCAN, "Passive")
+#        field(OUT,  "$(P){$(NO)}$(CHAN):DigOut_Spare-test PP")  
+#} 
 
 
