@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-09-16 14:50:11 by mead-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1700</width>
@@ -144,12 +143,12 @@ $(actions)</tooltip>
   <widget type="group" version="3.0.0">
     <name>Common Settings and Status</name>
     <x>11</x>
-    <y>38</y>
+    <y>37</y>
     <width>792</width>
     <height>94</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="255" green="255" blue="255">
+      <color name="Background" red="240" green="240" blue="240">
       </color>
     </foreground_color>
     <line_color>
@@ -171,6 +170,10 @@ $(actions)</tooltip>
       <width>50</width>
       <height>21</height>
       <off_label></off_label>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_label></on_label>
     </widget>
     <widget type="bool_button" version="2.0.0">
@@ -181,6 +184,10 @@ $(actions)</tooltip>
       <width>50</width>
       <height>21</height>
       <off_label></off_label>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_label></on_label>
     </widget>
     <widget type="bool_button" version="2.0.0">
@@ -191,6 +198,10 @@ $(actions)</tooltip>
       <width>50</width>
       <height>21</height>
       <off_label></off_label>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_label></on_label>
     </widget>
     <widget type="bool_button" version="2.0.0">
@@ -201,6 +212,10 @@ $(actions)</tooltip>
       <width>50</width>
       <height>21</height>
       <off_label></off_label>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_label></on_label>
     </widget>
     <widget type="led" version="2.0.0">
@@ -211,9 +226,13 @@ $(actions)</tooltip>
       <width>50</width>
       <height>21</height>
       <off_color>
-        <color red="0" green="95" blue="0">
+        <color name="Green" red="0" green="255" blue="0">
         </color>
       </off_color>
+      <on_color>
+        <color name="Text" red="0" green="0" blue="0">
+        </color>
+      </on_color>
       <foreground_color>
         <color red="192" green="192" blue="192">
         </color>
@@ -234,11 +253,11 @@ $(actions)</tooltip>
       <width>50</width>
       <height>21</height>
       <off_color>
-        <color name="OK" red="0" green="255" blue="0">
+        <color name="Black" red="0" green="0" blue="0">
         </color>
       </off_color>
       <on_color>
-        <color name="Off" red="60" green="100" blue="60">
+        <color name="ON" red="0" green="255" blue="0">
         </color>
       </on_color>
       <foreground_color>
@@ -261,11 +280,11 @@ $(actions)</tooltip>
       <width>50</width>
       <height>21</height>
       <off_color>
-        <color red="0" green="95" blue="0">
+        <color name="Black" red="0" green="0" blue="0">
         </color>
       </off_color>
       <on_color>
-        <color name="MAJOR" red="255" green="0" blue="0">
+        <color name="OK" red="0" green="255" blue="0">
         </color>
       </on_color>
       <foreground_color>
@@ -342,10 +361,10 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_240</name>
-      <text>AC On</text>
-      <x>428</x>
+      <text>PS ACon</text>
+      <x>419</x>
       <y>11</y>
-      <width>55</width>
+      <width>78</width>
       <horizontal_alignment>1</horizontal_alignment>
       <vertical_alignment>1</vertical_alignment>
       <actions>
@@ -358,7 +377,7 @@ $(actions)</tooltip>
     <widget type="label" version="2.0.0">
       <name>Label_241</name>
       <text>Ch On</text>
-      <x>509</x>
+      <x>506</x>
       <y>11</y>
       <width>52</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -372,8 +391,8 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_242</name>
-      <text>TDK Fault</text>
-      <x>571</x>
+      <text>PDU ACon</text>
+      <x>567</x>
       <y>11</y>
       <width>82</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -388,12 +407,12 @@ $(actions)</tooltip>
     <widget type="led" version="2.0.0">
       <name>LED_110</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigIn-I.B3</pv_name>
-      <x>660</x>
+      <x>670</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
       <off_color>
-        <color red="0" green="95" blue="0">
+        <color name="Black" red="0" green="0" blue="0">
         </color>
       </off_color>
       <on_color>
@@ -415,7 +434,7 @@ $(actions)</tooltip>
     <widget type="label" version="2.0.0">
       <name>Label_279</name>
       <text>Ext Flt</text>
-      <x>662</x>
+      <x>672</x>
       <y>11</y>
       <width>49</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -435,6 +454,10 @@ $(actions)</tooltip>
       <width>50</width>
       <height>21</height>
       <off_label></off_label>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_label></on_label>
     </widget>
     <widget type="label" version="2.0.0">
@@ -461,7 +484,7 @@ $(actions)</tooltip>
     <height>192</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="255" green="255" blue="255">
+      <color name="Background" red="240" green="240" blue="240">
       </color>
     </foreground_color>
     <line_color>
@@ -1412,7 +1435,7 @@ $(actions)</tooltip>
     <height>844</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="255" green="255" blue="255">
+      <color name="Background" red="240" green="240" blue="240">
       </color>
     </foreground_color>
     <line_color>
@@ -1451,7 +1474,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1469,7 +1492,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1525,7 +1548,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1543,7 +1566,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1599,7 +1622,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1617,7 +1640,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1673,7 +1696,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1691,7 +1714,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1747,7 +1770,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1765,7 +1788,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1821,7 +1844,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1839,7 +1862,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1936,7 +1959,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1954,7 +1977,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -2010,7 +2033,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -2028,7 +2051,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -2068,7 +2091,7 @@ $(actions)</tooltip>
     <height>456</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="255" green="255" blue="255">
+      <color name="Background" red="240" green="240" blue="240">
       </color>
     </foreground_color>
     <line_color>
@@ -2087,6 +2110,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.BC</pv_name>
       <x>114</x>
       <y>96</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2097,6 +2124,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.B1</pv_name>
       <x>114</x>
       <y>317</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2107,6 +2138,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.B0</pv_name>
       <x>114</x>
       <y>337</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2117,6 +2152,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.B2</pv_name>
       <x>114</x>
       <y>297</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2127,6 +2166,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.B4</pv_name>
       <x>114</x>
       <y>257</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2137,6 +2180,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.B3</pv_name>
       <x>114</x>
       <y>277</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2147,6 +2194,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.B5</pv_name>
       <x>114</x>
       <y>237</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2157,6 +2208,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.B7</pv_name>
       <x>114</x>
       <y>197</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2167,6 +2222,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.B6</pv_name>
       <x>114</x>
       <y>217</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2290,6 +2349,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.B8</pv_name>
       <x>114</x>
       <y>177</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2300,6 +2363,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.BA</pv_name>
       <x>114</x>
       <y>137</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2310,6 +2377,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.B9</pv_name>
       <x>114</x>
       <y>157</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2320,6 +2391,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLat-I.BB</pv_name>
       <x>114</x>
       <y>117</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2330,6 +2405,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.B8</pv_name>
       <x>70</x>
       <y>177</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2340,6 +2419,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.BA</pv_name>
       <x>70</x>
       <y>137</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2350,6 +2433,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.B9</pv_name>
       <x>70</x>
       <y>157</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2360,6 +2447,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.BB</pv_name>
       <x>70</x>
       <y>117</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2440,6 +2531,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.BC</pv_name>
       <x>70</x>
       <y>96</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2487,6 +2582,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.B1</pv_name>
       <x>70</x>
       <y>317</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2497,6 +2596,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.B0</pv_name>
       <x>70</x>
       <y>337</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2507,6 +2610,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.B2</pv_name>
       <x>70</x>
       <y>297</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2525,6 +2632,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.B4</pv_name>
       <x>70</x>
       <y>257</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2535,6 +2646,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.B3</pv_name>
       <x>70</x>
       <y>277</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2545,6 +2660,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.B5</pv_name>
       <x>70</x>
       <y>237</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2555,6 +2674,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.B7</pv_name>
       <x>70</x>
       <y>197</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2565,6 +2688,10 @@ $(actions)</tooltip>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I.B6</pv_name>
       <x>70</x>
       <y>217</y>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_color>
         <color name="STOP" red="255" green="0" blue="0">
         </color>
@@ -2585,6 +2712,10 @@ $(actions)</tooltip>
       <width>60</width>
       <height>36</height>
       <off_label></off_label>
+      <off_color>
+        <color name="Black" red="0" green="0" blue="0">
+        </color>
+      </off_color>
       <on_label></on_label>
     </widget>
     <widget type="label" version="2.0.0">
@@ -2647,7 +2778,7 @@ $(actions)</tooltip>
     <height>216</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="255" green="255" blue="255">
+      <color name="Background" red="240" green="240" blue="240">
       </color>
     </foreground_color>
     <line_color>
@@ -3048,7 +3179,7 @@ $(actions)</tooltip>
     <height>216</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="255" green="255" blue="255">
+      <color name="Background" red="240" green="240" blue="240">
       </color>
     </foreground_color>
     <line_color>
@@ -3066,6 +3197,7 @@ $(actions)</tooltip>
       <name>Action Button_26</name>
       <actions>
         <action type="open_display">
+          <description>Open Display</description>
           <file>Psc1_ramptable.opi</file>
           <macros>
             <PriSys>lab</PriSys>
@@ -3073,7 +3205,6 @@ $(actions)</tooltip>
             <CHAN>$(CHAN)</CHAN>
           </macros>
           <target>window</target>
-          <description>Open Display</description>
         </action>
       </actions>
       <text>Ramp Table Settings</text>
@@ -3082,7 +3213,7 @@ $(actions)</tooltip>
       <width>107</width>
       <height>52</height>
       <font>
-        <font name="Header1" family="Sans" style="BOLD" size="9.900990099009901">
+        <font name="Header1" family="Sans" style="BOLD" size="10.0">
         </font>
       </font>
       <tooltip>$(actions)</tooltip>
@@ -3092,6 +3223,7 @@ $(actions)</tooltip>
       <name>Action Button_27</name>
       <actions>
         <action type="open_display">
+          <description>Open Display</description>
           <file>Psc1_qspi.opi</file>
           <macros>
             <PriSys>lab</PriSys>
@@ -3099,7 +3231,6 @@ $(actions)</tooltip>
             <CHAN>$(CHAN)</CHAN>
           </macros>
           <target>window</target>
-          <description>Open Display</description>
         </action>
       </actions>
       <text>NonVolatile Settings</text>
@@ -3108,7 +3239,7 @@ $(actions)</tooltip>
       <width>107</width>
       <height>43</height>
       <font>
-        <font name="Header1" family="Sans" style="BOLD" size="9.900990099009901">
+        <font name="Header1" family="Sans" style="BOLD" size="10.0">
         </font>
       </font>
       <tooltip>$(actions)</tooltip>
@@ -3123,7 +3254,7 @@ $(actions)</tooltip>
     <height>78</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="255" green="255" blue="255">
+      <color name="Background" red="240" green="240" blue="240">
       </color>
     </foreground_color>
     <line_color>
@@ -3337,7 +3468,7 @@ $(actions)</tooltip>
     <widget type="label" version="2.0.0">
       <name>Label_130</name>
       <text>PS Mode</text>
-      <x>175</x>
+      <x>168</x>
       <y>2</y>
       <width>73</width>
       <vertical_alignment>1</vertical_alignment>
@@ -3351,9 +3482,9 @@ $(actions)</tooltip>
     <widget type="combo" version="2.0.0">
       <name>Combo Box</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DAC_OpMode-SP</pv_name>
-      <x>164</x>
+      <x>144</x>
       <y>25</y>
-      <width>85</width>
+      <width>105</width>
       <height>20</height>
     </widget>
   </widget>
@@ -3365,7 +3496,7 @@ $(actions)</tooltip>
     <height>235</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="255" green="255" blue="255">
+      <color name="Background" red="240" green="240" blue="240">
       </color>
     </foreground_color>
     <line_color>
@@ -3520,6 +3651,7 @@ $(actions)</tooltip>
       <name>Action Button_28</name>
       <actions>
         <action type="open_display">
+          <description>Open Display</description>
           <file>Psc1_snapshots.opi</file>
           <macros>
             <PriSys>lab</PriSys>
@@ -3527,7 +3659,6 @@ $(actions)</tooltip>
             <CHAN>$(CHAN)</CHAN>
           </macros>
           <target>window</target>
-          <description>Open Display</description>
         </action>
       </actions>
       <text>SnapShot Plots</text>
@@ -3536,7 +3667,7 @@ $(actions)</tooltip>
       <width>81</width>
       <height>40</height>
       <font>
-        <font name="Header1" family="Sans" style="BOLD" size="9.900990099009901">
+        <font name="Header1" family="Sans" style="BOLD" size="10.0">
         </font>
       </font>
       <tooltip>$(actions)</tooltip>
