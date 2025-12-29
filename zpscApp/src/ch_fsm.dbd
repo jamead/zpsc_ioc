@@ -1,4 +1,4 @@
 include "boRecord.dbd"
 include "stringoutRecord.dbd"
 
-registrar(ch2_fsmRegistrar)
+registrar(ch_fsmRegistrar)

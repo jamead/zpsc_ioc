@@ -232,7 +232,12 @@ cd "${TOP}/iocBoot/${IOC}"
 iocInit
 
 ## Start any sequence programs
-#seq sncxxx,"user=mead"
+seq ch_fsm,"M0=lab{2},M1=Chan1"
+seq ch_fsm,"M0=lab{2},M1=Chan2"
+seq ch_fsm,"M0=lab{2},M1=Chan3"
+seq ch_fsm,"M0=lab{2},M1=Chan4"
+
+
 
 epicsThreadSleep(1.0)
 
@@ -299,7 +304,7 @@ dbpf lab{1}Chan4:DAC_OpMode-SP 0
 #dbpf lab{1}Chan1:Error-Offset-SP 0.0
 #dbpf lab{1}Chan1:Error-Gain-SP 1.0
 
-seq ch1_fsm
-seq ch2_fsm
-seq ch3_fsm
-seq ch4_fsm
+#seq ch1_fsm
+#seq ch2_fsm
+#seq ch3_fsm
+#seq ch4_fsm

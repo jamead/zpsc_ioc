@@ -1,4 +1,0 @@
-include "boRecord.dbd"
-include "stringoutRecord.dbd"
-
-registrar(ch1_fsmRegistrar)

@@ -2,7 +2,7 @@
 
 #define PRINTF seqLog
 
-program ch3_fsm ("M0=lab{2}, M1=Chan3")
+program ch_fsm ("M0=lab{2}, M1=Chan1")
 
 
 /* ============================================================
@@ -98,14 +98,14 @@ ss OFF_ON_FSM {
           ch3_en_cmd = 0; 
           pvPut(ch3_en_cmd); 
           ch4_en_cmd = 0; 
-          pvPut(ch4_en_cmd);  
+          pvPut(ch4_en_cmd); 
     	  printf("Initializing OFF_ON_FSM...\n");
           sprintf(Chan_seq_messages, "WAIT...1");
           pvPut(Chan_seq_messages);
     	} state INIT_2
     }
     state INIT_2 {
-    	when(delay(2)) {
+    	when(delay(3)) {
           ch1_en_cmd = 1; 
           pvPut(ch1_en_cmd);  
           ch2_en_cmd = 1; 
@@ -113,7 +113,7 @@ ss OFF_ON_FSM {
           ch3_en_cmd = 1; 
           pvPut(ch3_en_cmd); 
           ch4_en_cmd = 1; 
-          pvPut(ch4_en_cmd);  
+          pvPut(ch4_en_cmd); 
           flt_mask = 0; 
     	  pvPut(flt_mask); 
     	  printf("Initializing OFF_ON_FSM...\n");
@@ -242,15 +242,19 @@ ss OFF_ON_FSM {
 		when (ps_on_off==0) {
 			ps_on_off_sts = 1; 
 			pvPut(ps_on_off_sts); 
+			//on1_cmd = 0; 
+			//pvPut(on1_cmd); 
 			sprintf(Chan_seq_messages, "Faulted..Try Again");
         		pvPut(Chan_seq_messages);
         	    } state RETRY_ON
         	when (ps_on_off==1) {
         		ps_on_off_sts = 0; 
 			pvPut(ps_on_off_sts);
+			//on1_cmd = 1; 
+			//pvPut(on1_cmd); 
         		sprintf(Chan_seq_messages, "Faulted..Try Again");
         		pvPut(Chan_seq_messages);
-        	    } state INIT_1
+        	    } state INIT_1 
 	}
 	state DONE {
 		when (delay(1)) {
