@@ -89,15 +89,17 @@ ss OFF_ON_FSM {
     	  pvPut(DAC); 
           ps_on_off_sts = 0;
           pvPut(ps_on_off_sts);
+          Park = 1;
+          pvPut(Park);
     	  on1_cmd = 0; 
 	  pvPut(on1_cmd);  
-          ch1_en_cmd = 0; 
+          ch1_en_cmd = 1; 
           pvPut(ch1_en_cmd);  
-          ch2_en_cmd = 0; 
+          ch2_en_cmd = 1; 
           pvPut(ch2_en_cmd);  
-          ch3_en_cmd = 0; 
+          ch3_en_cmd = 1; 
           pvPut(ch3_en_cmd); 
-          ch4_en_cmd = 0; 
+          ch4_en_cmd = 1; 
           pvPut(ch4_en_cmd); 
     	  printf("Initializing OFF_ON_FSM...\n");
           sprintf(Chan_seq_messages, "WAIT...1");
@@ -190,7 +192,7 @@ ss OFF_ON_FSM {
     }
     state SET_DAC_TO_ZERO_ON {
 		when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.01)) {
-	        sprintf(Chan_seq_messages, "Zero-ing DAC");
+	        sprintf(Chan_seq_messages, "Zeroing DAC");
 	        pvPut(Chan_seq_messages);  
 	        DAC =0.000; 
             pvPut(DAC); 						
@@ -201,7 +203,15 @@ ss OFF_ON_FSM {
 			sprintf(Chan_seq_messages, "Clear Faults");
 			pvPut(Chan_seq_messages); 
 			flt_clr = 1; 
-			pvPut(flt_clr); 						
+			pvPut(flt_clr); 
+			ch1_en_cmd = 1; 
+          		pvPut(ch1_en_cmd);  
+          		ch2_en_cmd = 1; 
+          		pvPut(ch2_en_cmd);  
+          		ch3_en_cmd = 1; 
+          		pvPut(ch3_en_cmd); 
+          		ch4_en_cmd = 1; 
+          		pvPut(ch4_en_cmd); 						
 		} state WAIT_TO_CLEAR
 	}
 	state WAIT_TO_CLEAR {
@@ -229,9 +239,7 @@ ss OFF_ON_FSM {
 		} state DONE_CHECK
 	}
 	state DONE_CHECK{
-		when (ps_on_sts == 0) {
-			//sprintf(Chan_seq_messages, "CHECKING");
-			//pvPut(Chan_seq_messages); 	
+		when (ps_on_sts == 0) {	
 			ps_on_off_sts = 0;	
 			pvPut(ps_on_off_sts); 				
 		} state RETRY_ON
@@ -250,8 +258,8 @@ ss OFF_ON_FSM {
         	when (ps_on_off==1) {
         		ps_on_off_sts = 0; 
 			pvPut(ps_on_off_sts);
-			//on1_cmd = 1; 
-			//pvPut(on1_cmd); 
+			on1_cmd = 0; 
+			pvPut(on1_cmd); 
         		sprintf(Chan_seq_messages, "Faulted..Try Again");
         		pvPut(Chan_seq_messages);
         	    } state INIT_1 
