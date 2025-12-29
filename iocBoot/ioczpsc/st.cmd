@@ -300,3 +300,6 @@ dbpf lab{1}Chan4:DAC_OpMode-SP 0
 #dbpf lab{1}Chan1:Error-Gain-SP 1.0
 
 seq ch1_fsm
+seq ch2_fsm
+seq ch3_fsm
+seq ch4_fsm

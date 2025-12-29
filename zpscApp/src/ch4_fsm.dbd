@@ -1,0 +1,4 @@
+include "boRecord.dbd"
+include "stringoutRecord.dbd"
+
+registrar(ch4_fsmRegistrar)

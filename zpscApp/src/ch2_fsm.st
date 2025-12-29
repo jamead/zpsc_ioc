@@ -2,7 +2,7 @@
 
 #define PRINTF seqLog
 
-program ch1_fsm ("M0=lab{2}, M1=Chan1")
+program ch2_fsm ("M0=lab{2}, M1=Chan2")
 
 
 /* ============================================================
@@ -90,7 +90,7 @@ ss OFF_ON_FSM {
           ps_on_off_sts = 0;
           pvPut(ps_on_off_sts);
     	  on1_cmd = 0; 
-	  pvPut(on1_cmd);  
+	  pvPut(on1_cmd);           
           ch1_en_cmd = 0; 
           pvPut(ch1_en_cmd);  
           ch2_en_cmd = 0; 
@@ -98,15 +98,15 @@ ss OFF_ON_FSM {
           ch3_en_cmd = 0; 
           pvPut(ch3_en_cmd); 
           ch4_en_cmd = 0; 
-          pvPut(ch4_en_cmd); 
+          pvPut(ch4_en_cmd);  
     	  printf("Initializing OFF_ON_FSM...\n");
           sprintf(Chan_seq_messages, "WAIT...1");
           pvPut(Chan_seq_messages);
     	} state INIT_2
     }
     state INIT_2 {
-    	when(delay(3)) {
-          ch1_en_cmd = 1; 
+    	when(delay(2)) {
+    	  ch1_en_cmd = 1; 
           pvPut(ch1_en_cmd);  
           ch2_en_cmd = 1; 
           pvPut(ch2_en_cmd);  
@@ -189,12 +189,12 @@ ss OFF_ON_FSM {
         } state BIPOLAR_IDLE
     }
     state SET_DAC_TO_ZERO_ON {
-		when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.01)) {
+	when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.01)) {
 	        sprintf(Chan_seq_messages, "Zero-ing DAC");
 	        pvPut(Chan_seq_messages);  
 	        DAC =0.000; 
-            pvPut(DAC); 						
-		} state CLEAR_FAULTS
+                pvPut(DAC); 						
+	} state CLEAR_FAULTS
     }    
  	state CLEAR_FAULTS {
 		when (delay(2)) {
@@ -242,19 +242,15 @@ ss OFF_ON_FSM {
 		when (ps_on_off==0) {
 			ps_on_off_sts = 1; 
 			pvPut(ps_on_off_sts); 
-			//on1_cmd = 0; 
-			//pvPut(on1_cmd); 
 			sprintf(Chan_seq_messages, "Faulted..Try Again");
         		pvPut(Chan_seq_messages);
         	    } state RETRY_ON
         	when (ps_on_off==1) {
         		ps_on_off_sts = 0; 
 			pvPut(ps_on_off_sts);
-			//on1_cmd = 1; 
-			//pvPut(on1_cmd); 
         		sprintf(Chan_seq_messages, "Faulted..Try Again");
         		pvPut(Chan_seq_messages);
-        	    } state INIT_1 
+        	    } state INIT_1
 	}
 	state DONE {
 		when (delay(1)) {
