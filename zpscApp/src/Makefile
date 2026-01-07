@@ -21,6 +21,9 @@ DBD += zpsc.dbd
 # zpsc.dbd will be made up from these files:
 zpsc_DBD += base.dbd
 
+zpsc_DBD += ch_fsm.dbd
+
+
 # Include dbd files from all support applications:
 zpsc_DBD += pscCore.dbd
 zpsc_DBD += scaleWaveform.dbd
@@ -51,9 +54,12 @@ zpsc_SRCS_vxWorks += -nil-
 
 # Add support from base/src/vxWorks if needed
 #zpsc_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
+zpsc_SRCS += ch_fsm.st
+
 
 # Finally link to the EPICS Base libraries
 zpsc_LIBS += $(EPICS_BASE_IOC_LIBS)
+zpsc_LIBS += seq pv
 
 #===========================
 

@@ -719,8 +719,74 @@ record(waveform, "$(P){$(NO)}Chan$(CHAN):RampTable-Wfm") {
     field(FLNK, "$(P){$(NO)}send")
 }
 
+#-------------------------------------------
+#------------FSM Readbacks------------------
+#-------------------------------------------
+
+record(stringout, "Chan$(CHAN)_seq_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "Chan$(CHAN)_seq_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "Chan$(CHAN)_seq_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "Chan$(CHAN)_seq_messages") {
+    field(DESC, "Message box from seq")
+}
 
 
+#-----------------------------------------------
+#------------FSM ON/OFF Button------------------
+#-----------------------------------------------
 
+record(bo, "$(P){$(NO)}Chan$(CHAN):PSOnOff-SP") {
+    field(ZNAM, "LOW")
+    field(ONAM, "HIGH")  
+    field(HIGH,".01")    #500 ms after low
+}
+
+record(bo, "$(P){$(NO)}Chan$(CHAN):PSOnOff-SP") {
+    field(ZNAM, "LOW")
+    field(ONAM, "HIGH")  
+    field(HIGH,".01")    #500 ms after low
+}
+
+record(bo, "$(P){$(NO)}Chan$(CHAN):PSOnOff-SP") {
+    field(ZNAM, "LOW")
+    field(ONAM, "HIGH")  
+    field(HIGH,".01")    #500 ms after low
+}
+
+record(bo, "$(P){$(NO)}Chan$(CHAN):PsOnOff-SP") {
+    field(ZNAM, "LOW")
+    field(ONAM, "HIGH")  
+    field(HIGH,".01")    #500 ms after low
+}
+
+#-----------------------------------------------
+#----------------FSM Status---------------------
+#-----------------------------------------------
+
+record(mbbo,"$(P){$(NO)}Chan$(CHAN):PSOnOff-STS")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Please wait...") 
+	field(DESC, "PS Operation Mode Change")
+}
+
+
+#record(calcout, "$(P){$(NO)}Chan$(CHAN):DigOut_Spare-test")
+#{
+#        field(DESC, "On1 Status drives SPARE")    
+#        field(INPA, "$(P){$(NO)}Chan$(CHAN):DigIn-I.B0")
+#        field(CALC, "A")          
+#  	field(SCAN, "Passive")
+#        field(OUT,  "$(P){$(NO)}$(CHAN):DigOut_Spare-test PP")  
+#} 
 
 

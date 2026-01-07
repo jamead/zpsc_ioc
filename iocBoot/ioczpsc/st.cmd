@@ -22,6 +22,8 @@ cd "${TOP}"
 
 ## Register all support components
 dbLoadDatabase "dbd/zpsc.dbd"
+dbLoadDatabase("dbd/seq.dbd")
+
 zpsc_registerRecordDeviceDriver pdbbase
 
 ## Load record instances for PSC1
@@ -230,7 +232,12 @@ cd "${TOP}/iocBoot/${IOC}"
 iocInit
 
 ## Start any sequence programs
-#seq sncxxx,"user=mead"
+seq ch_fsm,"M0=lab{2},M1=Chan1"
+seq ch_fsm,"M0=lab{2},M1=Chan2"
+seq ch_fsm,"M0=lab{2},M1=Chan3"
+seq ch_fsm,"M0=lab{2},M1=Chan4"
+
+
 
 epicsThreadSleep(1.0)
 
