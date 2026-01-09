@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2026-01-09 16:27:03 by pstester-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1700</width>
@@ -11,31 +12,6 @@
   </actions>
   <grid_step_x>6</grid_step_x>
   <grid_step_y>6</grid_step_y>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Update_150</name>
-    <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I</pv_name>
-    <x>595</x>
-    <y>38</y>
-    <width>53</width>
-    <font>
-      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </background_color>
-    <format>4</format>
-    <precision>0</precision>
-    <show_units>false</show_units>
-    <horizontal_alignment>1</horizontal_alignment>
-    <actions>
-    </actions>
-    <border_color>
-      <color red="0" green="128" blue="255">
-      </color>
-    </border_color>
-  </widget>
   <widget type="label" version="2.0.0">
     <name>Text Input_1</name>
     <macros>
@@ -145,10 +121,10 @@ $(actions)</tooltip>
     <x>11</x>
     <y>37</y>
     <width>792</width>
-    <height>94</height>
+    <height>103</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="240" green="240" blue="240">
+      <color name="Background" red="255" green="255" blue="255">
       </color>
     </foreground_color>
     <line_color>
@@ -163,23 +139,9 @@ $(actions)</tooltip>
     <actions>
     </actions>
     <widget type="bool_button" version="2.0.0">
-      <name>Boolean Button_17</name>
-      <pv_name>$(PriSys){$(PSC)}$(CHAN):DigOut_ON1-SP</pv_name>
-      <x>35</x>
-      <y>37</y>
-      <width>50</width>
-      <height>21</height>
-      <off_label></off_label>
-      <off_color>
-        <color name="Black" red="0" green="0" blue="0">
-        </color>
-      </off_color>
-      <on_label></on_label>
-    </widget>
-    <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_18</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigOut_ON2-SP</pv_name>
-      <x>110</x>
+      <x>177</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -193,7 +155,7 @@ $(actions)</tooltip>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_19</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigOut_Reset-SP</pv_name>
-      <x>185</x>
+      <x>247</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -207,7 +169,7 @@ $(actions)</tooltip>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_20</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigOut_Park-SP</pv_name>
-      <x>334</x>
+      <x>363</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -300,24 +262,9 @@ $(actions)</tooltip>
       </actions>
     </widget>
     <widget type="label" version="2.0.0">
-      <name>Label_236</name>
-      <text>TDK On</text>
-      <x>35</x>
-      <y>11</y>
-      <width>62</width>
-      <horizontal_alignment>1</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
       <name>Label_237</name>
       <text>PDU On</text>
-      <x>104</x>
+      <x>171</x>
       <y>11</y>
       <width>72</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -332,7 +279,7 @@ $(actions)</tooltip>
     <widget type="label" version="2.0.0">
       <name>Label_238</name>
       <text>TDK Rst</text>
-      <x>179</x>
+      <x>241</x>
       <y>11</y>
       <width>63</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -347,7 +294,7 @@ $(actions)</tooltip>
     <widget type="label" version="2.0.0">
       <name>Label_239</name>
       <text>Park</text>
-      <x>332</x>
+      <x>361</x>
       <y>11</y>
       <width>50</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -449,7 +396,7 @@ $(actions)</tooltip>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_25</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):DigOut_Spare-SP</pv_name>
-      <x>260</x>
+      <x>307</x>
       <y>37</y>
       <width>50</width>
       <height>21</height>
@@ -463,7 +410,7 @@ $(actions)</tooltip>
     <widget type="label" version="2.0.0">
       <name>Label_281</name>
       <text>Ext</text>
-      <x>264</x>
+      <x>311</x>
       <y>11</y>
       <width>41</width>
       <horizontal_alignment>1</horizontal_alignment>
@@ -484,7 +431,7 @@ $(actions)</tooltip>
     <height>192</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="240" green="240" blue="240">
+      <color name="Background" red="255" green="255" blue="255">
       </color>
     </foreground_color>
     <line_color>
@@ -1435,7 +1382,7 @@ $(actions)</tooltip>
     <height>844</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="240" green="240" blue="240">
+      <color name="Background" red="255" green="255" blue="255">
       </color>
     </foreground_color>
     <line_color>
@@ -1474,7 +1421,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1492,7 +1439,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1548,7 +1495,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1566,7 +1513,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1622,7 +1569,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1640,7 +1587,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1696,7 +1643,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1714,7 +1661,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1770,7 +1717,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1788,7 +1735,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1844,7 +1791,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1862,7 +1809,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -1959,7 +1906,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -1977,7 +1924,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -2033,7 +1980,7 @@ $(actions)</tooltip>
           </font>
         </title_font>
         <scale_font>
-          <font name="Default" family="Sans" style="REGULAR" size="14.0">
+          <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
           </font>
         </scale_font>
         <visible>true</visible>
@@ -2051,7 +1998,7 @@ $(actions)</tooltip>
             </font>
           </title_font>
           <scale_font>
-            <font name="Default" family="Sans" style="REGULAR" size="14.0">
+            <font name="Default" family="Liberation Sans" style="REGULAR" size="14.0">
             </font>
           </scale_font>
           <on_right>false</on_right>
@@ -2091,7 +2038,7 @@ $(actions)</tooltip>
     <height>456</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="240" green="240" blue="240">
+      <color name="Background" red="255" green="255" blue="255">
       </color>
     </foreground_color>
     <line_color>
@@ -2778,7 +2725,7 @@ $(actions)</tooltip>
     <height>216</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="240" green="240" blue="240">
+      <color name="Background" red="255" green="255" blue="255">
       </color>
     </foreground_color>
     <line_color>
@@ -3179,7 +3126,7 @@ $(actions)</tooltip>
     <height>216</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="240" green="240" blue="240">
+      <color name="Background" red="255" green="255" blue="255">
       </color>
     </foreground_color>
     <line_color>
@@ -3197,7 +3144,6 @@ $(actions)</tooltip>
       <name>Action Button_26</name>
       <actions>
         <action type="open_display">
-          <description>Open Display</description>
           <file>Psc1_ramptable.opi</file>
           <macros>
             <PriSys>lab</PriSys>
@@ -3205,6 +3151,7 @@ $(actions)</tooltip>
             <CHAN>$(CHAN)</CHAN>
           </macros>
           <target>window</target>
+          <description>Open Display</description>
         </action>
       </actions>
       <text>Ramp Table Settings</text>
@@ -3223,7 +3170,6 @@ $(actions)</tooltip>
       <name>Action Button_27</name>
       <actions>
         <action type="open_display">
-          <description>Open Display</description>
           <file>Psc1_qspi.opi</file>
           <macros>
             <PriSys>lab</PriSys>
@@ -3231,6 +3177,7 @@ $(actions)</tooltip>
             <CHAN>$(CHAN)</CHAN>
           </macros>
           <target>window</target>
+          <description>Open Display</description>
         </action>
       </actions>
       <text>NonVolatile Settings</text>
@@ -3254,7 +3201,7 @@ $(actions)</tooltip>
     <height>78</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="240" green="240" blue="240">
+      <color name="Background" red="255" green="255" blue="255">
       </color>
     </foreground_color>
     <line_color>
@@ -3496,7 +3443,7 @@ $(actions)</tooltip>
     <height>235</height>
     <style>1</style>
     <foreground_color>
-      <color name="Background" red="240" green="240" blue="240">
+      <color name="Background" red="255" green="255" blue="255">
       </color>
     </foreground_color>
     <line_color>
@@ -3651,7 +3598,6 @@ $(actions)</tooltip>
       <name>Action Button_28</name>
       <actions>
         <action type="open_display">
-          <description>Open Display</description>
           <file>Psc1_snapshots.opi</file>
           <macros>
             <PriSys>lab</PriSys>
@@ -3659,6 +3605,7 @@ $(actions)</tooltip>
             <CHAN>$(CHAN)</CHAN>
           </macros>
           <target>window</target>
+          <description>Open Display</description>
         </action>
       </actions>
       <text>SnapShot Plots</text>
@@ -3806,6 +3753,85 @@ $(actions)</tooltip>
     <vertical_alignment>1</vertical_alignment>
     <actions>
     </actions>
+    <border_color>
+      <color red="0" green="128" blue="255">
+      </color>
+    </border_color>
+  </widget>
+  <widget type="bool_button" version="2.0.0">
+    <name>Boolean Button_28</name>
+    <pv_name>$(PriSys){$(PSC)}$(CHAN):PSOnOff-SP</pv_name>
+    <x>54</x>
+    <y>67</y>
+    <width>90</width>
+    <height>27</height>
+    <off_label></off_label>
+    <on_label></on_label>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>Text Update_86</name>
+    <pv_name>$(PriSys){$(PSC)}$(CHAN)_seq_messages</pv_name>
+    <x>34</x>
+    <y>94</y>
+    <width>136</width>
+    <font>
+      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </background_color>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <actions>
+    </actions>
+    <border_color>
+      <color red="0" green="128" blue="255">
+      </color>
+    </border_color>
+  </widget>
+  <widget type="textentry" version="3.0.0">
+    <name>Text Update_88</name>
+    <pv_name>$(PriSys){$(PSC)}$(CHAN):PSOnOff-STS</pv_name>
+    <x>34</x>
+    <y>114</y>
+    <width>134</width>
+    <font>
+      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+      </font>
+    </font>
+    <background_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </background_color>
+    <precision>0</precision>
+    <horizontal_alignment>1</horizontal_alignment>
+    <actions>
+    </actions>
+    <rules>
+      <rule name="Rule" prop_id="background_color" out_exp="false">
+        <exp bool_exp="pv0==0">
+          <value>
+            <color name="MAJOR" red="255" green="0" blue="0">
+            </color>
+          </value>
+        </exp>
+        <exp bool_exp="pv0==1">
+          <value>
+            <color name="OK" red="0" green="255" blue="0">
+            </color>
+          </value>
+        </exp>
+        <exp bool_exp="pv0==2">
+          <value>
+            <color name="Attention" red="255" green="160" blue="0">
+            </color>
+          </value>
+        </exp>
+        <pv_name>$(PriSys){$(PSC)}$(CHAN):PSOnOff-STS</pv_name>
+      </rule>
+    </rules>
     <border_color>
       <color red="0" green="128" blue="255">
       </color>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2026-01-09 11:42:05 by pstester-->
+<!--Saved on 2026-01-09 16:26:09 by pstester-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1700</width>
@@ -12,31 +12,6 @@
   </actions>
   <grid_step_x>6</grid_step_x>
   <grid_step_y>6</grid_step_y>
-  <widget type="textentry" version="3.0.0">
-    <name>Text Update_150</name>
-    <pv_name>$(PriSys){$(PSC)}$(CHAN):FaultsLive-I</pv_name>
-    <x>595</x>
-    <y>38</y>
-    <width>53</width>
-    <font>
-      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
-      </font>
-    </font>
-    <background_color>
-      <color red="255" green="255" blue="255">
-      </color>
-    </background_color>
-    <format>4</format>
-    <precision>0</precision>
-    <show_units>false</show_units>
-    <horizontal_alignment>1</horizontal_alignment>
-    <actions>
-    </actions>
-    <border_color>
-      <color red="0" green="128" blue="255">
-      </color>
-    </border_color>
-  </widget>
   <widget type="label" version="2.0.0">
     <name>Text Input_1</name>
     <macros>
@@ -3444,8 +3419,7 @@ $(actions)</tooltip>
   </widget>
   <widget type="group" version="3.0.0">
     <name>Common Settings and Status_1</name>
-    <x>11</x>
-    <y>31</y>
+    <y>37</y>
     <width>792</width>
     <height>101</height>
     <style>1</style>
