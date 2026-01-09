@@ -74,7 +74,9 @@ monitor ch4_en_cmd;
 
 /* stringout to display status or progress. */
 string Chan_seq_messages;  
-assign Chan_seq_messages to "{M1}_seq_messages";
+assign Chan_seq_messages to "{M0}{M1}_seq_messages";
+
+int from_faulted_state; 
 
     /*******************************/
    /*    Initialization Phase     */
@@ -184,21 +186,46 @@ ss OFF_ON_FSM {
        	    	pvPut(Chan_seq_messages);
        	    } state SET_DAC_TO_ZERO_ON
        	when(ps_on_off == 0) {
+       	     if(from_faulted_state == 0) {
 		ps_on_off_sts = 1;
         	pvPut(ps_on_off_sts); 
+             } else {
+                ps_on_off_sts = 2;
+        	pvPut(ps_on_off_sts); 
+             }
 	        sprintf(Chan_seq_messages, "PS OFF");
        	    pvPut(Chan_seq_messages);
-        } state BIPOLAR_IDLE
+        } state CHECK_IF_SYSTEM_WAS_FAULTED
     }
+        
+    state CHECK_IF_SYSTEM_WAS_FAULTED {
+    	when(from_faulted_state == 0){
+    		ps_on_off_sts = 1;
+        	pvPut(ps_on_off_sts); 
+    	    } state BIPOLAR_IDLE
+    	when(from_faulted_state == 1) { //System has previously faulted and we are retrying
+    		from_faulted_state = 0; 
+		Park = 1; 
+		pvPut(Park); 
+		DAC = 0.0; 
+		pvPut(DAC); 
+		ps_on_off_sts = 0;
+            	pvPut(ps_on_off_sts); 
+            	sprintf(Chan_seq_messages, "Zero DAC");
+       	    	pvPut(Chan_seq_messages);    		
+    	} state SET_DAC_TO_ZERO_ON
+    }
+    	
     state SET_DAC_TO_ZERO_ON {
 		when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.01)) {
-	        sprintf(Chan_seq_messages, "Zeroing DAC");
-	        pvPut(Chan_seq_messages);  
-	        DAC =0.000; 
-            pvPut(DAC); 						
+	        	sprintf(Chan_seq_messages, "Zeroing DAC");
+	        	pvPut(Chan_seq_messages);  
+	        	DAC =0.000; 
+            		pvPut(DAC); 						
 		} state CLEAR_FAULTS
     }    
- 	state CLEAR_FAULTS {
+    
+    state CLEAR_FAULTS {
 		when (delay(2)) {
 			sprintf(Chan_seq_messages, "Clear Faults");
 			pvPut(Chan_seq_messages); 
@@ -240,6 +267,7 @@ ss OFF_ON_FSM {
 	}
 	state DONE_CHECK{
 		when (ps_on_sts == 0) {	
+			from_faulted_state = 1; 
 			ps_on_off_sts = 0;	
 			pvPut(ps_on_off_sts); 				
 		} state RETRY_ON
@@ -248,15 +276,13 @@ ss OFF_ON_FSM {
 	}
 	state RETRY_ON {
 		when (ps_on_off==0) {
-			ps_on_off_sts = 1; 
+			ps_on_off_sts = 2; 
 			pvPut(ps_on_off_sts); 
-			//on1_cmd = 0; 
-			//pvPut(on1_cmd); 
 			sprintf(Chan_seq_messages, "Faulted..Try Again");
         		pvPut(Chan_seq_messages);
         	    } state RETRY_ON
         	when (ps_on_off==1) {
-        		ps_on_off_sts = 0; 
+        		ps_on_off_sts = 2; 
 			pvPut(ps_on_off_sts);
 			on1_cmd = 0; 
 			pvPut(on1_cmd); 

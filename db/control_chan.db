@@ -723,19 +723,19 @@ record(waveform, "$(P){$(NO)}Chan$(CHAN):RampTable-Wfm") {
 #------------FSM Readbacks------------------
 #-------------------------------------------
 
-record(stringout, "Chan$(CHAN)_seq_messages") {
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
     field(DESC, "Message box from seq")
 }
 
-record(stringout, "Chan$(CHAN)_seq_messages") {
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
     field(DESC, "Message box from seq")
 }
 
-record(stringout, "Chan$(CHAN)_seq_messages") {
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
     field(DESC, "Message box from seq")
 }
 
-record(stringout, "Chan$(CHAN)_seq_messages") {
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
     field(DESC, "Message box from seq")
 }
 
@@ -776,6 +776,7 @@ record(mbbo,"$(P){$(NO)}Chan$(CHAN):PSOnOff-STS")
 {
 	field(ONST, "DONE")
 	field(ZRST, "Please wait...") 
+	field(TWST, "FAULTED!")
 	field(DESC, "PS Operation Mode Change")
 }
 

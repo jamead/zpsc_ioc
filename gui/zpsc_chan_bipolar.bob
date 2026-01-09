@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2026-01-07 14:43:39 by pstester-->
+<!--Saved on 2026-01-09 11:42:05 by pstester-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1700</width>
@@ -3741,7 +3741,7 @@ $(actions)</tooltip>
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Update_86</name>
-      <pv_name>$(CHAN)_seq_messages</pv_name>
+      <pv_name>$(PriSys){$(PSC)}$(CHAN)_seq_messages</pv_name>
       <x>13</x>
       <y>35</y>
       <width>136</width>
@@ -3791,6 +3791,12 @@ $(actions)</tooltip>
           <exp bool_exp="pv0==1">
             <value>
               <color name="OK" red="0" green="255" blue="0">
+              </color>
+            </value>
+          </exp>
+          <exp bool_exp="pv0==2">
+            <value>
+              <color name="Attention" red="255" green="160" blue="0">
               </color>
             </value>
           </exp>
