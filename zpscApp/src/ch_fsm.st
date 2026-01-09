@@ -72,6 +72,10 @@ short ch4_en_cmd;
 assign ch4_en_cmd to "{M0}Chan4:DigOut_ON2-SP";
 monitor ch4_en_cmd; 
 
+short sum_fault; 
+assign sum_fault to "{M0}{M1}:FaultsLat-I"; 
+monitor sum_fault; 
+
 /* stringout to display status or progress. */
 string Chan_seq_messages;  
 assign Chan_seq_messages to "{M0}{M1}_seq_messages";
@@ -187,11 +191,11 @@ ss OFF_ON_FSM {
        	    } state SET_DAC_TO_ZERO_ON
        	when(ps_on_off == 0) {
        	     if(from_faulted_state == 0) {
-		ps_on_off_sts = 1;
-        	pvPut(ps_on_off_sts); 
+		//ps_on_off_sts = 1;
+        	//pvPut(ps_on_off_sts); 
              } else {
-                ps_on_off_sts = 2;
-        	pvPut(ps_on_off_sts); 
+                //ps_on_off_sts = 2;
+        	//pvPut(ps_on_off_sts); 
              }
 	        sprintf(Chan_seq_messages, "PS OFF");
        	    pvPut(Chan_seq_messages);
@@ -312,7 +316,17 @@ ss OFF_ON_FSM {
         	   	pvPut(ps_on_off_sts); 
 			sprintf(Chan_seq_messages, " PS Ready!");
         	   	pvPut(Chan_seq_messages);
+		} state CHECK_FAULT
+	}
+	state CHECK_FAULT {
+		when(sum_fault == 0){
 		} state READY
+		when(sum_fault > 0) {
+			from_faulted_state = 1; 
+			ps_on_off_sts = 2; 
+			pvPut(ps_on_off_sts); 
+			sprintf(Chan_seq_messages, "Fault"); 
+		} state RETRY_ON
 	}
 	state SET_DAC_TO_ZERO_OFF {
 		when ((DAC_rdbck < 0.01) && (DAC_rdbck > -0.05)) {
