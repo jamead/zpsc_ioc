@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2026-01-09 16:27:03 by pstester-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1700</width>
@@ -2461,7 +2460,7 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_109</name>
-      <text>Fault 2:  TDK Fault</text>
+      <text>Fault 2:  PDU AC ON Fault</text>
       <x>157</x>
       <y>177</y>
       <width>191</width>
@@ -3144,6 +3143,7 @@ $(actions)</tooltip>
       <name>Action Button_26</name>
       <actions>
         <action type="open_display">
+          <description>Open Display</description>
           <file>Psc1_ramptable.opi</file>
           <macros>
             <PriSys>lab</PriSys>
@@ -3151,7 +3151,6 @@ $(actions)</tooltip>
             <CHAN>$(CHAN)</CHAN>
           </macros>
           <target>window</target>
-          <description>Open Display</description>
         </action>
       </actions>
       <text>Ramp Table Settings</text>
@@ -3170,6 +3169,7 @@ $(actions)</tooltip>
       <name>Action Button_27</name>
       <actions>
         <action type="open_display">
+          <description>Open Display</description>
           <file>Psc1_qspi.opi</file>
           <macros>
             <PriSys>lab</PriSys>
@@ -3177,7 +3177,6 @@ $(actions)</tooltip>
             <CHAN>$(CHAN)</CHAN>
           </macros>
           <target>window</target>
-          <description>Open Display</description>
         </action>
       </actions>
       <text>NonVolatile Settings</text>
@@ -3598,6 +3597,7 @@ $(actions)</tooltip>
       <name>Action Button_28</name>
       <actions>
         <action type="open_display">
+          <description>Open Display</description>
           <file>Psc1_snapshots.opi</file>
           <macros>
             <PriSys>lab</PriSys>
@@ -3605,7 +3605,6 @@ $(actions)</tooltip>
             <CHAN>$(CHAN)</CHAN>
           </macros>
           <target>window</target>
-          <description>Open Display</description>
         </action>
       </actions>
       <text>SnapShot Plots</text>

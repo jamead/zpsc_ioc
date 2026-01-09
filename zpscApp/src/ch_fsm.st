@@ -49,9 +49,13 @@ short ps_on_off_sts;
 assign ps_on_off_sts to "{M0}{M1}:PSOnOff-STS"; 
 monitor ps_on_off_sts; 
 
-short ps_on_sts; 
-assign ps_on_sts to "{M0}{M1}:DigIn-I.B0"; 
-monitor ps_on_sts; 
+short ps_on_sts_bip; 
+assign ps_on_sts_bip to "{M0}{M1}:DigIn-I.B0"; 
+monitor ps_on_sts_bip; 
+
+short ps_on_sts_uni; 
+assign ps_on_sts_uni to "{M0}{M1}:DigIn-I.B1"; 
+monitor ps_on_sts_uni; 
 
 short on1_cmd; 
 assign on1_cmd to "{M0}{M1}:DigOut_ON1-SP"; 
@@ -154,31 +158,13 @@ ss OFF_ON_FSM {
     	  printf("Initializing OFF_ON_FSM...\n");
           sprintf(Chan_seq_messages, "Clear Done");
        	  pvPut(Chan_seq_messages);
-    	} state CHECK_TYPE
-    }
-    state CHECK_TYPE {
-        when(Polarity == 0) {
-            printf("Initializing OFF_ON_FSM...\n");
-            sprintf(Chan_seq_messages, "BIPOLAR");
-       	    pvPut(Chan_seq_messages);
-            Park = 1;
-            pvPut(Park);
-            printf("Set %s to 0\n", pvName(Park));
-        } state BIPOLAR_IDLE
-        when(Polarity == 1) {
-            printf("Initializing OFF_ON_FSM...\n");
-            sprintf(Chan_seq_messages, "UNIPOLAR");
-       	    pvPut(Chan_seq_messages);
-            Park = 1;
-            pvPut(Park);
-            printf("Set %s to 0\n", pvName(Park));
-        } state UNIPOLAR_IDLE
+    	} state IDLE
     }
     
     /*******************************/
    /* Sequencer for Bipolar PSC   */
   /*******************************/
-    state BIPOLAR_IDLE {
+    state IDLE {
         when(ps_on_off == 1) {
 		Park = 1; 
 		pvPut(Park); 
@@ -206,7 +192,7 @@ ss OFF_ON_FSM {
     	when(from_faulted_state == 0){
     		ps_on_off_sts = 1;
         	pvPut(ps_on_off_sts); 
-    	    } state BIPOLAR_IDLE
+    	    } state IDLE
     	when(from_faulted_state == 1) { //System has previously faulted and we are retrying
     		from_faulted_state = 0; 
 		Park = 1; 
@@ -267,24 +253,47 @@ ss OFF_ON_FSM {
 			pvPut(Chan_seq_messages); 
 			Park = 0; 
 			pvPut(Park); 						
-		} state DONE_CHECK
+		} state CHECK_TYPE //DONE_CHECK
 	}
-	state DONE_CHECK{
-		when (ps_on_sts == 0) {	
+        state CHECK_TYPE {
+        	when(Polarity == 0){
+        	} state DONE_CHECK_BIPOLAR
+        	when(Polarity == 1){
+        	} state DONE_CHECK_UNIPOLAR
+        }
+	state DONE_CHECK_BIPOLAR{
+		when (ps_on_sts_bip == 0) {	
+			//printf("ps_on_sts = %d\n",ps_on_sts); 
 			from_faulted_state = 1; 
 			ps_on_off_sts = 0;	
 			pvPut(ps_on_off_sts); 				
 		} state RETRY_ON
-		when (ps_on_sts == 1) {				
+		when (ps_on_sts_bip == 1) {	
+		//printf("ps_on_sts = %d\n",ps_on_sts); 			
+		} state DONE
+	}
+	state DONE_CHECK_UNIPOLAR{
+		when (ps_on_sts_uni == 0) {	
+			//printf("ps_on_sts = %d\n",ps_on_sts); 
+			from_faulted_state = 1; 
+			ps_on_off_sts = 0;	
+			pvPut(ps_on_off_sts); 				
+		} state RETRY_ON
+		when (ps_on_sts_uni == 1) {	
+		//printf("ps_on_sts = %d\n",ps_on_sts); 			
 		} state DONE
 	}
 	state RETRY_ON {
 		when (ps_on_off==0) {
 			ps_on_off_sts = 2; 
 			pvPut(ps_on_off_sts); 
+			on1_cmd = 0; 
+			pvPut(on1_cmd); 
 			sprintf(Chan_seq_messages, "Faulted..Try Again");
         		pvPut(Chan_seq_messages);
-        	    } state RETRY_ON
+        	    } state RETRY_IDLE
+       }
+       state RETRY_IDLE {
         	when (ps_on_off==1) {
         		ps_on_off_sts = 2; 
 			pvPut(ps_on_off_sts);
@@ -350,7 +359,7 @@ ss OFF_ON_FSM {
 			pvPut(Chan_seq_messages); 
 			ps_on_off_sts = 1;
 			pvPut(ps_on_off_sts); 				
-		} state BIPOLAR_IDLE
+		} state IDLE
 	}
   
     /*******************************/
