@@ -313,7 +313,7 @@ ss OFF_ON_FSM {
 	}
 	state READY {
 		when (ps_on_off==1) {
-			sprintf(Chan_seq_messages, "Zero DAC");
+			sprintf(Chan_seq_messages, "Zeroing DAC");
         	   	pvPut(Chan_seq_messages);
         	   	DAC =0.00; 
         	   	pvPut(DAC); 
@@ -349,7 +349,7 @@ ss OFF_ON_FSM {
 			pvPut(Chan_seq_messages); 
 			on1_cmd = 0; 
 			pvPut(on1_cmd); 	
-			Park = 0; 
+			Park = 1; 
 			pvPut(Park); 					
 		} state COMPLETE
 	}
