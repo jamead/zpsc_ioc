@@ -84,6 +84,22 @@ short autozero;
 assign autozero to "{M0}{M1}:AutoZero-SP"; 
 monitor autozero; 
 
+double dcct1_adc; 
+assign dcct1_adc to "{M0}{M1}:DCCT1-I";
+monitor dcct1_adc; 
+
+double dcct1_ofst; 
+assign dcct1_ofst to "{M0}{M1}:DCCT1-Offset-SP"; 
+monitor dcct1_ofst; 
+
+double dcct2_adc; 
+assign dcct2_adc to "{M0}{M1}:DCCT2-I";
+monitor dcct2_adc; 
+
+double dcct2_ofst; 
+assign dcct2_ofst to "{M0}{M1}:DCCT2-Offset-SP"; 
+monitor dcct2_ofst; 
+
 /* stringout to display status or progress. */
 string Chan_seq_messages;  
 assign Chan_seq_messages to "{M0}{M1}_seq_messages";
@@ -175,7 +191,7 @@ ss OFF_ON_FSM {
        when(autozero ==1) {
        		sprintf(atzo_messages, "Zeroing DCCT Offsets");
        	    	pvPut(atzo_messages);
-       } state READBACK_DCCT_ADC_OFFSETS
+       } state READBACK_DCCT1_ADC_OFFSET
         when(ps_on_off == 1) {
 		Park = 1; 
 		pvPut(Park); 
@@ -376,16 +392,56 @@ ss OFF_ON_FSM {
     /*******************************/
    /* Auto-Zero Procedure*/
   /*******************************/
-	state READBACK_DCCT_ADC_OFFSETS{
+	state READBACK_DCCT1_ADC_OFFSET{
 		when(1) {
-            		sprintf(atzo_messages, "IDLE 2CH");
+			pvGet(dcct1_adc);
+			dcct1_ofst = dcct1_adc; 
+        	   	pvPut(dcct1_ofst);
+            		sprintf(atzo_messages, "%f Offset",dcct1_adc);
        	    		pvPut(atzo_messages);
-		} state IDLE
+		} state CHECK_DCCT1
 	}
-  
+	state WAIT1{
+		when(delay(2)) {
+		} state CHECK_DCCT1
+	}
+	state CHECK_DCCT1 {
+		when(dcct1_adc < 0.001){
+		       sprintf(atzo_messages, "DCCT1 GOOD");
+       	    	       pvPut(atzo_messages);
+		} state READBACK_DCCT2_ADC_OFFSET
+		when(dcct1_adc > 0.001){
+		       sprintf(atzo_messages, "DCCT1 RETRY");
+       	    	       pvPut(atzo_messages);
+		} state READBACK_DCCT1_ADC_OFFSET
+	}
+	state READBACK_DCCT2_ADC_OFFSET{
+		when(1) {
+			pvGet(dcct2_adc);
+			dcct2_ofst = dcct2_adc; 
+        	   	pvPut(dcct2_ofst);
+            		sprintf(atzo_messages, "%f Offset",dcct2_adc);
+       	    		pvPut(atzo_messages);
+		} state WAIT2
+	}
+	state WAIT2{
+		when(delay(2)) {
+		} state CHECK_DCCT2
+	}
+	state CHECK_DCCT2 {
+		when(dcct2_adc < 0.001){
+		       sprintf(atzo_messages, "DCCT2 GOOD");
+       	    	       pvPut(atzo_messages);
+		} state IDLE
+		when(dcct1_adc > 0.001){
+		       sprintf(atzo_messages, "DCCT2 RETRY");
+       	    	       pvPut(atzo_messages);
+		} state READBACK_DCCT2_ADC_OFFSET
+	}
     /*******************************/
    /* Sequencer for Unipolar PSC  */
   /*******************************/
+/*
     state UNIPOLAR_IDLE {
         when(delay(1.0)) {
             printf("Set %s to 1\n", pvName(Park));
@@ -393,5 +449,6 @@ ss OFF_ON_FSM {
        	    pvPut(Chan_seq_messages);
         } state UNIPOLAR_IDLE
     }
+*/
 }
 
