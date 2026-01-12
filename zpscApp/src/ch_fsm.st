@@ -129,7 +129,7 @@ ss OFF_ON_FSM {
           flt_mask = 0; 
     	  pvPut(flt_mask); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan_seq_messages, "WAIT....2");
+          sprintf(Chan_seq_messages, "WAIT...2");
           pvPut(Chan_seq_messages);
     	} state INIT_3
     }
@@ -138,7 +138,7 @@ ss OFF_ON_FSM {
           flt_mask = 1; 
     	  pvPut(flt_mask); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan_seq_messages, "WAIT.....3");
+          sprintf(Chan_seq_messages, "WAIT...3");
        	  pvPut(Chan_seq_messages);
     	} state INIT_4
     }
@@ -156,7 +156,7 @@ ss OFF_ON_FSM {
           flt_clr = 0; 
     	  pvPut(flt_clr); 
     	  printf("Initializing OFF_ON_FSM...\n");
-          sprintf(Chan_seq_messages, "Clear Done");
+          //sprintf(Chan_seq_messages, "Clear Done");
        	  pvPut(Chan_seq_messages);
     	} state IDLE
     }
@@ -172,7 +172,7 @@ ss OFF_ON_FSM {
 		pvPut(DAC); 
 		ps_on_off_sts = 0;
             	pvPut(ps_on_off_sts); 
-            	sprintf(Chan_seq_messages, "Zero DAC");
+            	sprintf(Chan_seq_messages, "Zeroing DAC");
        	    	pvPut(Chan_seq_messages);
        	    } state SET_DAC_TO_ZERO_ON
        	when(ps_on_off == 0) {
@@ -184,7 +184,7 @@ ss OFF_ON_FSM {
         	//pvPut(ps_on_off_sts); 
              }
 	        sprintf(Chan_seq_messages, "PS OFF");
-       	    pvPut(Chan_seq_messages);
+       	    	pvPut(Chan_seq_messages);
         } state CHECK_IF_SYSTEM_WAS_FAULTED
     }
         
@@ -201,7 +201,7 @@ ss OFF_ON_FSM {
 		pvPut(DAC); 
 		ps_on_off_sts = 0;
             	pvPut(ps_on_off_sts); 
-            	sprintf(Chan_seq_messages, "Zero DAC");
+            	sprintf(Chan_seq_messages, "Zeroing DAC");
        	    	pvPut(Chan_seq_messages);    		
     	} state SET_DAC_TO_ZERO_ON
     }
@@ -217,7 +217,7 @@ ss OFF_ON_FSM {
     
     state CLEAR_FAULTS {
 		when (delay(2)) {
-			sprintf(Chan_seq_messages, "Clear Faults");
+			sprintf(Chan_seq_messages, "Clearing Faults");
 			pvPut(Chan_seq_messages); 
 			flt_clr = 1; 
 			pvPut(flt_clr); 
@@ -233,7 +233,7 @@ ss OFF_ON_FSM {
 	}
 	state WAIT_TO_CLEAR {
 		when (delay(5)) {
-			sprintf(Chan_seq_messages, "Clearing");
+			sprintf(Chan_seq_messages, "Clearing Faults");
 			pvPut(Chan_seq_messages); 
 			flt_clr = 0; 
 			pvPut(flt_clr); 						
@@ -305,7 +305,7 @@ ss OFF_ON_FSM {
 	}
 	state DONE {
 		when (delay(1)) {
-			sprintf(Chan_seq_messages, "PS Ready!");
+			sprintf(Chan_seq_messages, " PS Ready!");
 			pvPut(Chan_seq_messages); 	
 			ps_on_off_sts = 1;	
 			pvPut(ps_on_off_sts); 				
@@ -334,7 +334,7 @@ ss OFF_ON_FSM {
 			from_faulted_state = 1; 
 			ps_on_off_sts = 2; 
 			pvPut(ps_on_off_sts); 
-			sprintf(Chan_seq_messages, "Fault"); 
+			sprintf(Chan_seq_messages, "Faulted..Try Again"); 
 		} state RETRY_ON
 	}
 	state SET_DAC_TO_ZERO_OFF {
