@@ -719,26 +719,21 @@ record(waveform, "$(P){$(NO)}Chan$(CHAN):RampTable-Wfm") {
     field(FLNK, "$(P){$(NO)}send")
 }
 
-#-------------------------------------------
-#------------FSM Readbacks------------------
-#-------------------------------------------
+#-----------------------------------------------
+#------------FSM Readbacks----------------------
+#-----------------------------------------------
 
 record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
     field(DESC, "Message box from seq")
 }
 
-record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
+#-----------------------------------------------
+#-------------AutoZero Readbacks----------------
+#-----------------------------------------------
+
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_messages") {
     field(DESC, "Message box from seq")
 }
-
-record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
-    field(DESC, "Message box from seq")
-}
-
-record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
-    field(DESC, "Message box from seq")
-}
-
 
 #-----------------------------------------------
 #------------FSM ON/OFF Button------------------
@@ -750,22 +745,12 @@ record(bo, "$(P){$(NO)}Chan$(CHAN):PSOnOff-SP") {
     field(HIGH,".01")    #500 ms after low
 }
 
-record(bo, "$(P){$(NO)}Chan$(CHAN):PSOnOff-SP") {
-    field(ZNAM, "LOW")
-    field(ONAM, "HIGH")  
-    field(HIGH,".01")    #500 ms after low
-}
-
-record(bo, "$(P){$(NO)}Chan$(CHAN):PSOnOff-SP") {
-    field(ZNAM, "LOW")
-    field(ONAM, "HIGH")  
-    field(HIGH,".01")    #500 ms after low
-}
-
-record(bo, "$(P){$(NO)}Chan$(CHAN):PsOnOff-SP") {
-    field(ZNAM, "LOW")
-    field(ONAM, "HIGH")  
-    field(HIGH,".01")    #500 ms after low
+record(mbbo,"$(P){$(NO)}Chan$(CHAN):AutoZero-SP")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Please wait...") 
+	field(TWST, "FAULTED!")
+	field(DESC, "PS Operation Mode Change")
 }
 
 #-----------------------------------------------
@@ -780,14 +765,13 @@ record(mbbo,"$(P){$(NO)}Chan$(CHAN):PSOnOff-STS")
 	field(DESC, "PS Operation Mode Change")
 }
 
+record(mbbo,"$(P){$(NO)}Chan$(CHAN):AutoZero-STS")
+{
+	field(ONST, "DONE")
+	field(ZRST, "Please wait...") 
+	field(DESC, "Autozero")
+}
 
-#record(calcout, "$(P){$(NO)}Chan$(CHAN):DigOut_Spare-test")
-#{
-#        field(DESC, "On1 Status drives SPARE")    
-#        field(INPA, "$(P){$(NO)}Chan$(CHAN):DigIn-I.B0")
-#        field(CALC, "A")          
-#  	field(SCAN, "Passive")
-#        field(OUT,  "$(P){$(NO)}$(CHAN):DigOut_Spare-test PP")  
-#} 
+
 
 

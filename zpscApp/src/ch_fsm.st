@@ -80,9 +80,16 @@ short sum_fault;
 assign sum_fault to "{M0}{M1}:FaultsLat-I"; 
 monitor sum_fault; 
 
+short autozero; 
+assign autozero to "{M0}{M1}:AutoZero-SP"; 
+monitor autozero; 
+
 /* stringout to display status or progress. */
 string Chan_seq_messages;  
 assign Chan_seq_messages to "{M0}{M1}_seq_messages";
+
+string atzo_messages; 
+assign atzo_messages to "{M0}{M1}_atzo_messages"; 
 
 int from_faulted_state; 
 
@@ -165,6 +172,10 @@ ss OFF_ON_FSM {
    /* Sequencer for Bipolar PSC   */
   /*******************************/
     state IDLE {
+       when(autozero ==1) {
+       		sprintf(atzo_messages, "Zeroing DCCT Offsets");
+       	    	pvPut(atzo_messages);
+       } state READBACK_DCCT_ADC_OFFSETS
         when(ps_on_off == 1) {
 		Park = 1; 
 		pvPut(Park); 
@@ -359,6 +370,16 @@ ss OFF_ON_FSM {
 			pvPut(Chan_seq_messages); 
 			ps_on_off_sts = 1;
 			pvPut(ps_on_off_sts); 				
+		} state IDLE
+	}
+
+    /*******************************/
+   /* Auto-Zero Procedure*/
+  /*******************************/
+	state READBACK_DCCT_ADC_OFFSETS{
+		when(1) {
+            		sprintf(atzo_messages, "IDLE 2CH");
+       	    		pvPut(atzo_messages);
 		} state IDLE
 	}
   
