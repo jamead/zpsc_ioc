@@ -1,6 +1,7 @@
 /* Sequencer to control the PSC IOC startup.*/
 
 #define PRINTF seqLog
+//#define DABS(x) ((x) < 0.0 ? -(x) : (x))
 
 program ch_fsm ("M0=lab{2}, M1=Chan1")
 
@@ -14,6 +15,8 @@ program ch_fsm ("M0=lab{2}, M1=Chan1")
    
 option +r;
 option -c;
+
+double fabs(double);
 
 
 short DAC; 
@@ -100,6 +103,18 @@ double dcct2_ofst;
 assign dcct2_ofst to "{M0}{M1}:DCCT2-Offset-SP"; 
 monitor dcct2_ofst; 
 
+short mode; 
+assign mode to "{M0}{M1}:DAC_OpMode-SP";
+monitor mode;  
+
+double error_adc; 
+assign error_adc to "{M0}{M1}:Error-I"; 
+monitor error_adc; 
+
+double dac_ofst; 
+assign dac_ofst to "{M0}{M1}:DACSetPt-Offset-SP";  
+monitor dac_ofst; 
+
 /* stringout to display status or progress. */
 string Chan_seq_messages;  
 assign Chan_seq_messages to "{M0}{M1}_seq_messages";
@@ -108,6 +123,8 @@ string atzo_messages;
 assign atzo_messages to "{M0}{M1}_atzo_messages"; 
 
 int from_faulted_state; 
+double error_old; 
+double error_new; 
 
     /*******************************/
    /*    Initialization Phase     */
@@ -406,11 +423,11 @@ ss OFF_ON_FSM {
 		} state CHECK_DCCT1
 	}
 	state CHECK_DCCT1 {
-		when(dcct1_adc < 0.001){
+		when(dcct1_adc < fabs(0.001)){
 		       sprintf(atzo_messages, "DCCT1 GOOD");
        	    	       pvPut(atzo_messages);
 		} state READBACK_DCCT2_ADC_OFFSET
-		when(dcct1_adc > 0.001){
+		when(dcct1_adc > fabs(0.001)){
 		       sprintf(atzo_messages, "DCCT1 RETRY");
        	    	       pvPut(atzo_messages);
 		} state READBACK_DCCT1_ADC_OFFSET
@@ -429,15 +446,70 @@ ss OFF_ON_FSM {
 		} state CHECK_DCCT2
 	}
 	state CHECK_DCCT2 {
-		when(dcct2_adc < 0.001){
+		when(dcct2_adc < fabs(0.001)){
 		       sprintf(atzo_messages, "DCCT2 GOOD");
        	    	       pvPut(atzo_messages);
-		} state IDLE
-		when(dcct1_adc > 0.001){
+		} state JUMP_MODE
+		when(dcct1_adc > fabs(0.001)){
 		       sprintf(atzo_messages, "DCCT2 RETRY");
        	    	       pvPut(atzo_messages);
 		} state READBACK_DCCT2_ADC_OFFSET
 	}
+	state JUMP_MODE {
+		when() {
+		   mode = 3; 
+		   pvPut(mode); 
+		   sprintf(atzo_messages, "DAC ADJUSTMENT");
+       	    	   pvPut(atzo_messages);
+       	    	   pvGet(error_adc);		   
+		} state WAIT3
+	}
+	state WAIT3{
+		when(delay(3)){
+       	    	   pvGet(error_adc);
+		   sprintf(atzo_messages, "%f ERROR",error_adc);
+       	    	   pvPut(atzo_messages);
+		} state ZERO_ERROR
+	}
+	state ZERO_ERROR {
+		when(fabs(error_adc) < fabs(0.01)){
+			pvGet(error_adc); 
+			pvPut(dac_ofst);  
+			sprintf(atzo_messages, "DONE");
+       	    	   	pvPut(atzo_messages);
+		} state IDLE
+		when(fabs(error_adc) > fabs(0.01)) {
+			error_old = fabs(error_adc); 
+			dac_ofst = dac_ofst + 0.000001; 
+			pvPut(dac_ofst); 
+			error_new = pvGet(error_adc); 
+			if(error_new < error_old) {
+				dac_ofst = dac_ofst + 0.000001; 
+				pvPut(dac_ofst); 
+			}else{
+				dac_ofst = dac_ofst - 0.000001; 
+				pvPut(dac_ofst); 
+				}
+			} state ZERO_ERROR	
+		}
+		/*
+		when((fabs(error_adc) > fabs(0.0001)) && (error_adc > 0.0)) {
+			pvGet(error_adc); 
+			dac_ofst = dac_ofst - 0.000001; 
+			pvPut(dac_ofst); 
+			sprintf(atzo_messages, "ADJUSTING...");
+       	    	   	pvPut(atzo_messages);
+		} state ZERO_ERROR
+		when((fabs(error_adc) > fabs(0.0001)) && (error_adc < 0.0)){
+			pvGet(error_adc); 
+			dac_ofst = dac_ofst + 0.000001; 
+			pvPut(dac_ofst); 
+			sprintf(atzo_messages, "ADJUSTING...");
+       	    	   	pvPut(atzo_messages);
+		} state ZERO_ERROR
+		*/
+	}
+	
     /*******************************/
    /* Sequencer for Unipolar PSC  */
   /*******************************/
@@ -450,5 +522,5 @@ ss OFF_ON_FSM {
         } state UNIPOLAR_IDLE
     }
 */
-}
+
 
