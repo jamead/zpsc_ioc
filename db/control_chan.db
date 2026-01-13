@@ -735,6 +735,18 @@ record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_messages") {
     field(DESC, "Message box from seq")
 }
 
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_dbg1_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_dbg2_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_dbg3_messages") {
+    field(DESC, "Message box from seq")
+}
+
 #-----------------------------------------------
 #------------FSM ON/OFF Button------------------
 #-----------------------------------------------
@@ -771,6 +783,7 @@ record(mbbo,"$(P){$(NO)}Chan$(CHAN):AutoZero-STS")
 	field(ZRST, "Please wait...") 
 	field(DESC, "Autozero")
 }
+
 
 
 
