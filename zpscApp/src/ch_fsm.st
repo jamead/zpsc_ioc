@@ -125,6 +125,7 @@ assign atzo_messages to "{M0}{M1}_atzo_messages";
 int from_faulted_state; 
 double error_old; 
 double error_new; 
+int up; 
 
     /*******************************/
    /*    Initialization Phase     */
@@ -466,32 +467,86 @@ ss OFF_ON_FSM {
 	}
 	state WAIT3{
 		when(delay(3)){
-       	    	   pvGet(error_adc);
-		   sprintf(atzo_messages, "%f ERROR",error_adc);
+		   pvGet(error_adc); 
+		   error_old = fabs(error_adc); 
+		   sprintf(atzo_messages, "%f ERROR1",error_adc);
        	    	   pvPut(atzo_messages);
-		} state ZERO_ERROR
+		} state INCREMENT_UP
 	}
-	state ZERO_ERROR {
+/*	state ZERO_ERROR_CHECK {
 		when(fabs(error_adc) < fabs(0.01)){
 			pvGet(error_adc); 
 			pvPut(dac_ofst);  
 			sprintf(atzo_messages, "DONE");
        	    	   	pvPut(atzo_messages);
 		} state IDLE
-		when(fabs(error_adc) > fabs(0.01)) {
+		when(fabs(error_adc) > fabs(0.01)){
+			pvGet(error_adc); 
 			error_old = fabs(error_adc); 
-			dac_ofst = dac_ofst + 0.000001; 
+			sprintf(atzo_messages, "UP");
+       	    	   	pvPut(atzo_messages);			
+		} state INCREMENT_UP
+	}*/
+	state INCREMENT_UP {
+		when(fabs(error_adc) < 0.01){
+			sprintf(atzo_messages, "COMPLETE");
+       	    	   	pvPut(atzo_messages);	
+			} state IDLE
+		when(fabs(error_adc) > 0.01) {
+       	    	   	pvGet(error_adc);
+       	    	   	error_new = fabs(error_adc); 
+			dac_ofst = dac_ofst + 0.0001; 
 			pvPut(dac_ofst); 
-			error_new = pvGet(error_adc); 
-			if(error_new < error_old) {
-				dac_ofst = dac_ofst + 0.000001; 
-				pvPut(dac_ofst); 
-			}else{
-				dac_ofst = dac_ofst - 0.000001; 
-				pvPut(dac_ofst); 
-				}
-			} state ZERO_ERROR	
-		}
+			sprintf(atzo_messages, "%f ErrNew %f ErrOld UP",error_new, error_old);
+       	    	   	pvPut(atzo_messages);	
+			} state WAIT4
+		} 
+	state INCREMENT_DOWN {
+		when(fabs(error_adc) < 0.01){
+			sprintf(atzo_messages, "COMPLETE");
+       	    	   	pvPut(atzo_messages);	
+		} state IDLE
+		when(fabs(error_adc) > 0.01) {
+       	    	   	pvGet(error_adc);
+       	    	   	error_new = fabs(error_adc); 
+       	    	   	//error_new = error_adc; 
+			dac_ofst = dac_ofst - 0.0001; 
+			pvPut(dac_ofst); 
+			sprintf(atzo_messages, "DOWN");
+       	    	   	pvPut(atzo_messages);		
+			} state WAIT4
+		} 		
+	state WAIT4 {
+		when(delay(2)) {
+			pvGet(error_adc); 
+			error_new = fabs(error_adc); 	
+			//error_new = error_adc; 
+			sprintf(atzo_messages, "WAIT4");
+       	    	   	pvPut(atzo_messages);	
+		} state CHECK_NEW_ERROR
+	}
+	state CHECK_NEW_ERROR {
+		when(error_new < error_old) {
+			up = 1; 
+			error_old = fabs(error_adc);
+			sprintf(atzo_messages, "CHECK");
+       	    	   	pvPut(atzo_messages);		
+		} state ZERO_CHECK
+		when(error_new > error_old) {
+			up = 0; 
+			error_old = fabs(error_adc);
+			sprintf(atzo_messages, "CHECK");
+       	    	   	pvPut(atzo_messages);		
+		} state ZERO_CHECK
+	//	when(error_new == error_old) {
+	//	} state INCREMENT_DOWN
+	}
+	state ZERO_CHECK {
+		when(up ==1) {
+		} state INCREMENT_UP
+		when(up ==0) {
+		} state INCREMENT_DOWN
+	}
 		/*
 		when((fabs(error_adc) > fabs(0.0001)) && (error_adc > 0.0)) {
 			pvGet(error_adc); 
@@ -508,7 +563,7 @@ ss OFF_ON_FSM {
        	    	   	pvPut(atzo_messages);
 		} state ZERO_ERROR
 		*/
-	}
+}
 	
     /*******************************/
    /* Sequencer for Unipolar PSC  */
