@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2026-01-13 17:16:37 by pstester-->
+<!--Saved on 2026-01-14 11:27:35 by pstester-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1700</width>
@@ -3935,8 +3935,8 @@ $(actions)</tooltip>
   <widget type="textentry" version="3.0.0">
     <name>Text Update_90</name>
     <pv_name>$(PriSys){$(PSC)}$(CHAN)_atzo_dbg1_messages</pv_name>
-    <x>160</x>
-    <y>955</y>
+    <x>283</x>
+    <y>980</y>
     <width>189</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -3958,8 +3958,8 @@ $(actions)</tooltip>
   <widget type="textentry" version="3.0.0">
     <name>Text Update_91</name>
     <pv_name>$(PriSys){$(PSC)}$(CHAN)_atzo_dbg2_messages</pv_name>
-    <x>160</x>
-    <y>990</y>
+    <x>486</x>
+    <y>980</y>
     <width>189</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -3981,8 +3981,8 @@ $(actions)</tooltip>
   <widget type="textentry" version="3.0.0">
     <name>Text Update_92</name>
     <pv_name>$(PriSys){$(PSC)}$(CHAN)_atzo_dbg3_messages</pv_name>
-    <x>160</x>
-    <y>1020</y>
+    <x>686</x>
+    <y>980</y>
     <width>189</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -4004,24 +4004,24 @@ $(actions)</tooltip>
   <widget type="label" version="2.0.0">
     <name>Label_279</name>
     <text>error new</text>
-    <x>363</x>
-    <y>955</y>
+    <x>324</x>
+    <y>960</y>
     <width>107</width>
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_281</name>
     <text>error old</text>
-    <x>363</x>
-    <y>990</y>
+    <x>520</x>
+    <y>960</y>
     <width>107</width>
     <horizontal_alignment>1</horizontal_alignment>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_289</name>
     <text>error adc</text>
-    <x>363</x>
-    <y>1020</y>
+    <x>708</x>
+    <y>960</y>
     <width>107</width>
     <horizontal_alignment>1</horizontal_alignment>
   </widget>

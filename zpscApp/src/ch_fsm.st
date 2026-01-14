@@ -1,7 +1,8 @@
 /* Sequencer to control the PSC IOC startup.*/
 
 #define PRINTF seqLog
-//#define DABS(x) ((x) < 0.0 ? -(x) : (x))
+#define RES_M 0.000076
+#define RES_H 0.000019
 
 program ch_fsm ("M0=lab{2}, M1=Chan1")
 
@@ -115,6 +116,18 @@ double dac_ofst;
 assign dac_ofst to "{M0}{M1}:DACSetPt-Offset-SP";  
 monitor dac_ofst; 
 
+short scale_factor; 
+assign scale_factor to "{M0}{M1}:SF:DAC_DCCTs-I";
+monitor scale_factor;  
+
+short res; 
+assign res to "{M0}Resolution-Mode"; 
+monitor res; 
+
+short avg_mode; 
+assign avg_mode to "{M0}{M1}:AveMode-SP"; 
+monitor avg_mode; 
+
 /* stringout to display status or progress. */
 string Chan_seq_messages;  
 assign Chan_seq_messages to "{M0}{M1}_seq_messages";
@@ -134,7 +147,8 @@ assign atzo_dbg3_messages to "{M0}{M1}_atzo_dbg3_messages";
 int from_faulted_state; 
 double error_old; 
 double error_new; 
-int up; 
+unsigned int up; 
+int push; 
 
     /*******************************/
    /*    Initialization Phase     */
@@ -218,6 +232,14 @@ ss OFF_ON_FSM {
        when(autozero ==1) {
        		sprintf(atzo_messages, "Zeroing DCCT Offsets");
        	    	pvPut(atzo_messages);
+       	    	avg_mode = 1; 
+       	    	pvPut(avg_mode); 
+       	    	dcct1_ofst = 0;
+       	    	pvPut(dcct1_ofst); 
+       	    	dcct2_ofst = 0; 
+       	    	pvPut(dcct2_ofst);
+       	    	dac_ofst = 0; 
+       	    	pvPut(dac_ofst);        	    	
        } state READBACK_DCCT1_ADC_OFFSET
         when(ps_on_off == 1) {
 		Park = 1; 
@@ -420,7 +442,7 @@ ss OFF_ON_FSM {
    /* Auto-Zero Procedure*/
   /*******************************/
 	state READBACK_DCCT1_ADC_OFFSET{
-		when(1) {
+		when(delay(3)) {
 			pvGet(dcct1_adc);
 			dcct1_ofst = dcct1_adc; 
         	   	pvPut(dcct1_ofst);
@@ -510,11 +532,16 @@ ss OFF_ON_FSM {
        	    	   	/***********************/
 			} state IDLE
 		when(fabs(error_adc) > 0.01) {
+			up = 1; 
        	    	   	pvGet(error_adc);
-       	    	   	error_new = fabs(error_adc); 
-			dac_ofst = dac_ofst + 0.0001; 
+       	    	   	error_old = fabs(error_adc); 
+       	    	   	if(res == 0){
+       	    	   		dac_ofst = dac_ofst + (RES_M*scale_factor) + push; 
+       	    	   	}else{
+				dac_ofst = dac_ofst + (RES_H*scale_factor) + push; 
+			}
 			pvPut(dac_ofst); 
-			sprintf(atzo_messages, "%f ErrNew %f ErrOld UP",error_new, error_old);
+			sprintf(atzo_messages, "push = %d",push);
        	    	   	pvPut(atzo_messages);
        	    	   	/***********************/
        	    	   	sprintf(atzo_dbg1_messages, "%f ErrNew",error_new); 
@@ -528,6 +555,8 @@ ss OFF_ON_FSM {
 		} 
 	state INCREMENT_DOWN {
 		when(fabs(error_adc) < 0.01){
+			mode = 0; 
+			pvPut(mode); 
 			sprintf(atzo_messages, "COMPLETE");
        	    	   	pvPut(atzo_messages);	
        	    	   	/***********************/
@@ -541,9 +570,12 @@ ss OFF_ON_FSM {
 		} state IDLE
 		when(fabs(error_adc) > 0.01) {
        	    	   	pvGet(error_adc);
-       	    	   	error_new = fabs(error_adc); 
-       	    	   	//error_new = error_adc; 
-			dac_ofst = dac_ofst - 0.0001; 
+       	    	   	error_old = fabs(error_adc); 
+       	    	   	if(res == 0){
+       	    	   		dac_ofst = dac_ofst - (RES_M*scale_factor); 
+       	    	   	}else{
+				dac_ofst = dac_ofst - (RES_H*scale_factor); 
+			}
 			pvPut(dac_ofst); 
 			sprintf(atzo_messages, "DOWN");
        	    	   	pvPut(atzo_messages);	
@@ -558,7 +590,7 @@ ss OFF_ON_FSM {
 			} state WAIT4
 		} 		
 	state WAIT4 {
-		when(delay(2)) {
+		when(delay(1)) {
 			pvGet(error_adc); 
 			error_new = fabs(error_adc); 	
 			//error_new = error_adc; 
@@ -590,10 +622,11 @@ ss OFF_ON_FSM {
 	}
 	state CHECK_NEW_ERROR {
 		when(error_new < error_old) {
-			up = 1; 
-			error_old = fabs(error_adc);
+			up = up; 
+			error_old = error_new; //fabs(error_adc);
 			sprintf(atzo_messages, "CHECK");
        	    	   	pvPut(atzo_messages);	
+       	    	   	push = 0; 
        	    	   	/***********************/
        	    	   	sprintf(atzo_dbg1_messages, "%f ErrNew",error_new); 
        	    	   	pvPut(atzo_dbg1_messages); 
@@ -602,10 +635,30 @@ ss OFF_ON_FSM {
        	    	        sprintf(atzo_dbg3_messages, "%f ErrAdc",error_adc); 
        	    	   	pvPut(atzo_dbg3_messages); 
        	    	   	/***********************/	
-		} state ZERO_CHECK
+		} state UP_DOWN
 		when(error_new > error_old) {
-			up = 0; 
-			error_old = fabs(error_adc);
+			if(up ==1){
+			    up = 0; 
+			}else{
+			    up = 1; 
+			}
+			error_old = error_new; //fabs(error_adc);
+			sprintf(atzo_messages, "CHECK");
+       	    	   	pvPut(atzo_messages);	
+       	    	   	push = 0; 
+       	    	   	/***********************/
+       	    	   	sprintf(atzo_dbg1_messages, "%f ErrNew",error_new); 
+       	    	   	pvPut(atzo_dbg1_messages); 
+       	    	   	sprintf(atzo_dbg2_messages, "%f ErrOld",error_old); 
+       	    	   	pvPut(atzo_dbg2_messages); 	
+       	    	        sprintf(atzo_dbg3_messages, "%f ErrAdc",error_adc); 
+       	    	   	pvPut(atzo_dbg3_messages); 
+       	    	   	/***********************/
+		} state WAIT6
+		when(error_new == error_old) {
+			up = up; 
+			push = 2*(RES_M*scale_factor);  //extra push if error did not move
+			error_old = error_new; //fabs(error_adc);
 			sprintf(atzo_messages, "CHECK");
        	    	   	pvPut(atzo_messages);	
        	    	   	/***********************/
@@ -617,12 +670,10 @@ ss OFF_ON_FSM {
        	    	   	pvPut(atzo_dbg3_messages); 
        	    	   	/***********************/
 		} state WAIT6
-	//	when(error_new == error_old) {
-	//	} state INCREMENT_DOWN
 	}
 	state WAIT6 {
-		when(delay(2)) {
-			sprintf(atzo_messages, "WAIT6");
+		when(delay(1)) {
+			sprintf(atzo_messages, "WAIT6, UP %d",up);
        	    	   	pvPut(atzo_messages);
        	    	   	/***********************/
        	    	   	sprintf(atzo_dbg1_messages, "%f ErrNew",error_new); 
@@ -632,10 +683,12 @@ ss OFF_ON_FSM {
        	    	        sprintf(atzo_dbg3_messages, "%f ErrAdc",error_adc); 
        	    	   	pvPut(atzo_dbg3_messages); 
        	    	   	/***********************/
-       	    	   	}state ZERO_CHECK	
+       	    	}state UP_DOWN	
 	} 
-	state ZERO_CHECK {
-		when(up ==1) {
+	state UP_DOWN {
+		when(up >0) {
+			sprintf(atzo_messages, "ZERO CHECK");
+       	    	   	pvPut(atzo_messages);
        	    	   	/***********************/
        	    	   	sprintf(atzo_dbg1_messages, "%f ErrNew",error_new); 
        	    	   	pvPut(atzo_dbg1_messages); 
@@ -646,6 +699,8 @@ ss OFF_ON_FSM {
        	    	   	/***********************/
 		} state INCREMENT_UP
 		when(up ==0) {
+			sprintf(atzo_messages, "ZERO CHECK");
+       	    	   	pvPut(atzo_messages);
        	    	   	/***********************/
        	    	   	sprintf(atzo_dbg1_messages, "%f ErrNew",error_new); 
        	    	   	pvPut(atzo_dbg1_messages); 
