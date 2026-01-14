@@ -239,7 +239,7 @@ ss OFF_ON_FSM {
        		pvPut(atzo_sts); 
        		sprintf(atzo_messages, "Zeroing DCCT Offsets");
        	    	pvPut(atzo_messages);
-       	    	avg_mode = 1; 
+       	    	avg_mode = 0; 
        	    	pvPut(avg_mode); 
        	    	dcct1_ofst = 0;
        	    	pvPut(dcct1_ofst); 
