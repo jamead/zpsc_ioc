@@ -1,8 +1,8 @@
 /* Sequencer to control the PSC IOC startup.*/
 
 #define PRINTF seqLog
-#define RES_M 0.000076
-#define RES_H 0.000019
+#define RES_M 0.000077
+#define RES_H 0.000020
 
 program ch_fsm ("M0=lab{2}, M1=Chan1")
 
@@ -105,7 +105,7 @@ assign dcct2_ofst to "{M0}{M1}:DCCT2-Offset-SP";
 monitor dcct2_ofst; 
 
 short mode; 
-assign mode to "{M0}{M1}:DAC_OpMode-SP";
+assign mode to "{M0}{M1}:DAC_OpMode-adj_countSP";
 monitor mode;  
 
 double error_adc; 
@@ -128,6 +128,10 @@ short avg_mode;
 assign avg_mode to "{M0}{M1}:AveMode-SP"; 
 monitor avg_mode; 
 
+short atzo_sts; 
+assign atzo_sts to "{M0}{M1}:AutoZero-STS"; 
+monitor atzo_sts; 
+
 /* stringout to display status or progress. */
 string Chan_seq_messages;  
 assign Chan_seq_messages to "{M0}{M1}_seq_messages";
@@ -149,6 +153,7 @@ double error_old;
 double error_new; 
 unsigned int up; 
 int push; 
+int adj_count; 
 
     /*******************************/
    /*    Initialization Phase     */
@@ -230,6 +235,8 @@ ss OFF_ON_FSM {
   /*******************************/
     state IDLE {
        when(autozero ==1) {
+       		atzo_sts = 1; 
+       		pvPut(atzo_sts); 
        		sprintf(atzo_messages, "Zeroing DCCT Offsets");
        	    	pvPut(atzo_messages);
        	    	avg_mode = 1; 
@@ -499,6 +506,7 @@ ss OFF_ON_FSM {
 	state WAIT3{
 		when(delay(3)){
 		   pvGet(error_adc); 
+		   adj_count = 0; 
 		   error_old = fabs(error_adc); 
 		   sprintf(atzo_messages, "%f ERROR1",error_adc);
        	    	   pvPut(atzo_messages);
@@ -532,7 +540,8 @@ ss OFF_ON_FSM {
        	    	   	/***********************/
 			} state IDLE
 		when(fabs(error_adc) > 0.01) {
-			up = 1; 
+			//up = 1; 
+			adj_count = adj_count +1; 
        	    	   	pvGet(error_adc);
        	    	   	error_old = fabs(error_adc); 
        	    	   	if(res == 0){
@@ -541,7 +550,7 @@ ss OFF_ON_FSM {
 				dac_ofst = dac_ofst + (RES_H*scale_factor) + push; 
 			}
 			pvPut(dac_ofst); 
-			sprintf(atzo_messages, "push = %d",push);
+			sprintf(atzo_messages, "push = %d, adj_count = %d", push, adj_count);
        	    	   	pvPut(atzo_messages);
        	    	   	/***********************/
        	    	   	sprintf(atzo_dbg1_messages, "%f ErrNew",error_new); 
@@ -555,7 +564,11 @@ ss OFF_ON_FSM {
 		} 
 	state INCREMENT_DOWN {
 		when(fabs(error_adc) < 0.01){
+			adj_count = 0; 
 			mode = 0; 
+			atzo_sts = 0; 
+			pvPut(atzo_sts); 
+			//up = 0; 
 			pvPut(mode); 
 			sprintf(atzo_messages, "COMPLETE");
        	    	   	pvPut(atzo_messages);	
@@ -569,6 +582,7 @@ ss OFF_ON_FSM {
        	    	   	/***********************/
 		} state IDLE
 		when(fabs(error_adc) > 0.01) {
+			adj_count = adj_count +1; 
        	    	   	pvGet(error_adc);
        	    	   	error_old = fabs(error_adc); 
        	    	   	if(res == 0){
@@ -621,7 +635,15 @@ ss OFF_ON_FSM {
 		} state CHECK_NEW_ERROR
 	}
 	state CHECK_NEW_ERROR {
+		when(adj_count > 85) {
+			adj_count = 0; 
+			atzo_sts = 0; 
+			pvPut(atzo_sts); 
+			sprintf(atzo_messages, "NON-CONVERGENT!");
+       	    	   	pvPut(atzo_messages);
+		} state IDLE
 		when(error_new < error_old) {
+       	    	   	//adj_count = 0; 
 			up = up; 
 			error_old = error_new; //fabs(error_adc);
 			sprintf(atzo_messages, "CHECK");

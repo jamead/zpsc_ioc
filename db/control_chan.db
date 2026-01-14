@@ -779,8 +779,8 @@ record(mbbo,"$(P){$(NO)}Chan$(CHAN):PSOnOff-STS")
 
 record(mbbo,"$(P){$(NO)}Chan$(CHAN):AutoZero-STS")
 {
-	field(ONST, "DONE")
-	field(ZRST, "Please wait...") 
+	field(ONST, "Please wait...")
+	field(ZRST, "DONE") 
 	field(DESC, "Autozero")
 }
 
