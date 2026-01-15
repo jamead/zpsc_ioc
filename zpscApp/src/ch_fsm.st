@@ -1,8 +1,8 @@
 /* Sequencer to control the PSC IOC startup.*/
 
 #define PRINTF seqLog
-#define RES_M 0.000076
-#define RES_H 0.000019
+#define RES_M 0.000077
+#define RES_H 0.000020
 
 program ch_fsm ("M0=lab{2}, M1=Chan1")
 
@@ -543,15 +543,23 @@ ss OFF_ON_FSM {
 			} state IDLE
 		when(fabs(error_adc) > 0.01) {
 			//up = 1; 
-			adj_count = adj_count +1; 
        	    	   	pvGet(error_adc);
        	    	   	error_old = fabs(error_adc); 
        	    	   	pvGet(scale_factor); 
        	    	   	if(res == 0){
-       	    	   		dac_ofst = dac_ofst + (RES_M*scale_factor) + push; 
+       	    	   		if(adj_count ==0){
+       	    	   			dac_ofst = dac_ofst + 3*(RES_M*scale_factor); 
+       	    	   		}else{
+       	    	   			dac_ofst = dac_ofst + (RES_M*scale_factor) + push; 
+       	    	   		}
        	    	   	}else{
-				dac_ofst = dac_ofst + (RES_H*scale_factor) + push; 
+       	    	   		if(adj_count ==0){
+       	    	   			dac_ofst = dac_ofst + 3*(RES_M*scale_factor); 
+       	    	   		}else{
+       	    	   			dac_ofst = dac_ofst + (RES_M*scale_factor) + push; 
+       	    	   		}
 			}
+			adj_count = adj_count +1; 
 			pvPut(dac_ofst); 
 			sprintf(atzo_messages, "push = %d, adj_count = %d", push, adj_count);
        	    	   	pvPut(atzo_messages);
@@ -589,9 +597,17 @@ ss OFF_ON_FSM {
        	    	   	pvGet(error_adc);
        	    	   	error_old = fabs(error_adc); 
        	    	   	if(res == 0){
-       	    	   		dac_ofst = dac_ofst - (RES_M*scale_factor); 
+       	    	   		if(adj_count ==0){
+       	    	   			dac_ofst = dac_ofst - 3*(RES_M*scale_factor); 
+       	    	   		}else{
+       	    	   			dac_ofst = dac_ofst - (RES_M*scale_factor) + push; 
+       	    	   		}
        	    	   	}else{
-				dac_ofst = dac_ofst - (RES_H*scale_factor); 
+       	    	   		if(adj_count ==0){
+       	    	   			dac_ofst = dac_ofst - 3*(RES_M*scale_factor); 
+       	    	   		}else{
+       	    	   			dac_ofst = dac_ofst - (RES_M*scale_factor) + push; 
+       	    	   		}
 			}
 			pvPut(dac_ofst); 
 			sprintf(atzo_messages, "DOWN");
@@ -611,7 +627,7 @@ ss OFF_ON_FSM {
 			pvGet(error_adc); 
 			error_new = fabs(error_adc); 	
 			//error_new = error_adc; 
-			sprintf(atzo_messages, "WAIT4");
+			sprintf(atzo_messages, "WAIT..");
        	    	   	pvPut(atzo_messages);	
        	    	   	/***********************/
        	    	   	sprintf(atzo_dbg1_messages, "%f ErrNew",error_new); 
@@ -625,7 +641,7 @@ ss OFF_ON_FSM {
 	}
 	state WAIT5 {
 		when(delay(1)) {
-			sprintf(atzo_messages, "WAIT5");
+			sprintf(atzo_messages, "WAIT....");
        	    	   	pvPut(atzo_messages);	
        	    	   	/***********************/
        	    	   	sprintf(atzo_dbg1_messages, "%f ErrNew",error_new); 
@@ -698,7 +714,7 @@ ss OFF_ON_FSM {
 	}
 	state WAIT6 {
 		when(delay(1)) {
-			sprintf(atzo_messages, "WAIT6, UP %d",up);
+			sprintf(atzo_messages, "WAIT..., UP %d",up);
        	    	   	pvPut(atzo_messages);
        	    	   	/***********************/
        	    	   	sprintf(atzo_dbg1_messages, "%f ErrNew",error_new); 
