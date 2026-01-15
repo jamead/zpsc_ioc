@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2026-01-14 17:22:41 by pstester-->
+<!--Saved on 2026-01-15 14:17:32 by pstester-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1120</width>
@@ -3486,7 +3486,7 @@ $(actions)</tooltip>
             </color>
           </value>
         </exp>
-        <pv_name>$(PriSys){$(PSC)}$(CHAN):PSOnOff-STS</pv_name>
+        <pv_name>$(PriSys){$(PSC)}$(CHAN):AutoZero-STS</pv_name>
       </rule>
     </rules>
     <border_color>

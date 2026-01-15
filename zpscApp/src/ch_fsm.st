@@ -1,8 +1,8 @@
 /* Sequencer to control the PSC IOC startup.*/
 
 #define PRINTF seqLog
-#define RES_M 0.000077
-#define RES_H 0.000020
+#define RES_M 0.000076
+#define RES_H 0.000019
 
 program ch_fsm ("M0=lab{2}, M1=Chan1")
 
@@ -116,7 +116,7 @@ double dac_ofst;
 assign dac_ofst to "{M0}{M1}:DACSetPt-Offset-SP";  
 monitor dac_ofst; 
 
-short scale_factor; 
+double scale_factor; 
 assign scale_factor to "{M0}{M1}:SF:DAC_DCCTs-I";
 monitor scale_factor;  
 
@@ -497,7 +497,9 @@ ss OFF_ON_FSM {
 	state JUMP_MODE {
 		when() {
 		   mode = 3; 
-		   pvPut(mode); 
+		   pvPut(mode);
+		   avg_mode = 1; 
+       	           pvPut(avg_mode);  
 		   sprintf(atzo_messages, "DAC ADJUSTMENT");
        	    	   pvPut(atzo_messages);
        	    	   pvGet(error_adc);		   
@@ -544,6 +546,7 @@ ss OFF_ON_FSM {
 			adj_count = adj_count +1; 
        	    	   	pvGet(error_adc);
        	    	   	error_old = fabs(error_adc); 
+       	    	   	pvGet(scale_factor); 
        	    	   	if(res == 0){
        	    	   		dac_ofst = dac_ofst + (RES_M*scale_factor) + push; 
        	    	   	}else{
