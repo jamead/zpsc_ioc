@@ -663,7 +663,7 @@ ss OFF_ON_FSM {
 		} state RECHECK_ERROR_ADC
 	}
 	state RECHECK_ERROR_ADC {
-		when(delay(5)) {
+		when(delay(1)) {
 		    pvGet(error_adc); 
 		    error_new = fabs(error_adc); 
        	    	    sprintf(atzo_dbg1_messages, "%d up vote",up_vote); 
@@ -672,7 +672,7 @@ ss OFF_ON_FSM {
 		} state VOTE_CHECK	
 	} 
 	state WAIT8 {
-		when(delay(5)) {
+		when(delay(1)) {
 		} state CHECK_NEW_ERROR
 	}
 	state CHECK_NEW_ERROR {
@@ -719,7 +719,7 @@ ss OFF_ON_FSM {
 		} state WAIT7
 	}
 	state WAIT7 {
-		when(delay(5)){
+		when(delay(1)){
 		error_new = fabs(pvGet(error_adc));
 		} state UP_DOWN
 	}
