@@ -719,11 +719,31 @@ record(waveform, "$(P){$(NO)}Chan$(CHAN):RampTable-Wfm") {
     field(FLNK, "$(P){$(NO)}send")
 }
 
-#-------------------------------------------
-#------------FSM Readbacks------------------
-#-------------------------------------------
+#-----------------------------------------------
+#------------FSM Readbacks----------------------
+#-----------------------------------------------
 
 record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
+    field(DESC, "Message box from seq")
+}
+
+#-----------------------------------------------
+#-------------AutoZero Readbacks----------------
+#-----------------------------------------------
+
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_dbg1_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_dbg2_messages") {
+    field(DESC, "Message box from seq")
+}
+
+record(stringout, "$(P){$(NO)}Chan$(CHAN)_atzo_dbg3_messages") {
     field(DESC, "Message box from seq")
 }
 
@@ -732,6 +752,12 @@ record(stringout, "$(P){$(NO)}Chan$(CHAN)_seq_messages") {
 #-----------------------------------------------
 
 record(bo, "$(P){$(NO)}Chan$(CHAN):PSOnOff-SP") {
+    field(ZNAM, "LOW")
+    field(ONAM, "HIGH")  
+    field(HIGH,".01")    #500 ms after low
+}
+
+record(bo,"$(P){$(NO)}Chan$(CHAN):AutoZero-SP") {
     field(ZNAM, "LOW")
     field(ONAM, "HIGH")  
     field(HIGH,".01")    #500 ms after low
@@ -748,6 +774,15 @@ record(mbbo,"$(P){$(NO)}Chan$(CHAN):PSOnOff-STS")
 	field(TWST, "FAULTED!")
 	field(DESC, "PS Operation Mode Change")
 }
+
+record(mbbo,"$(P){$(NO)}Chan$(CHAN):AutoZero-STS")
+{
+	field(ONST, "Please wait...")
+	field(ZRST, "DONE") 
+	field(DESC, "Autozero")
+}
+
+
 
 
 

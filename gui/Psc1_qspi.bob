@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-09-11 15:36:09 by mead-->
+<!--Saved on 2026-01-20 15:47:44 by pstester-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1120</width>
@@ -18,8 +18,8 @@
       <pv_name></pv_name>
     </macros>
     <text>${CHAN}</text>
-    <x>588</x>
-    <y>53</y>
+    <x>667</x>
+    <y>10</y>
     <width>77</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -47,8 +47,8 @@ $(pv_value)</tooltip>
       <pv_name></pv_name>
     </macros>
     <text>${PSC}</text>
-    <x>510</x>
-    <y>53</y>
+    <x>589</x>
+    <y>10</y>
     <width>77</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -76,8 +76,8 @@ $(pv_value)</tooltip>
       <pv_name></pv_name>
     </macros>
     <text>${PriSys}</text>
-    <x>426</x>
-    <y>53</y>
+    <x>505</x>
+    <y>10</y>
     <width>77</width>
     <font>
       <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
@@ -109,64 +109,10 @@ $(pv_value)</tooltip>
 $(pv_value)
 $(actions)</tooltip>
   </widget>
-  <widget type="bool_button" version="2.0.0">
-    <name>Boolean Button_13</name>
-    <pv_name>$(PriSys){$(PSC)}$(CHAN):WriteQspi-SP</pv_name>
-    <x>72</x>
-    <y>105</y>
-    <width>78</width>
-    <height>23</height>
-    <off_label></off_label>
-    <on_label></on_label>
-    <show_confirm_dialog>1</show_confirm_dialog>
-    <password>1234</password>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_159</name>
-    <text>Write Values to QSPI FLASH</text>
-    <x>54</x>
-    <y>61</y>
-    <width>126</width>
-    <height>44</height>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-    <actions>
-    </actions>
-    <border_color>
-      <color red="0" green="128" blue="255">
-      </color>
-    </border_color>
-  </widget>
-  <widget type="bool_button" version="2.0.0">
-    <name>Boolean Button_14</name>
-    <pv_name>$(PriSys){$(PSC)}$(CHAN):ReadQspi-SP</pv_name>
-    <x>210</x>
-    <y>105</y>
-    <width>78</width>
-    <height>23</height>
-    <off_label></off_label>
-    <on_label></on_label>
-  </widget>
-  <widget type="label" version="2.0.0">
-    <name>Label_187</name>
-    <text>Read Values from QSPI FLASH</text>
-    <x>186</x>
-    <y>61</y>
-    <width>126</width>
-    <height>44</height>
-    <horizontal_alignment>1</horizontal_alignment>
-    <vertical_alignment>1</vertical_alignment>
-    <actions>
-    </actions>
-    <border_color>
-      <color red="0" green="128" blue="255">
-      </color>
-    </border_color>
-  </widget>
   <widget type="group" version="3.0.0">
     <name>Gain / Offset</name>
-    <x>414</x>
-    <y>87</y>
+    <x>420</x>
+    <y>174</y>
     <width>684</width>
     <height>319</height>
     <style>1</style>
@@ -1575,8 +1521,8 @@ $(actions)</tooltip>
   </widget>
   <widget type="group" version="3.0.0">
     <name>ScaleFactors</name>
-    <x>414</x>
-    <y>415</y>
+    <x>420</x>
+    <y>502</y>
     <width>684</width>
     <height>267</height>
     <style>1</style>
@@ -2190,9 +2136,9 @@ $(actions)</tooltip>
   <widget type="group" version="3.0.0">
     <name>Fault Settings</name>
     <x>12</x>
-    <y>143</y>
+    <y>174</y>
     <width>390</width>
-    <height>542</height>
+    <height>595</height>
     <style>1</style>
     <foreground_color>
       <color red="255" green="255" blue="255">
@@ -3398,8 +3344,7 @@ $(actions)</tooltip>
   <widget type="label" version="2.0.0">
     <name>Label_203</name>
     <text>PSC QSPI Settings</text>
-    <x>84</x>
-    <y>14</y>
+    <x>220</x>
     <width>240</width>
     <height>37</height>
     <font>
@@ -3414,5 +3359,210 @@ $(actions)</tooltip>
       <color red="0" green="128" blue="255">
       </color>
     </border_color>
+  </widget>
+  <widget type="group" version="3.0.0">
+    <name>Controls</name>
+    <x>12</x>
+    <y>59</y>
+    <width>1092</width>
+    <height>103</height>
+    <style>1</style>
+    <foreground_color>
+      <color red="255" green="255" blue="255">
+      </color>
+    </foreground_color>
+    <line_color>
+      <color red="65" green="105" blue="255">
+      </color>
+    </line_color>
+    <transparent>true</transparent>
+    <widget type="label" version="2.0.0">
+      <name>Label_159</name>
+      <text>Write Values to QSPI FLASH</text>
+      <x>125</x>
+      <width>126</width>
+      <height>44</height>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_13</name>
+      <pv_name>$(PriSys){$(PSC)}$(CHAN):WriteQspi-SP</pv_name>
+      <x>143</x>
+      <y>44</y>
+      <width>78</width>
+      <height>23</height>
+      <off_label></off_label>
+      <on_label></on_label>
+      <show_confirm_dialog>1</show_confirm_dialog>
+      <password>1234</password>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_187</name>
+      <text>Read Values from QSPI FLASH</text>
+      <x>257</x>
+      <width>126</width>
+      <height>44</height>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_14</name>
+      <pv_name>$(PriSys){$(PSC)}$(CHAN):ReadQspi-SP</pv_name>
+      <x>281</x>
+      <y>44</y>
+      <width>78</width>
+      <height>23</height>
+      <off_label></off_label>
+      <on_label></on_label>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_188</name>
+      <text>AutoZero</text>
+      <x>474</x>
+      <width>126</width>
+      <height>44</height>
+      <font>
+        <font name="Header 2" family="Liberation Sans" style="BOLD" size="18.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="bool_button" version="2.0.0">
+      <name>Boolean Button_29</name>
+      <pv_name>$(PriSys){$(PSC)}$(CHAN):AutoZero-SP</pv_name>
+      <x>498</x>
+      <y>44</y>
+      <width>78</width>
+      <height>23</height>
+      <off_label></off_label>
+      <on_label></on_label>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_189</name>
+      <text>AutoZero Status</text>
+      <x>631</x>
+      <width>126</width>
+      <height>44</height>
+      <font>
+        <font name="Header 3" family="Liberation Sans" style="BOLD" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>Text Update_87</name>
+      <pv_name>$(PriSys){$(PSC)}$(CHAN)_atzo_messages</pv_name>
+      <x>600</x>
+      <y>30</y>
+      <width>204</width>
+      <font>
+        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <precision>0</precision>
+      <horizontal_alignment>1</horizontal_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="textentry" version="3.0.0">
+      <name>Text Update_89</name>
+      <pv_name>$(PriSys){$(PSC)}$(CHAN):AutoZero-STS</pv_name>
+      <x>635</x>
+      <y>52</y>
+      <width>134</width>
+      <font>
+        <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+        </font>
+      </font>
+      <background_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <precision>0</precision>
+      <horizontal_alignment>1</horizontal_alignment>
+      <actions>
+      </actions>
+      <rules>
+        <rule name="Rule" prop_id="background_color" out_exp="false">
+          <exp bool_exp="pv0==0">
+            <value>
+              <color name="OK" red="0" green="255" blue="0">
+              </color>
+            </value>
+          </exp>
+          <exp bool_exp="pv0==1">
+            <value>
+              <color name="MAJOR" red="255" green="0" blue="0">
+              </color>
+            </value>
+          </exp>
+          <exp bool_exp="pv0==2">
+            <value>
+              <color name="Attention" red="255" green="160" blue="0">
+              </color>
+            </value>
+          </exp>
+          <pv_name>$(PriSys){$(PSC)}$(CHAN):AutoZero-STS</pv_name>
+        </rule>
+      </rules>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="label" version="2.0.0">
+      <name>Label_190</name>
+      <text>Note: After Autozero is complete, if satisfied with the results, press the "Write Values to QSPI" Button</text>
+      <x>821</x>
+      <width>258</width>
+      <height>74</height>
+      <font>
+        <font name="Header 3" family="Liberation Sans" style="BOLD" size="16.0">
+        </font>
+      </font>
+      <horizontal_alignment>1</horizontal_alignment>
+      <vertical_alignment>1</vertical_alignment>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
   </widget>
 </display>
