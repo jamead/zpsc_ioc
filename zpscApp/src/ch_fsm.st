@@ -533,6 +533,8 @@ ss OFF_ON_FSM {
 	}*/
 	state INCREMENT_UP {
 		when(fabs(error_adc) < 0.01){
+       	    	   	atzo_sts = 0; 
+       			pvPut(atzo_sts); 
 			sprintf(atzo_messages, "COMPLETE");
        	    	   	pvPut(atzo_messages);	
        	    	   	/***********************/
