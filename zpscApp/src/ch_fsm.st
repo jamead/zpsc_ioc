@@ -105,7 +105,7 @@ assign dcct2_ofst to "{M0}{M1}:DCCT2-Offset-SP";
 monitor dcct2_ofst; 
 
 short mode; 
-assign mode to "{M0}{M1}:DAC_OpMode-adj_countSP";
+assign mode to "{M0}{M1}:DAC_OpMode-SP";
 monitor mode;  
 
 double error_adc; 
@@ -152,8 +152,7 @@ int from_faulted_state;
 double error_old; 
 double error_new; 
 unsigned int up; 
-int push; 
-int adj_count; 
+int timeout_count; 
 int check_count; 
 int up_vote; 
 int down_vote; 
@@ -262,13 +261,7 @@ ss OFF_ON_FSM {
        	    	pvPut(Chan_seq_messages);
        	    } state SET_DAC_TO_ZERO_ON
        	when(ps_on_off == 0) {
-       	     if(from_faulted_state == 0) {
-		//ps_on_off_sts = 1;
-        	//pvPut(ps_on_off_sts); 
-             } else {
-                //ps_on_off_sts = 2;
-        	//pvPut(ps_on_off_sts); 
-             }
+
 	        sprintf(Chan_seq_messages, "PS OFF");
        	    	pvPut(Chan_seq_messages);
         } state CHECK_IF_SYSTEM_WAS_FAULTED
@@ -339,7 +332,7 @@ ss OFF_ON_FSM {
 			pvPut(Chan_seq_messages); 
 			Park = 0; 
 			pvPut(Park); 						
-		} state CHECK_TYPE //DONE_CHECK
+		} state CHECK_TYPE 
 	}
         state CHECK_TYPE {
         	when(Polarity == 0){
@@ -349,24 +342,20 @@ ss OFF_ON_FSM {
         }
 	state DONE_CHECK_BIPOLAR{
 		when (ps_on_sts_bip == 0) {	
-			//printf("ps_on_sts = %d\n",ps_on_sts); 
-			from_faulted_state = 1; 
+			//from_faulted_state = 1; 
 			ps_on_off_sts = 0;	
 			pvPut(ps_on_off_sts); 				
 		} state RETRY_ON
-		when (ps_on_sts_bip == 1) {	
-		//printf("ps_on_sts = %d\n",ps_on_sts); 			
+		when (ps_on_sts_bip == 1) {				
 		} state DONE
 	}
 	state DONE_CHECK_UNIPOLAR{
 		when (ps_on_sts_uni == 0) {	
-			//printf("ps_on_sts = %d\n",ps_on_sts); 
-			from_faulted_state = 1; 
+			//from_faulted_state = 1; 
 			ps_on_off_sts = 0;	
 			pvPut(ps_on_off_sts); 				
 		} state RETRY_ON
-		when (ps_on_sts_uni == 1) {	
-		//printf("ps_on_sts = %d\n",ps_on_sts); 			
+		when (ps_on_sts_uni == 1) {				
 		} state DONE
 	}
 	state RETRY_ON {
@@ -504,148 +493,78 @@ ss OFF_ON_FSM {
 		   avg_mode = 1; 
        	           pvPut(avg_mode);  
 		   sprintf(atzo_messages, "DAC ADJUSTMENT");
-       	    	   pvPut(atzo_messages);
-       	    	   //pvGet(error_adc);		   
+       	    	   pvPut(atzo_messages);	   
 		} state WAIT3
 	}
 	state WAIT3{
 		when(delay(3)){ 
-		   adj_count = 0; 
+		   timeout_count = 0; 
 		   pvGet(error_adc);
 		   error_old = fabs(error_adc); 
-		   sprintf(atzo_dbg3_messages, "%f error old",error_old);
-       	    	   pvPut(atzo_dbg3_messages);
 		} state INCREMENT_UP
 	}
-/*	state ZERO_ERROR_CHECK {
-		when(fabs(error_adc) < fabs(0.01)){
-			pvGet(error_adc); 
-			pvPut(dac_ofst);  
-			sprintf(atzo_messages, "DONE");
-       	    	   	pvPut(atzo_messages);
-		} state IDLE
-		when(fabs(error_adc) > fabs(0.01)){
-			pvGet(error_adc); 
-			error_old = fabs(error_adc); 
-			sprintf(atzo_messages, "UP");
-       	    	   	pvPut(atzo_messages);			
-		} state INCREMENT_UP
-	}*/
 	state INCREMENT_UP {
 		when(fabs(error_adc) < 0.01){
+			pvPut(dac_ofst); 
        	    	   	atzo_sts = 0; 
        			pvPut(atzo_sts); 
 			sprintf(atzo_messages, "COMPLETE");
        	    	   	pvPut(atzo_messages);	
-       	    	   	/***********************/
-       	    	   	sprintf(atzo_dbg1_messages, "%d up vote",up_vote); 
-       	    	   	pvPut(atzo_dbg1_messages); 
-       	    	   	sprintf(atzo_dbg2_messages, "%d down vote",down_vote); 
-       	    	   	pvPut(atzo_dbg2_messages); 	
-       	    	        sprintf(atzo_dbg3_messages, "%d up",up); 
-       	    	   	pvPut(atzo_dbg3_messages); 
-       	    	   	/***********************/
 			} state IDLE
 		when(fabs(error_adc) > 0.01) {
 			up = 1; 
-       	    	   	//pvGet(error_adc);
-       	    	   	//error_old = fabs(error_adc); 
-       	    	   	//pvGet(scale_factor); 
        	    	   	if(res == 0){
-       	    	   		dac_ofst = dac_ofst + (RES_M*scale_factor) + push; 
+       	    	   		dac_ofst = dac_ofst + (RES_M*scale_factor); 
        	    	   	}else{
 
-       	    	   		dac_ofst = dac_ofst + (RES_H*scale_factor) + push; 
+       	    	   		dac_ofst = dac_ofst + (RES_H*scale_factor); 
 			}
-			adj_count = adj_count +1; 
+			timeout_count = timeout_count +1; 
 			pvPut(dac_ofst); 
-			sprintf(atzo_messages, "push = %d, adj_count = %d", push, adj_count);
+			sprintf(atzo_messages, "GOING UP");
        	    	   	pvPut(atzo_messages);
-       	    	   	/***********************/
-       	    	   	sprintf(atzo_dbg1_messages, "%d up vote",up_vote); 
-       	    	   	pvPut(atzo_dbg1_messages); 
-       	    	   	sprintf(atzo_dbg2_messages, "%d down vote",down_vote); 
-       	    	   	pvPut(atzo_dbg2_messages); 	
-       	    	        sprintf(atzo_dbg3_messages, "%d up",up); 
-       	    	   	pvPut(atzo_dbg3_messages); 
-       	    	   	/***********************/
 			} state WAIT4
 		} 
 	state INCREMENT_DOWN {
 		when(fabs(error_adc) < 0.01){
-			adj_count = 0; 
+			pvPut(dac_ofst); 
+			timeout_count = 0; 
 			mode = 0; 
 			atzo_sts = 0; 
 			pvPut(atzo_sts); 
-			//up = 0; 
 			pvPut(mode); 
 			sprintf(atzo_messages, "COMPLETE");
        	    	   	pvPut(atzo_messages);	
-       	    	   	/***********************/
-       	    	   	sprintf(atzo_dbg1_messages, "%d up vote",up_vote); 
-       	    	   	pvPut(atzo_dbg1_messages); 
-       	    	   	sprintf(atzo_dbg2_messages, "%d down vote",down_vote); 
-       	    	   	pvPut(atzo_dbg2_messages); 	
-       	    	        sprintf(atzo_dbg3_messages, "%d up",up); 
-       	    	   	pvPut(atzo_dbg3_messages); 
-       	    	   	/***********************/
 		} state IDLE
 		when(fabs(error_adc) > 0.01) {
-			adj_count = adj_count +1; 
-       	    	   	//pvGet(error_adc);
-       	    	   	//error_old = fabs(error_adc); 
+			timeout_count = timeout_count +1; 
        	    	   	if(res == 0){
-       	    	   		dac_ofst = dac_ofst - (RES_M*scale_factor) + push; 
+       	    	   		dac_ofst = dac_ofst - (RES_M*scale_factor); 
        	    	   	}else{
-       	    	   		dac_ofst = dac_ofst - (RES_H*scale_factor) + push; 
+       	    	   		dac_ofst = dac_ofst - (RES_H*scale_factor) ; 
 
 			}
 			pvPut(dac_ofst); 
-			sprintf(atzo_messages, "DOWN");
+			sprintf(atzo_messages, "GOING DOWN");
        	    	   	pvPut(atzo_messages);	
-       	    	   	/***********************/
-       	    	   	pvPut(atzo_dbg2_messages); 	
-       	    	        sprintf(atzo_dbg3_messages, "%d up",up); 
-       	    	   	pvPut(atzo_dbg3_messages); 
-       	    	   	/***********************/	
 			} state WAIT4
 		} 		
 	state WAIT4 {
 		when(delay(1)) {
 			pvGet(error_adc); 
 			error_new = fabs(error_adc); 	
-			//error_new = error_adc; 
-			sprintf(atzo_messages, "WAIT.. %d up", up);
+			sprintf(atzo_messages, "WAIT.. ");
        	    	   	pvPut(atzo_messages);	
-       	    	   	/***********************/
-       	    	   	pvPut(atzo_dbg2_messages); 	
-       	    	        sprintf(atzo_dbg3_messages, "%d up",up); 
-       	    	   	pvPut(atzo_dbg3_messages); 
-       	    	   	/***********************/
 		} state WAIT5
 	}
 	state WAIT5 {
 		when(delay(1)) {
-			sprintf(atzo_messages, "WAIT.... %d up", up);
+			sprintf(atzo_messages, "WAIT....");
        	    	   	pvPut(atzo_messages);	
-       	    	   	/***********************/
-       	    	   	pvPut(atzo_dbg2_messages); 	
-       	    	        sprintf(atzo_dbg3_messages, "%d up",up); 
-       	    	   	pvPut(atzo_dbg3_messages); 
-       	    	   	/***********************/
 		} state VOTE_CHECK
 	}
 	state VOTE_CHECK {
 		when(check_count == 3) {
-		   sprintf(atzo_messages, "new = %f old = %f ",error_new, error_old); 
-       	    	   pvPut(atzo_messages); 
-       	    	   //pvGet(error_adc); 
-       	    	   //error_old = fabs(error_adc); 
-		   //sprintf(atzo_dbg1_messages, "%f error old",error_old);
-		   //pvPut(atzo_dbg1_messages); 
-       	    	   //sprintf(atzo_dbg1_messages, "%d up vote",up_vote); 
-       	    	   //pvPut(atzo_dbg1_messages); 
-       	    	   sprintf(atzo_dbg2_messages, "%d down vote",down_vote); 
 		} state WAIT8
 		when(check_count < 3) {
 		   if(error_new < error_old) {
@@ -654,23 +573,14 @@ ss OFF_ON_FSM {
 		   	up_vote = up_vote +1; 
 		   }		
 		   check_count = check_count +1; 
-		   sprintf(atzo_messages, "WAIT.... %d up", up);
+		   sprintf(atzo_messages, "WAIT....");
        	    	   pvPut(atzo_messages);
-       	    	   sprintf(atzo_dbg1_messages, "%d up vote",up_vote); 
-       	    	   pvPut(atzo_dbg1_messages); 
-       	    	   sprintf(atzo_dbg2_messages, "%d down vote",down_vote);
-       	    	   pvPut(atzo_dbg2_messages); 
-       	    	   sprintf(atzo_dbg3_messages, "%d up",up); 
-       	    	   pvPut(atzo_dbg3_messages); 
 		} state RECHECK_ERROR_ADC
 	}
 	state RECHECK_ERROR_ADC {
 		when(delay(1)) {
 		    pvGet(error_adc); 
 		    error_new = fabs(error_adc); 
-       	    	    sprintf(atzo_dbg1_messages, "%d up vote",up_vote); 
-       	    	    pvPut(atzo_dbg1_messages); 
-       	    	    sprintf(atzo_dbg2_messages, "%d down vote",down_vote); 
 		} state VOTE_CHECK	
 	} 
 	state WAIT8 {
@@ -678,14 +588,13 @@ ss OFF_ON_FSM {
 		} state CHECK_NEW_ERROR
 	}
 	state CHECK_NEW_ERROR {
-		when(adj_count > 85) {
-			adj_count = 0; 
+		when(timeout_count > 85) {
+			timeout_count = 0; 
 			atzo_sts = 0; 
 			pvPut(atzo_sts); 
 			sprintf(atzo_messages, "NON-CONVERGENT!");
        	    	   	pvPut(atzo_messages);
 		} state IDLE
-		//when(error_new < error_old) {
 		when(up_vote > down_vote) {
        	    	   	check_count =0; 
        	    	   	up_vote = 0; 
@@ -695,29 +604,14 @@ ss OFF_ON_FSM {
 			}else{
 			     up =1; 
 			}; 
-			error_old = error_new; //fabs(error_adc);
-			sprintf(atzo_messages, "up CHECK %d", up);
-       	    	   	pvPut(atzo_messages);	
-       	    	   	push = 0; 
-       	    	   	/***********************/
-       	    	        sprintf(atzo_dbg3_messages, "%d up",up); 
-       	    	   	pvPut(atzo_dbg3_messages); 
-       	    	   	/***********************/	
+			error_old = error_new; 		
 		} state WAIT7
-		//when(error_new > error_old) {
 		when(down_vote > up_vote) {
 			check_count = 0; 
 			up_vote = 0; 
 			down_vote = 0; 
 			up = up; 
-			error_old = error_new; //fabs(error_adc);
-			sprintf(atzo_messages, "down CHECK %d", up);
-       	    	   	pvPut(atzo_messages);	
-       	    	   	push = 0; 
-       	    	   	/***********************/
-       	    	        sprintf(atzo_dbg3_messages, "%d up",up); 
-       	    	   	pvPut(atzo_dbg3_messages); 
-       	    	   	/***********************/
+			error_old = error_new;
 		} state WAIT7
 	}
 	state WAIT7 {
@@ -729,38 +623,13 @@ ss OFF_ON_FSM {
 		when(up >0) {
 			sprintf(atzo_messages, "ZERO CHECK");
        	    	   	pvPut(atzo_messages);
-       	    	   	/***********************/
-       	    	   	pvPut(atzo_dbg2_messages); 	
-       	    	        sprintf(atzo_dbg3_messages, "%f ErrAdc",error_adc); 
-       	    	   	pvPut(atzo_dbg3_messages); 
-       	    	   	/***********************/
 		} state INCREMENT_UP
 		when(up ==0) {
 			sprintf(atzo_messages, "ZERO CHECK");
        	    	   	pvPut(atzo_messages);
-       	    	   	/***********************/ 
-       	    	   	pvPut(atzo_dbg2_messages); 	
-       	    	        sprintf(atzo_dbg3_messages, "%d up",up); 
-       	    	   	pvPut(atzo_dbg3_messages); 
-       	    	   	/***********************/
 		} state INCREMENT_DOWN
 	}
-		/*
-		when((fabs(error_adc) > fabs(0.0001)) && (error_adc > 0.0)) {
-			pvGet(error_adc); 
-			dac_ofst = dac_ofst - 0.000001; 
-			pvPut(dac_ofst); 
-			sprintf(atzo_messages, "ADJUSTING...");
-       	    	   	pvPut(atzo_messages);
-		} state ZERO_ERROR
-		when((fabs(error_adc) > fabs(0.0001)) && (error_adc < 0.0)){
-			pvGet(error_adc); 
-			dac_ofst = dac_ofst + 0.000001; 
-			pvPut(dac_ofst); 
-			sprintf(atzo_messages, "ADJUSTING...");
-       	    	   	pvPut(atzo_messages);
-		} state ZERO_ERROR
-		*/
+
 }
 	
     /*******************************/
