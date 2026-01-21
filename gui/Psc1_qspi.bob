@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2026-01-21 14:27:44 by pstester-->
+<!--Saved on 2026-01-21 16:45:56 by pstester-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1120</width>
@@ -3430,8 +3430,8 @@ $(actions)</tooltip>
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_188</name>
-      <text>AutoZero DAC</text>
-      <x>474</x>
+      <text>AutoZero</text>
+      <x>437</x>
       <width>126</width>
       <height>44</height>
       <font>
@@ -3450,7 +3450,7 @@ $(actions)</tooltip>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_29</name>
       <pv_name>$(PriSys){$(PSC)}$(CHAN):AutoZero-SP</pv_name>
-      <x>498</x>
+      <x>461</x>
       <y>44</y>
       <width>78</width>
       <height>23</height>
@@ -3564,35 +3564,6 @@ $(actions)</tooltip>
         </color>
       </border_color>
     </widget>
-    <widget type="bool_button" version="2.0.0">
-      <name>Boolean Button_30</name>
-      <pv_name>$(PriSys){$(PSC)}$(CHAN):Zero_DCCTs-SP</pv_name>
-      <x>383</x>
-      <y>44</y>
-      <width>78</width>
-      <height>23</height>
-      <off_label></off_label>
-      <on_label></on_label>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_191</name>
-      <text>Zero DCCTs</text>
-      <x>359</x>
-      <width>126</width>
-      <height>44</height>
-      <font>
-        <font name="Header 3" family="Liberation Sans" style="BOLD" size="16.0">
-        </font>
-      </font>
-      <horizontal_alignment>1</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
   </widget>
   <widget type="textentry" version="3.0.0">
     <name>Text Update_142</name>
@@ -3665,7 +3636,7 @@ $(actions)</tooltip>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_192</name>
-    <text>Zero DCCTs</text>
+    <text></text>
     <x>463</x>
     <y>876</y>
     <width>126</width>
