@@ -454,7 +454,7 @@ ss OFF_ON_FSM {
    /* Auto-Zero Procedure*/
   /*******************************/
 	state READBACK_DCCT1_ADC_OFFSET{
-		when(delay(7)) {
+		when(delay(4)) {
 			pvGet(dcct1_adc);
 			dcct1_ofst = dcct1_adc; 
         	   	pvPut(dcct1_ofst);
@@ -503,7 +503,7 @@ ss OFF_ON_FSM {
 		when() {
 		   mode = 3; 
 		   pvPut(mode);
-		   avg_mode = 1; 
+		   avg_mode = 2; 
        	           pvPut(avg_mode);  
 		   sprintf(atzo_messages, "DAC ADJUSTMENT");
        	    	   pvPut(atzo_messages);	   
@@ -616,6 +616,7 @@ ss OFF_ON_FSM {
 	}
 	state CHECK_NEW_ERROR {
 		when(timeout_count > 50) {
+			pvPut(dac_ofst); 
 			timeout_count = 0; 
 			atzo_sts = 0; 
 			mode = 0; 
@@ -623,7 +624,7 @@ ss OFF_ON_FSM {
 			pvPut(atzo_sts); 
 			sprintf(atzo_messages, "NON-CONVERGENT!");
        	    	   	pvPut(atzo_messages);
-		} state IDLE
+		} state READBACK_DAC_ADC_OFFSET
 		when(up_vote > down_vote) {
        	    	   	check_count =0; 
        	    	   	up_vote = 0; 
