@@ -481,7 +481,7 @@ ss OFF_ON_FSM {
 		       sprintf(atzo_messages, "DCCT2 GOOD");
        	    	       pvPut(atzo_messages);
 		} state JUMP_MODE
-		when(dcct1_adc > fabs(0.001)){
+		when(dcct2_adc > fabs(0.001)){
 		       sprintf(atzo_messages, "DCCT2 RETRY");
        	    	       pvPut(atzo_messages);
 		} state READBACK_DCCT2_ADC_OFFSET
@@ -592,7 +592,7 @@ ss OFF_ON_FSM {
 		} state CHECK_NEW_ERROR
 	}
 	state CHECK_NEW_ERROR {
-		when(timeout_count > 85) {
+		when(timeout_count > 50) {
 			timeout_count = 0; 
 			atzo_sts = 0; 
 			mode = 0; 
