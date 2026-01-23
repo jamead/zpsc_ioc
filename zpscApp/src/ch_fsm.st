@@ -665,6 +665,8 @@ ss OFF_ON_FSM {
 		pvGet(DAC_rdbck); 
 		dac_adc_ofst = DAC_rdbck; 
 		pvPut(dac_adc_ofst); 
+       	    	avg_mode = 1; 
+       	    	pvPut(avg_mode); 
 		} state IDLE
 	}
 }
