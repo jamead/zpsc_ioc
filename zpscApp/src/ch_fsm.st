@@ -24,9 +24,13 @@ short DAC;
 assign DAC to "{M0}{M1}:DAC_SetPt-SP"; 
 monitor DAC; 
 
-short DAC_rdbck; 
+double DAC_rdbck; 
 assign DAC_rdbck to "{M0}{M1}:DAC-I"; 
 monitor DAC_rdbck; 
+
+double dac_adc_ofst; 
+assign dac_adc_ofst to "{M0}{M1}:DAC-Offset-SP";  
+monitor dac_adc_ofst; 
 
 short Park; 
 assign Park to "{M0}{M1}:DigOut_Park-SP";
@@ -87,6 +91,10 @@ monitor sum_fault;
 short autozero; 
 assign autozero to "{M0}{M1}:AutoZero-SP"; 
 monitor autozero; 
+
+short zero_dccts; 
+assign zero_dccts to "{M0}{M1}:Zero_DCCTs-SP"; 
+monitor zero_dccts; 
 
 double dcct1_adc; 
 assign dcct1_adc to "{M0}{M1}:DCCT1-I";
@@ -241,14 +249,16 @@ ss OFF_ON_FSM {
        		pvPut(atzo_sts); 
        		sprintf(atzo_messages, "Zeroing DCCT Offsets");
        	    	pvPut(atzo_messages);
-       	    	avg_mode = 0; 
+       	    	avg_mode = 1; 
        	    	pvPut(avg_mode); 
        	    	dcct1_ofst = 0;
        	    	pvPut(dcct1_ofst); 
        	    	dcct2_ofst = 0; 
        	    	pvPut(dcct2_ofst);
        	    	dac_ofst = 0; 
-       	    	pvPut(dac_ofst);        	    	
+       	    	pvPut(dac_ofst);  
+       	    	dac_adc_ofst = 0; 
+       	    	pvPut(dac_adc_ofst);       	    	
        } state READBACK_DCCT1_ADC_OFFSET
         when(ps_on_off == 1) {
 		Park = 1; 
@@ -261,7 +271,10 @@ ss OFF_ON_FSM {
        	    	pvPut(Chan_seq_messages);
        	    } state SET_DAC_TO_ZERO_ON
        	when(ps_on_off == 0) {
-
+       		sprintf(atzo_messages, "IDLE");
+       	    	pvPut(atzo_messages);
+       	    	atzo_sts = 0; 
+       		pvPut(atzo_sts); 
 	        sprintf(Chan_seq_messages, "PS OFF");
        	    	pvPut(Chan_seq_messages);
         } state CHECK_IF_SYSTEM_WAS_FAULTED
@@ -441,13 +454,13 @@ ss OFF_ON_FSM {
    /* Auto-Zero Procedure*/
   /*******************************/
 	state READBACK_DCCT1_ADC_OFFSET{
-		when(delay(3)) {
+		when(delay(4)) {
 			pvGet(dcct1_adc);
 			dcct1_ofst = dcct1_adc; 
         	   	pvPut(dcct1_ofst);
             		sprintf(atzo_messages, "%f Offset",dcct1_adc);
        	    		pvPut(atzo_messages);
-		} state CHECK_DCCT1
+		} state WAIT1
 	}
 	state WAIT1{
 		when(delay(4)) {
@@ -464,7 +477,7 @@ ss OFF_ON_FSM {
 		} state READBACK_DCCT1_ADC_OFFSET
 	}
 	state READBACK_DCCT2_ADC_OFFSET{
-		when(4) {
+		when() {
 			pvGet(dcct2_adc);
 			dcct2_ofst = dcct2_adc; 
         	   	pvPut(dcct2_ofst);
@@ -490,21 +503,22 @@ ss OFF_ON_FSM {
 		when() {
 		   mode = 3; 
 		   pvPut(mode);
-		   avg_mode = 1; 
+		   avg_mode = 2; 
        	           pvPut(avg_mode);  
 		   sprintf(atzo_messages, "DAC ADJUSTMENT");
        	    	   pvPut(atzo_messages);	   
 		} state WAIT3
 	}
 	state WAIT3{
-		when(delay(3)){ 
+		//when(delay(3)){ 
+		when() {
 		   timeout_count = 0; 
 		   pvGet(error_adc);
 		   error_old = fabs(error_adc); 
 		} state INCREMENT_UP
 	}
 	state INCREMENT_UP {
-		when(fabs(error_adc) < 0.01){
+		when(fabs(error_adc) < 0.015){
 			pvPut(dac_ofst); 
 			mode = 0; 
 		   	pvPut(mode);
@@ -512,7 +526,7 @@ ss OFF_ON_FSM {
        			pvPut(atzo_sts); 
 			sprintf(atzo_messages, "COMPLETE");
        	    	   	pvPut(atzo_messages);	
-			} state IDLE
+			} state READBACK_DAC_ADC_OFFSET
 		when(fabs(error_adc) > 0.01) {
 			up = 1; 
        	    	   	if(res == 0){
@@ -528,7 +542,7 @@ ss OFF_ON_FSM {
 			} state WAIT4
 		} 
 	state INCREMENT_DOWN {
-		when(fabs(error_adc) < 0.01){
+		when(fabs(error_adc) < 0.015){
 			pvPut(dac_ofst); 
 			mode = 0; 
 		   	pvPut(mode);
@@ -539,7 +553,7 @@ ss OFF_ON_FSM {
 			pvPut(mode); 
 			sprintf(atzo_messages, "COMPLETE");
        	    	   	pvPut(atzo_messages);	
-		} state IDLE
+		} state READBACK_DAC_ADC_OFFSET
 		when(fabs(error_adc) > 0.01) {
 			timeout_count = timeout_count +1; 
        	    	   	if(res == 0){
@@ -579,20 +593,30 @@ ss OFF_ON_FSM {
 		   check_count = check_count +1; 
 		   sprintf(atzo_messages, "WAIT....");
        	    	   pvPut(atzo_messages);
+		   sprintf(atzo_dbg1_messages, "OLD = %f",error_old);
+       	    	   pvPut(atzo_dbg1_messages);     
+		   sprintf(atzo_dbg2_messages, "NEW = %f",error_new);
+       	    	   pvPut(atzo_dbg2_messages);      
+		   sprintf(atzo_dbg3_messages, "up=%d down=%d",up_vote,down_vote);
+       	    	   pvPut(atzo_dbg3_messages);    	    	   
 		} state RECHECK_ERROR_ADC
 	}
 	state RECHECK_ERROR_ADC {
-		when(delay(1)) {
+		//when(delay(1)) {
+		when() {
 		    pvGet(error_adc); 
 		    error_new = fabs(error_adc); 
 		} state VOTE_CHECK	
 	} 
 	state WAIT8 {
 		when(delay(1)) {
+		//when() {
+		error_old = error_new; 
 		} state CHECK_NEW_ERROR
 	}
 	state CHECK_NEW_ERROR {
 		when(timeout_count > 50) {
+			pvPut(dac_ofst); 
 			timeout_count = 0; 
 			atzo_sts = 0; 
 			mode = 0; 
@@ -600,12 +624,12 @@ ss OFF_ON_FSM {
 			pvPut(atzo_sts); 
 			sprintf(atzo_messages, "NON-CONVERGENT!");
        	    	   	pvPut(atzo_messages);
-		} state IDLE
+		} state READBACK_DAC_ADC_OFFSET
 		when(up_vote > down_vote) {
        	    	   	check_count =0; 
        	    	   	up_vote = 0; 
        	    	   	down_vote = 0; 
-			if(up =1){
+			if(up ==1){
 				up =0; 
 			}else{
 			     up =1; 
@@ -621,7 +645,8 @@ ss OFF_ON_FSM {
 		} state WAIT7
 	}
 	state WAIT7 {
-		when(delay(1)){
+		//when(delay(1)){
+		when() {
 		error_new = fabs(pvGet(error_adc));
 		} state UP_DOWN
 	}
@@ -635,7 +660,15 @@ ss OFF_ON_FSM {
        	    	   	pvPut(atzo_messages);
 		} state INCREMENT_DOWN
 	}
-
+	state READBACK_DAC_ADC_OFFSET {
+		when(delay(1)){
+		pvGet(DAC_rdbck); 
+		dac_adc_ofst = DAC_rdbck; 
+		pvPut(dac_adc_ofst); 
+       	    	avg_mode = 1; 
+       	    	pvPut(avg_mode); 
+		} state IDLE
+	}
 }
 	
     /*******************************/
