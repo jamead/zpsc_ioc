@@ -128,25 +128,100 @@ record(mbbi, "$(P){$(NO)}Bandwidth-Mode") {
 
 
 
+#record(longin, "$(P){$(NO)}Polarity-I") {
+#    field(DESC, "Polarity of Unit ")
+#    field(DTYP, "PSC Reg")
+#    field(INP , "@PSC$(NO) 31 36")
+#    field(FLNK, "$(P){$(NO)}Polarity-Mode")
+#    field(SCAN,"I/O Intr")
+#}
+
+
+#record(mbbi, "$(P){$(NO)}Polarity-Mode") {
+#    field(INP, "$(P){$(NO)}Polarity-I")
+#    field(ZRVL, "0")      
+#    field(ZRST, "Bipolar")
+#    field(ONVL, "1")    
+#    field(ONST, "Unipolar")
+#    field(TWVL, "2")  
+#    field(TWST, "Check EEPROM")       
+#    field(SCAN, "Passive")
+#}
+
+# Raw polarity word (bits 0..3 = chan1..chan4)
 record(longin, "$(P){$(NO)}Polarity-I") {
-    field(DESC, "Polarity of Unit ")
+    field(DESC, "Polarity word")
     field(DTYP, "PSC Reg")
     field(INP , "@PSC$(NO) 31 36")
-    field(FLNK, "$(P){$(NO)}Polarity-Mode")
     field(SCAN,"I/O Intr")
+    field(FLNK,"$(P){$(NO)}Polarity-Fanout")
+}
+
+record(fanout, "$(P){$(NO)}Polarity-Fanout") {
+    field(LNK1, "$(P){$(NO)}Chan1:Polarity-Bit")
+    field(LNK2, "$(P){$(NO)}Chan2:Polarity-Bit")
+    field(LNK3, "$(P){$(NO)}Chan3:Polarity-Bit")
+    field(LNK4, "$(P){$(NO)}Chan4:Polarity-Bit")
 }
 
 
-record(mbbi, "$(P){$(NO)}Polarity-Mode") {
-    field(INP, "$(P){$(NO)}Polarity-I")
-    field(ZRVL, "0")      
-    field(ZRST, "Bipolar")
-    field(ONVL, "1")    
-    field(ONST, "Unipolar")
-    field(TWVL, "2")  
-    field(TWST, "Check EEPROM")       
+
+# ---- Chan 1 (bit 0)
+record(calc, "$(P){$(NO)}Chan1:Polarity-Bit") {
+    field(INPA, "$(P){$(NO)}Polarity-I" )
+    field(CALC, "(A>>0)&1")
     field(SCAN, "Passive")
 }
+record(bi, "$(P){$(NO)}Chan1:Polarity-Mode") {
+    field(INP,  "$(P){$(NO)}Chan1:Polarity-Bit CP")
+    field(ZNAM, "Bipolar")
+    field(ONAM, "Unipolar")
+    field(SCAN, "Passive")
+}
+
+# ---- Chan 2 (bit 1)
+record(calc, "$(P){$(NO)}Chan2:Polarity-Bit") {
+    field(INPA, "$(P){$(NO)}Polarity-I" )
+    field(CALC, "(A>>1)&1")
+    field(SCAN, "Passive")
+}
+record(bi, "$(P){$(NO)}Chan2:Polarity-Mode") {
+    field(INP,  "$(P){$(NO)}Chan2:Polarity-Bit CP")
+    field(ZNAM, "Bipolar")
+    field(ONAM, "Unipolar")
+    field(SCAN, "Passive")
+}
+
+# ---- Chan 3 (bit 2)
+record(calc, "$(P){$(NO)}Chan3:Polarity-Bit") {
+    field(INPA, "$(P){$(NO)}Polarity-I")
+    field(CALC, "(A>>2)&1")
+    field(SCAN, "Passive")
+}
+record(bi, "$(P){$(NO)}Chan3:Polarity-Mode") {
+    field(INP,  "$(P){$(NO)}Chan3:Polarity-Bit CP")
+    field(ZNAM, "Bipolar")
+    field(ONAM, "Unipolar")
+    field(SCAN, "Passive")
+}
+
+# ---- Chan 4 (bit 3)
+record(calc, "$(P){$(NO)}Chan4:Polarity-Bit") {
+    field(INPA, "$(P){$(NO)}Polarity-I")
+    field(CALC, "(A>>3)&1")
+    field(SCAN, "Passive")
+}
+record(bi, "$(P){$(NO)}Chan4:Polarity-Mode") {
+    field(INP,  "$(P){$(NO)}Chan4:Polarity-Bit CP")
+    field(ZNAM, "Bipolar")
+    field(ONAM, "Unipolar")
+    field(SCAN, "Passive")
+}
+
+
+
+
+
 
 
 

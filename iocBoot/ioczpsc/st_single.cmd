@@ -7,6 +7,12 @@
 
 epicsEnvSet("IOCNAME", "lab")
 
+epicsEnvSet("EPICS_CAS_INTF_ADDR_LIST", "10.0.142.51")
+epicsEnvSet("EPICS_CAS_AUTO_ADDR_LIST", "NO")
+
+
+
+
 # PSC IP address
 epicsEnvSet("PSC1_IP", "10.0.142.115"); 
 

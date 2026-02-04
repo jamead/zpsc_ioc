@@ -8,7 +8,8 @@
 epicsEnvSet("IOCNAME", "lab")
 
 # PSC IP address
-epicsEnvSet("PSC1_IP", "10.69.26.30"); 
+epicsEnvSet("PSC1_IP", "10.0.142.115"); 
+#epicsEnvSet("PSC1_IP", "10.69.26.30"); 
 epicsEnvSet("PSC2_IP", "10.69.26.31"); 
 epicsEnvSet("PSC3_IP", "10.69.26.32"); 
 epicsEnvSet("PSC4_IP", "10.69.26.33"); 
