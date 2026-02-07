@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2026-01-21 16:45:56 by pstester-->
+<!--Saved on 2026-02-06 15:55:58 by mead-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1120</width>
-  <height>700</height>
+  <height>800</height>
   <background_color>
     <color red="200" green="215" blue="255">
     </color>

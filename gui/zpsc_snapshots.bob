@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2025-09-10 08:44:42 by mead-->
+<!--Saved on 2026-02-06 15:33:56 by mead-->
 <display version="2.0.0">
   <name>$(CHAN):$(PriSys)</name>
   <width>1120</width>
@@ -510,7 +510,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -682,7 +682,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -867,7 +867,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>mA</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -953,7 +953,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -1316,7 +1316,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -1488,7 +1488,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -1673,7 +1673,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>mA</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -1759,7 +1759,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -2136,7 +2136,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -2308,7 +2308,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -2493,7 +2493,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>mA</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -2579,7 +2579,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -2949,7 +2949,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -3121,7 +3121,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -3306,7 +3306,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>mA</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>
@@ -3392,7 +3392,7 @@ widget.setPropertyValue('x_axis.maximum', PVUtil.getDouble(pvs[1])-1)]]></text>
             </x_axis>
             <y_axes>
               <y_axis>
-                <title>Amps</title>
+                <title>Volts</title>
                 <autoscale>true</autoscale>
                 <log_scale>false</log_scale>
                 <minimum>0.0</minimum>

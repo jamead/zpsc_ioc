@@ -260,6 +260,26 @@ record(ai, "$(P){$(NO)}OneHz-Freq-I") {
     field(SCAN,"I/O Intr")
 }
 
+record(longin, "$(P){$(NO)}Ch34-DualMode-I") {
+    field(DESC, "Series Connected Supplies on Ch3,4")
+    field(DTYP, "PSC Reg")
+    field(INP , "@PSC$(NO) 31 60")
+    field(FLNK, "$(P){$(NO)}Ch34-DualMode-Mode")
+    field(SCAN,"I/O Intr")
+}
+
+
+record(mbbi, "$(P){$(NO)}Ch34-DualMode-Mode") {
+    field(INP, "$(P){$(NO)}Ch34-DualMode-I")
+    field(ZRVL, "0")      
+    field(ZRST, "Disabled")
+    field(ONVL, "1")    
+    field(ONST, "Enabled")
+    field(TWVL, "2")  
+    field(TWST, "Check EEPROM")       
+    field(SCAN, "Passive")
+}
+
 
 
 ### PS1 #####
